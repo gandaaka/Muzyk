@@ -1,0 +1,14 @@
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\bin\Debug\netcoreapp2.1\DotNetPractice.deps.json
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\bin\Debug\netcoreapp2.1\DotNetPractice.runtimeconfig.json
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\bin\Debug\netcoreapp2.1\DotNetPractice.runtimeconfig.dev.json
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\bin\Debug\netcoreapp2.1\DotNetPractice.dll
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\bin\Debug\netcoreapp2.1\DotNetPractice.pdb
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\obj\Debug\netcoreapp2.1\DotNetPractice.csprojAssemblyReference.cache
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\obj\Debug\netcoreapp2.1\DotNetPractice.csproj.CoreCompileInputs.cache
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\obj\Debug\netcoreapp2.1\DotNetPractice.RazorAssemblyInfo.cache
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\obj\Debug\netcoreapp2.1\DotNetPractice.RazorAssemblyInfo.cs
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\obj\Debug\netcoreapp2.1\DotNetPractice.AssemblyInfoInputs.cache
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\obj\Debug\netcoreapp2.1\DotNetPractice.AssemblyInfo.cs
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\obj\Debug\netcoreapp2.1\DotNetPractice.RazorTargetAssemblyInfo.cache
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\obj\Debug\netcoreapp2.1\DotNetPractice.dll
+E:\Classes\Capstone\DotNetPractice\DotNetPractice\obj\Debug\netcoreapp2.1\DotNetPractice.pdb
