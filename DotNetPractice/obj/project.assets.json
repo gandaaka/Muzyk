@@ -11962,11 +11962,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Anku\\Documents\\Projects\\DotNetPractice\\Muzyk.csproj",
+      "projectUniqueName": "c:\\Users\\Anku\\Documents\\Projects\\DotNetPractice\\Muzyk.csproj",
       "projectName": "Muzyk",
-      "projectPath": "C:\\Users\\Anku\\Documents\\Projects\\DotNetPractice\\Muzyk.csproj",
+      "projectPath": "c:\\Users\\Anku\\Documents\\Projects\\DotNetPractice\\Muzyk.csproj",
       "packagesPath": "C:\\Users\\Anku\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Anku\\Documents\\Projects\\DotNetPractice\\obj\\",
+      "outputPath": "c:\\Users\\Anku\\Documents\\Projects\\DotNetPractice\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
