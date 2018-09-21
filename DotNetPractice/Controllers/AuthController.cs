@@ -10,11 +10,13 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace DotNetPractice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowSpecificOrigins")]
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _config;
@@ -26,6 +28,7 @@ namespace DotNetPractice.Controllers
         }
 
         //register method
+        [EnableCors("AllowSpecificOrigins")]
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserToRegisterDto userToRegisterDto){
             userToRegisterDto.Username = userToRegisterDto.Username.ToLower();
@@ -43,6 +46,7 @@ namespace DotNetPractice.Controllers
         }
 
         //login method
+        [EnableCors("AllowSpecificOrigin")]
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto){
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
@@ -61,7 +65,7 @@ namespace DotNetPractice.Controllers
 
             var tokenDescriptor = new SecurityTokenDescriptor(){
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(0.5),
+                Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds
             };
 

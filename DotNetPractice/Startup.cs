@@ -32,7 +32,10 @@ namespace DotNetPractice
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddCors();
+            services.AddCors(options => {
+                options.AddPolicy("AllowSpecificOrigin", builder =>
+                builder.WithOrigins("http://localhost:5000/api/auth/").AllowAnyHeader().AllowAnyMethod());
+            });
 
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -58,7 +61,7 @@ namespace DotNetPractice
             {
                 //app.UseHsts();
             }
-
+            app.UseCors("AllowSpecificOrigin");
             //app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();

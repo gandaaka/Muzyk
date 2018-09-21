@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <form class="form-signin">
+    <div *ngIf="!registerMode" class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-bold">Muzyk</h1>
+      <p class="h5 mb-4 font-weight-bold">A Place where artists meets the world</p>
+  
+      <button type="button" class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
+      <button type="button" class="btn btn-secondary btn-lg">Learn more</button>
+
+    </div>
+  </form>
+  <div *ngIf="registerMode" class="container">
+    <div class="row justify-content-right">
+      <div class="col4">
+        <app-register></app-register>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+

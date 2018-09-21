@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetPractice.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ namespace DotNetPractice.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors()]
     public class ValuesController : ControllerBase
     {
         private readonly DataContext _dataContext;
@@ -32,6 +34,7 @@ namespace DotNetPractice.Controllers
 
         [AllowAnonymous]
         [HttpGet("{id}")]
+        [EnableCors("AllowSpecificOrigins")]
         public async Task<IActionResult> GetValue(int id)
         {
             var value = await _dataContext.Values.FirstOrDefaultAsync(x=> x.Id == id);
