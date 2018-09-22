@@ -28,7 +28,7 @@ namespace DotNetPractice.Controllers
         }
 
         //register method
-        [EnableCors("AllowSpecificOrigins")]
+        [EnableCors("AllowSpecificOrigin")]
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserToRegisterDto userToRegisterDto){
             userToRegisterDto.Username = userToRegisterDto.Username.ToLower();
