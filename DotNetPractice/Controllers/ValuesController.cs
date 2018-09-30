@@ -25,6 +25,8 @@ namespace DotNetPractice.Controllers
 
         // GET api/values
         [HttpGet]
+        [AllowAnonymous]
+        [EnableCors("AllowSpecificOrigin")]
         public async Task<IActionResult> GetValues()
         {
             var Values = await _dataContext.Values.ToListAsync();
@@ -34,7 +36,7 @@ namespace DotNetPractice.Controllers
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        [EnableCors("AllowSpecificOrigins")]
+        [EnableCors("AllowSpecificOrigin")]
         public async Task<IActionResult> GetValue(int id)
         {
             var value = await _dataContext.Values.FirstOrDefaultAsync(x=> x.Id == id);

@@ -1,33 +1,38 @@
-<form class="md-float-material text-center mb-4" #registerForm="ngForm" (ngSubmit)="register()">
-  <div class="auth-box">
-      <div class="row m-b-20">
-          <div class="col-md-12">
-              <h3 class="text-center txt-primary">Sign up. It is fast and easy.</h3>
-          </div>
-      </div>
-      <hr>
-      <div class="input-group">
-          <input type="text" class="form-control" required name="username" [(ngModel)]="model.username" placeholder="Choose Username">
-          <span class="md-line"></span>
-      </div>
+<div>
+    <form class="md-float-material text-center mb-4" #registerForm="ngForm" (ngSubmit)="register()">
+        <div class="auth-box">
+            <div class="row m-b-20">
+                <div class="col-md-12">
+                    <h3 class="text-center txt-primary">Sign up. It is fast and easy.</h3>
+                </div>
+            </div>
+            <hr>
+            <div class="input-group">
+                <input type="text" class="form-control" required name="username" [(ngModel)]="model.username"
+                    placeholder="Choose Username">
+                <span class="md-line"></span>
+            </div>
+            <div class="input-group">
+                <input type="password" class="form-control mt-3" required name="password" [(ngModel)]="model.password"
+                    placeholder="Choose Password">
+                <span class="md-line"></span>
+            </div>
 
-      <div class="input-group">
-          <input type="password" class="form-control mt-3" required name="password" [(ngModel)]="model.password" placeholder="Choose Password">
-          <span class="md-line"></span>
-      </div>
-
-      <div class="row m-t-30">
-          <div class="col-md-12">
-              <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 mt-3">Sign up now.</button>
-              <button type="button" class="btn btn-secondary btn-md btn-block waves-effect text-center m-b-20" (click)="cancel()">Cancel</button>
-          </div>
-      </div>
-      <hr>
-      <div class="row">
-          <div class="col-md-10">
-              <p class="text-inverse text-left m-b-0">Thank you and enjoy our website.</p>
-              <p class="text-inverse text-left"><b>Your Autentification Team</b></p>
-          </div>
-      </div>
-  </div>
-</form>
+            <div class="row m-t-30">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 mt-3">Sign
+                        up now.</button>
+                    <button type="button" class="btn btn-secondary btn-md btn-block waves-effect text-center m-b-20"
+                        (click)="cancel()">Cancel</button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="text-inverse text-left m-b-0">Thank you and enjoy our website.</p>
+                    <p class="text-inverse text-left"><b>Team IT transformers</b></p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

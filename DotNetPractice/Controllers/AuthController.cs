@@ -28,15 +28,17 @@ namespace DotNetPractice.Controllers
         }
 
         //register method
-        [EnableCors("AllowSpecificOrigins")]
+        [EnableCors("AllowSpecificOrigin")]
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserToRegisterDto userToRegisterDto){
+        public async Task<IActionResult> Register(UserToRegisterDto userToRegisterDto)
+        {
             userToRegisterDto.Username = userToRegisterDto.Username.ToLower();
 
-            if(await _repo.UserExists(userToRegisterDto.Username))
+            if (await _repo.UserExists(userToRegisterDto.Username))
                 return BadRequest("Username already exists !");
-            
-            var userToCreate = new User{
+
+            var userToCreate = new User
+            {
                 Username = userToRegisterDto.Username
             };
 
@@ -48,13 +50,14 @@ namespace DotNetPractice.Controllers
         //login method
         [EnableCors("AllowSpecificOrigin")]
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto){
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
+        {
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();
 
-            var claims = new []{
+            var claims = new[]{
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
@@ -63,7 +66,8 @@ namespace DotNetPractice.Controllers
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var tokenDescriptor = new SecurityTokenDescriptor(){
+            var tokenDescriptor = new SecurityTokenDescriptor()
+            {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds
@@ -73,7 +77,8 @@ namespace DotNetPractice.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new {
+            return Ok(new
+            {
                 token = tokenHandler.WriteToken(token)
             });
         }
