@@ -12,7 +12,7 @@
           <a class="nav-link" [routerLink]="['/analytics']">Analytics</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/lists']">Lists</a>
+          <a class="nav-link" [routerLink]="['/lists']">Followers</a>
         </li>
       </ul>
 
@@ -21,8 +21,10 @@
           Welcome {{authService.decodedToken?.unique_name | titlecase}}
         </a>
         <div class="dropdown-menu mt-3" *dropdownMenu>
-          <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Edit Profile</a>
+            <a class="dropdown-item" routerLinkActive="router-link-active" ><i class="fa fa-user"></i> My Profile</a>
+          <a class="dropdown-item" href="#"><i class="fa fa-edit"></i> Edit Profile</a>
           <a class="dropdown-item" href="#"><i class="fa fa-calendar"></i> My Bookings</a>
+          <a class="dropdown-item" href="#"><i class="fas fa-marker"></i> Personalize</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
         </div>
