@@ -8,6 +8,9 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ProfilePageComponent } from './members/profile-page/profile-page.component';
 import { ProfilePageResolver } from './_resolvers/profile-page.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { ProfileEditComponent } from './members/profile-edit/profile-edit.component';
+import { ProfileEditResolver } from './_resolvers/profile-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -19,7 +22,9 @@ export const appRoutes: Routes = [
             { path: 'newsfeed', component: NewsfeedComponent},
             { path: 'messages', component: MessagesComponent},
             { path: 'analytics', component: AnalyticsComponent},
-            { path: 'lists', component: ListsComponent, resolve: {users: MemberListResolver}},
+            { path: 'followers', component: ListsComponent, resolve: {users: MemberListResolver}},
+            { path: 'profile/edit', component: ProfileEditComponent, resolve: {user: ProfileEditResolver},
+                canDeactivate: [PreventUnsavedChanges]},
             { path: 'members/:id', component: ProfilePageComponent, resolve: {user: ProfilePageResolver}},
         ]
     },

@@ -24,6 +24,7 @@ namespace DotNetPractice.Helpers
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
             CreateMap<Photo, PhotoForDetailDto>();
+            CreateMap<UserForUpdateDto, User>();
         }
     }
 }

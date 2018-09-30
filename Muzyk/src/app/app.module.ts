@@ -27,6 +27,9 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { ProfilePageComponent } from './members/profile-page/profile-page.component';
 import { ProfilePageResolver } from './_resolvers/profile-page.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { ProfileEditComponent } from './members/profile-edit/profile-edit.component';
+import { ProfileEditResolver } from './_resolvers/profile-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 
 export function tokenGetter() {
@@ -44,7 +47,8 @@ export function tokenGetter() {
       AnalyticsComponent,
       NewsfeedComponent,
       MemberCardComponent,
-      ProfilePageComponent
+      ProfilePageComponent,
+      ProfileEditComponent
    ],
    imports: [
       BrowserModule,
@@ -67,9 +71,11 @@ export function tokenGetter() {
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
+      PreventUnsavedChanges,
       UserService,
       ProfilePageResolver,
-      MemberListResolver
+      MemberListResolver,
+      ProfileEditResolver
    ],
    bootstrap: [
       AppComponent
