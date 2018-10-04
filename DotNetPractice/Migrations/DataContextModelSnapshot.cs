@@ -27,6 +27,8 @@ namespace DotNetPractice.Migrations
 
                     b.Property<string>("PhotoUrl");
 
+                    b.Property<string>("PublicId");
+
                     b.Property<int>("UserId");
 
                     b.Property<bool>("isCoverPhoto");

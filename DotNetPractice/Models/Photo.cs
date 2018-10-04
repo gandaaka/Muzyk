@@ -10,6 +10,7 @@ namespace DotNetPractice.Models
         public DateTime DateAdded { get; set; }
         public bool isProfilePhoto { get; set; }
         public bool isCoverPhoto { get; set; }
+        public string PublicId { get; set; }
         public User user { get; set; }
         public int UserId { get; set; }
     }

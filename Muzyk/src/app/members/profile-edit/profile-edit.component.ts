@@ -37,13 +37,23 @@ export class ProfileEditComponent implements OnInit {
   }
 
   updateUser() {
-    this.userService
-      .updateUser(this.authService.decodedToken.nameid, this.user)
-      .subscribe(next => {
-        this.alertify.success('Profile updated successfully | Server error still');
-        this.editForm.reset(this.user);
-      }, error => {
-        this.alertify.error('Error saving changes :' + error);
-      });
+    console.log(this.user);
+    this.userService.updateUser(this.authService.decodedToken.nameid, this.user)
+      .subscribe(
+        next => {
+          this.alertify.success(
+            'Profile updated successfully'
+          );
+          this.editForm.reset(this.user);
+        },
+        error => {
+          this.alertify.error('Error saving changes');
+        }
+      );
+  }
+
+  updateProfilePhoto(photoUrl) {
+    this.user.photoUrl = photoUrl;
+    this.alertify.success('Profile Picture Changed Successfully');
   }
 }

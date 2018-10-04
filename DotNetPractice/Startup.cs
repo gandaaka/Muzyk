@@ -41,8 +41,9 @@ namespace DotNetPractice
             });
             services.AddCors(options => {
                 options.AddPolicy("AllowSpecificOrigin", builder =>
-                builder.WithOrigins("http://localhost:5000/").AllowAnyHeader().AllowAnyMethod());
+                builder.WithOrigins("http://evil.com/").AllowAnyHeader().AllowAnyMethod());
             });
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
