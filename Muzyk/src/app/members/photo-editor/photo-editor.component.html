@@ -3,7 +3,7 @@
     <img src="{{photo.photoUrl}}" class="img-fluid img-thumbnail p-1" alt="">
     <div class="text-center">
       <button type="button" class="btn btn-sm mr-1" (click)="setProfilePhoto(photo)" [ngClass]="photo.isProfilePhoto ? 'btn-success active' : 'btn-secondary'" [disabled]="photo.isProfilePhoto">Main</button>
-      <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+      <button type="button" class="btn btn-sm btn-danger" (click)="deletePhoto(photo.id)" [disabled]="photo.isProfilePhoto"><i class="fa fa-trash"></i></button>
     </div>
   </div>
 </div>

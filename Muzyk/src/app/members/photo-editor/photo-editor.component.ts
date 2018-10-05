@@ -79,11 +79,24 @@ export class PhotoEditorComponent implements OnInit {
           )[0];
           this.currentProfilePhoto.isProfilePhoto = false;
           photo.isProfilePhoto = true;
-          this.getMemberPhotoChange.emit(photo.photoUrl);
+          this.authService.changeMemberPhoto(photo.photoUrl);
+          this.authService.currentUser.photoUrl = photo.photoUrl;
+          localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
         },
         error => {
           this.alertify.error('Photo could not be set as Profile Photo');
         }
       );
+  }
+
+  deletePhoto(photoId: number) {
+    this.alertify.confirm('Are you sure to delete this photo ?', () => {
+      this.userService.deletePhoto(this.authService.decodedToken.nameid, photoId).subscribe(() => {
+        this.photos.splice(this.photos.findIndex(p => p.id === photoId), 1);
+        this.alertify.success('Photo has been deleted successfully');
+      }, error => {
+        this.alertify.error('Failed to delete the photo');
+      });
+    });
   }
 }

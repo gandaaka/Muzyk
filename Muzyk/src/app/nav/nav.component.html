@@ -21,6 +21,9 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
       </form>
       <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <span class="mr-1">
+          <img src="{{photoUrl}}">
+        </span>
         <a class="dropdown-toggle text-light" dropdownToggle>
           Welcome {{authService.decodedToken?.unique_name | titlecase}}
         </a>

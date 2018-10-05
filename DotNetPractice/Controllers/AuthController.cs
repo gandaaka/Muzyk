@@ -11,6 +11,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using AutoMapper;
 
 namespace DotNetPractice.Controllers
 {
@@ -21,8 +22,10 @@ namespace DotNetPractice.Controllers
     {
         private readonly IConfiguration _config;
         private readonly IAuthRepository _repo;
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        private readonly IMapper _mapper;
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper _mapper)
         {
+            this._mapper = _mapper;
             _repo = repo;
             _config = config;
         }
@@ -52,7 +55,7 @@ namespace DotNetPractice.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
+            var userFromRepo = await _repo.Login(userForLoginDto.Username, userForLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();
@@ -69,7 +72,7 @@ namespace DotNetPractice.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(0.5),
+                Expires = DateTime.Now.AddDays(0.2),
                 SigningCredentials = creds
             };
 
@@ -77,9 +80,12 @@ namespace DotNetPractice.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
+            var user = _mapper.Map<UserForListDto>(userFromRepo);
+
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                user
             });
         }
     }
