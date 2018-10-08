@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DotNetPractice.Data;
 using DotNetPractice.DTOS;
+using DotNetPractice.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetPractice.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [EnableCors("AllowSpecificOrigin")]
