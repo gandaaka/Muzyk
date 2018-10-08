@@ -7,9 +7,13 @@ namespace DotNetPractice.Models
     {
         public int Id { get; set; }
         public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string knownAs { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public string Gender { get; set; } 
+        public string Gender { get; set; }
+        public string UserType { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Genre { get; set; }
         public DateTime Created { get; set; }
@@ -18,6 +22,7 @@ namespace DotNetPractice.Models
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public bool isFollowing { get; set; }
         public ICollection<Photo> Photos { get; set; }
 
     }

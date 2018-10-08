@@ -26,9 +26,10 @@ namespace DotNetPractice.Helpers
             CreateMap<Photo, PhotoForDetailDto>();
 
             CreateMap<UserForUpdateDto, User>();
-
+            CreateMap<UserForDetailDto, User>();
             CreateMap<Photo, PhotoFromReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<UserToRegisterDto, User>();
         }
     }
 }
