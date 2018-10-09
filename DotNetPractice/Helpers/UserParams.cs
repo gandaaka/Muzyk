@@ -15,6 +15,8 @@ namespace DotNetPractice.Helpers
         public string Genre { get; set; } = "";
         public int MinExp { get; set; } = 0;
         public int MaxExp { get; set; } = 25;
-        public string OrderBy { get; set; }        
+        public string OrderBy { get; set; }
+        public bool Followees { get; set; } = false;
+        public bool Followers { get; set; } = false;   
     }
 }

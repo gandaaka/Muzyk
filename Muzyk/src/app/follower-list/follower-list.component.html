@@ -1,0 +1,32 @@
+<div class="container pt-5">
+  <div class="text-center mt-3">
+    <h2>{{followsParam === 'Followers' ? 'Members who follow me' : 'Members who I\'ve followed'}} :
+      {{pagination.totalItems}}</h2>
+  </div>
+
+  <div class="container mt-3">
+
+    <div class="row">
+      <div class="btn-group">
+        <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followers" (click)="loadUsers()">Followers</button>
+        <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followees" (click)="loadUsers()">Following</button>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div *ngFor="let user of users" class="col-lg-3 col-md-4 col-sm-6 mt-4">
+        <app-member-card [user]="user"></app-member-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+      firstText="&laquo;" lastText="&raquo;">
+
+    </pagination>
+  </div>
+</div>

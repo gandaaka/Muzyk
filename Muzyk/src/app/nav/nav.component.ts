@@ -42,4 +42,8 @@ export class NavComponent implements OnInit {
     this.router.navigate(['\home']);
   }
 
+  searchUsers() {
+    this.router.navigate(['\lists']);
+  }
+
 }

@@ -26,6 +26,11 @@ namespace DotNetPractice.Data
             _context.Remove(entity);
         }
 
+        public async Task<Follow> GetFollow(int userId, int recepientId)
+        {
+            return await _context.Follows.FirstOrDefaultAsync(u => u.FollowerId == userId && u.FolloweeId == recepientId);
+        }
+
         public async Task<Photo> GetMainPhotoForUser(int userId)
         {
             return await _context.Photos.Where(u => u.UserId == userId).FirstOrDefaultAsync(p => p.isProfilePhoto);
@@ -75,6 +80,21 @@ namespace DotNetPractice.Data
                         break;
                 }
             }
+
+            if (userParams.Followers)
+            {
+                var userFollowers = await GetUserFollowers(userParams.UserId, userParams.Followers);
+
+                users = users.Where(u => userFollowers.Contains(u.Id));
+            }
+
+            if (userParams.Followees)
+            {
+                var userFollowees = await GetUserFollowers(userParams.UserId, userParams.Followers);
+
+                users = users.Where(u => userFollowees.Contains(u.Id));
+            }
+
             if (userParams.MinExp != 0 || userParams.MaxExp != 25)
             {
                 var minExp = userParams.MinExp;
@@ -95,6 +115,21 @@ namespace DotNetPractice.Data
                 }
             }
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
+        }
+
+        private async Task<IEnumerable<int>> GetUserFollowers(int id, bool followers)
+        {
+            var user = await _context.Users.Include(x => x.Follower)
+            .Include(x => x.Followee).FirstOrDefaultAsync(u => u.Id == id);
+
+            if (followers)
+            {
+                return user.Follower.Where(u => u.FolloweeId == id).Select(i => i.FollowerId);
+            }
+            else
+            {
+                return user.Followee.Where(u => u.FollowerId == id).Select(i => i.FolloweeId);
+            }
         }
 
         public async Task<bool> SaveAll()

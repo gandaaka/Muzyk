@@ -6,6 +6,7 @@ using AutoMapper;
 using DotNetPractice.Data;
 using DotNetPractice.DTOS;
 using DotNetPractice.Helpers;
+using DotNetPractice.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -69,6 +70,33 @@ namespace DotNetPractice.Controllers
             }
 
             throw new Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpPost("{id}/follow/{recepientId}")]
+        public async Task<IActionResult> FollowUser(int id, int recepientId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var follow = await _repo.GetFollow(id, recepientId);
+
+            if (follow != null)
+                return BadRequest("you have already followed this user");
+            
+            if (await _repo.GetUser(recepientId) == null)
+                return NotFound();
+            
+            follow = new Follow{
+                FollowerId = id,
+                FolloweeId = recepientId
+            };
+
+            _repo.Add<Follow>(follow);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            throw new Exception("Failed to follow the user");
         }
     }
 }
