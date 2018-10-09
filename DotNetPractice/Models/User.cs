@@ -16,6 +16,7 @@ namespace DotNetPractice.Models
         public string UserType { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Genre { get; set; }
+        public int YearsOfExperience { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
         public string Introduction { get; set; }

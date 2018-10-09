@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetPractice.Helpers;
 using DotNetPractice.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,10 +43,58 @@ namespace DotNetPractice.Data
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = await _context.Users.Include(p => p.Photos).ToListAsync();
-            return users;
+            var users = _context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
+
+            users = users.Where(u => u.Id != userParams.UserId);
+            if (userParams.Genre != null || userParams.Genre != "")
+            {
+                switch (userParams.Genre)
+                {
+                    case "Rock":
+                        users = users.Where(u => u.Genre == "Rock");
+                        break;
+                    case "Blues":
+                        users = users.Where(u => u.Genre == "Blues");
+                        break;
+                    case "Jazz":
+                        users = users.Where(u => u.Genre == "Jazz");
+                        break;
+                    case "Country":
+                        users = users.Where(u => u.Genre == "Country");
+                        break;
+                    case "Dance":
+                        users = users.Where(u => u.Genre == "Dance");
+                        break;
+                    case "Classical":
+                        users = users.Where(u => u.Genre == "Classical");
+                        break;
+                    default:
+                        userParams.Genre = "";
+                        break;
+                }
+            }
+            if (userParams.MinExp != 0 || userParams.MaxExp != 25)
+            {
+                var minExp = userParams.MinExp;
+                var maxExp = userParams.MaxExp;
+                users = users.Where(u => u.YearsOfExperience >= minExp && u.YearsOfExperience <= maxExp);
+            }
+
+            if (string.IsNullOrEmpty(userParams.OrderBy))
+            {
+                switch (userParams.OrderBy)
+                {
+                    case "created":
+                        users = users.OrderByDescending(u => u.Created);
+                        break;
+                    default:
+                        users = users.OrderByDescending(u => u.LastActive);
+                        break;
+                }
+            }
+            return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<bool> SaveAll()

@@ -18,16 +18,20 @@
             <p>{{user.genre}}</p>
           </div>
           <div>
+            <strong>Last Active :</strong>
+            <p>{{user.lastActive | timeAgo}}</p>
+          </div>
+          <div>
             <strong>Member Since :</strong>
             <p>{{user.created | date}}</p>
           </div>
           <div>
-            <strong>Last Active :</strong>
-            <p>{{user.lastActive | timeAgo}}</p>
+            <strong>Years Of Experience :</strong>
+            <p>{{user.yearsOfExperience}}</p>
           </div>
         </div>
 
-        <div class="class-footer">
+        <div class="card-footer">
           <div class="btn-group d-flex">
             <button class="btn btn-primary w-100">Follow</button>
             <button class="btn btn-success w-100">Message</button>
