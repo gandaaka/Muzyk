@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DotNetPractice.Migrations
+namespace Muzyk.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -27,6 +27,36 @@ namespace DotNetPractice.Migrations
                     b.HasIndex("FolloweeId");
 
                     b.ToTable("Follows");
+                });
+
+            modelBuilder.Entity("DotNetPractice.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime?>("DateRead");
+
+                    b.Property<DateTime>("MessageSent");
+
+                    b.Property<bool>("RecepientDeleted");
+
+                    b.Property<int>("RecepientId");
+
+                    b.Property<int>("SenderId");
+
+                    b.Property<bool>("SendersDeleted");
+
+                    b.Property<bool>("isRead");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecepientId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("DotNetPractice.Models.Photo", b =>
@@ -92,8 +122,6 @@ namespace DotNetPractice.Migrations
 
                     b.Property<int>("YearsOfExperience");
 
-                    b.Property<bool>("isFollowing");
-
                     b.Property<string>("knownAs");
 
                     b.HasKey("Id");
@@ -123,6 +151,19 @@ namespace DotNetPractice.Migrations
                     b.HasOne("DotNetPractice.Models.User", "Follower")
                         .WithMany("Followee")
                         .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("DotNetPractice.Models.Message", b =>
+                {
+                    b.HasOne("DotNetPractice.Models.User", "Recepient")
+                        .WithMany("MessageRecieved")
+                        .HasForeignKey("RecepientId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("DotNetPractice.Models.User", "Sender")
+                        .WithMany("MessageSent")
+                        .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

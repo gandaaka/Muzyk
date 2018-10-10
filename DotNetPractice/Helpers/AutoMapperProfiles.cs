@@ -30,6 +30,10 @@ namespace DotNetPractice.Helpers
             CreateMap<Photo, PhotoFromReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<UserToRegisterDto, User>();
+            CreateMap<MessageForCreationDto, Message>().ReverseMap();
+            CreateMap<Message, MessageToReturnDto>()
+                .ForMember(m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.isProfilePhoto).PhotoUrl))
+                .ForMember(m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.isProfilePhoto).PhotoUrl));
         }
     }
 }

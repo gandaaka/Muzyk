@@ -17,6 +17,7 @@ namespace DotNetPractice.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [EnableCors("AllowSpecificOrigin")]
+    [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly IMuzykRepository _repo;

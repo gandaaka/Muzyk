@@ -34,14 +34,14 @@
         <div class="card-footer">
           <div class="btn-group d-flex">
             <button class="btn btn-primary w-100">Follow</button>
-            <button class="btn btn-success w-100">Message</button>
+            <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button>
           </div>
         </div>
       </div>
     </div>
     <div class="col-sm-8">
       <div class="tab-panel">
-        <tabset class="follower-tabset">
+        <tabset class="follower-tabset" #memberTabs>
           <tab heading="About">
             <br>
             <h4>Description</h4>
@@ -58,7 +58,7 @@
           </tab>
           <tab heading="Messages">
             <br>
-            <h4>Messages will be here</h4>
+            <app-member-messages [recepientId]="user.id"></app-member-messages>
           </tab>
         </tabset>
       </div>

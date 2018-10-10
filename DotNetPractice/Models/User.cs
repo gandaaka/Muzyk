@@ -26,6 +26,8 @@ namespace DotNetPractice.Models
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Follow> Follower { get; set; }
         public ICollection<Follow> Followee { get; set; }
+        public ICollection<Message> MessageSent { get; set; }
+        public ICollection<Message> MessageRecieved { get; set; }
 
     }
 }

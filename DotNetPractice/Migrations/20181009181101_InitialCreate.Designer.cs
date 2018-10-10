@@ -6,17 +6,60 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DotNetPractice.Migrations
+namespace Muzyk.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180924125200_ExtendedUserClass")]
-    partial class ExtendedUserClass
+    [Migration("20181009181101_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.3-rtm-32065");
+
+            modelBuilder.Entity("DotNetPractice.Models.Follow", b =>
+                {
+                    b.Property<int>("FollowerId");
+
+                    b.Property<int>("FolloweeId");
+
+                    b.HasKey("FollowerId", "FolloweeId");
+
+                    b.HasIndex("FolloweeId");
+
+                    b.ToTable("Follows");
+                });
+
+            modelBuilder.Entity("DotNetPractice.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime?>("DateRead");
+
+                    b.Property<DateTime>("MessageSent");
+
+                    b.Property<bool>("RecepientDeleted");
+
+                    b.Property<int>("RecepientId");
+
+                    b.Property<int>("SenderId");
+
+                    b.Property<bool>("SendersDeleted");
+
+                    b.Property<bool>("isRead");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecepientId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
 
             modelBuilder.Entity("DotNetPractice.Models.Photo", b =>
                 {
@@ -28,6 +71,8 @@ namespace DotNetPractice.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("PhotoUrl");
+
+                    b.Property<string>("PublicId");
 
                     b.Property<int>("UserId");
 
@@ -55,6 +100,8 @@ namespace DotNetPractice.Migrations
 
                     b.Property<DateTime>("DateOfBirth");
 
+                    b.Property<string>("FirstName");
+
                     b.Property<string>("Gender");
 
                     b.Property<string>("Genre");
@@ -65,11 +112,19 @@ namespace DotNetPractice.Migrations
 
                     b.Property<DateTime>("LastActive");
 
+                    b.Property<string>("LastName");
+
                     b.Property<byte[]>("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt");
 
+                    b.Property<string>("UserType");
+
                     b.Property<string>("Username");
+
+                    b.Property<int>("YearsOfExperience");
+
+                    b.Property<string>("knownAs");
 
                     b.HasKey("Id");
 
@@ -86,6 +141,32 @@ namespace DotNetPractice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Values");
+                });
+
+            modelBuilder.Entity("DotNetPractice.Models.Follow", b =>
+                {
+                    b.HasOne("DotNetPractice.Models.User", "Followee")
+                        .WithMany("Follower")
+                        .HasForeignKey("FolloweeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("DotNetPractice.Models.User", "Follower")
+                        .WithMany("Followee")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("DotNetPractice.Models.Message", b =>
+                {
+                    b.HasOne("DotNetPractice.Models.User", "Recepient")
+                        .WithMany("MessageRecieved")
+                        .HasForeignKey("RecepientId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("DotNetPractice.Models.User", "Sender")
+                        .WithMany("MessageSent")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("DotNetPractice.Models.Photo", b =>
