@@ -14,12 +14,18 @@ export class AuthService {
   decodedToken: any;
   currentUser: User;
   photoUrl = new BehaviorSubject<string>('../../assets/user.png');
+  coverPhotoUrl = new BehaviorSubject<string>('../../assets/coverPhotoTemp.jpg');
   currentPhotoUrl = this.photoUrl.asObservable();
+  currentCoverPhoto = this.coverPhotoUrl.asObservable();
 
   constructor(private http: HttpClient) {}
 
   changeMemberPhoto(photoUrl: string) {
     this.photoUrl.next(photoUrl);
+  }
+
+  changeCoverPhoto(coverPhoto: string) {
+    this.coverPhotoUrl.next(coverPhoto);
   }
 
   login(model: any) {

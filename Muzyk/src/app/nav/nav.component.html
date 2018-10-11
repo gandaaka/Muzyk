@@ -1,24 +1,26 @@
 <div class="container-fluid">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
     <div class="container">
-        <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['/newsfeed']">Muzyk</a>
-        <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']">Muzyk</a>
+      <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['/newsfeed']"><i class="fas fa-home"></i> Muzyk</a>
+      <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']"><i class="fas fa-home"></i> Muzyk</a>
 
       <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/messages']">Messages</a>
+          <a class="nav-link" [routerLink]="['/messages']"><i class="fas fa-comment-alt"></i> Messages</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/analytics']">Analytics</a>
+          <a class="nav-link" [routerLink]="['/analytics']"><i class="fas fa-chart-line"></i> Analytics</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/followers']">Followers</a>
+          <a class="nav-link" [routerLink]="['/followers']"><i class="fas fa-users"></i> Followers</a>
         </li>
       </ul>
 
-      <form class="form-inline mr-3" *ngIf="loggedIn()">
-        <input class="form-control w-300" type="search" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchUsers()"><i class="fa fa-search"></i></button>
+      <form #searchForm="ngForm" class="form-inline mr-3" *ngIf="loggedIn()" (ngSubmit)="searchUsers()">
+        <div class="input-group-prepend">
+          <input class="form-control w-300" type="search" required placeholder="Search" [(ngModel)]="searchQuery">
+          <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+        </div>
       </form>
 
       <div *ngIf="loggedIn()" class="dropdown" dropdown>
@@ -29,12 +31,13 @@
           Welcome {{authService.decodedToken?.unique_name | titlecase}}
         </a>
         <div class="dropdown-menu mt-3" *dropdownMenu>
-          <a class="dropdown-item" [routerLink]="['/members/', this.authService.decodedToken?.nameid]"><i class="fa fa-user"></i> My Profile</a>
+          <a class="dropdown-item" [routerLink]="['/members/', this.authService.decodedToken?.nameid]"><i class="fa fa-user"></i>
+            My Profile</a>
           <a class="dropdown-item" [routerLink]="['/profile/edit']"><i class="fa fa-edit"></i> Edit Profile</a>
           <a class="dropdown-item" href="#"><i class="fa fa-calendar"></i> My Bookings</a>
           <a class="dropdown-item" href="#"><i class="fas fa-marker"></i> Personalize</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+          <a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
       </div>
 

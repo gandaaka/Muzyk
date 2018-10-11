@@ -19,6 +19,7 @@ export class PhotoEditorComponent implements OnInit {
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
   currentProfilePhoto: Photo;
+  activeSlide = 0;
 
   constructor(
     private authService: AuthService,
@@ -104,4 +105,5 @@ export class PhotoEditorComponent implements OnInit {
       });
     });
   }
+
 }
