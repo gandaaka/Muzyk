@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/DotNetPractice/Muzyk.csproj"
+                "${workspaceFolder}/Muzyk-API/Muzyk.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

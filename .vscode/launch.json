@@ -24,9 +24,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/DotNetPractice/bin/Debug/netcoreapp2.1/Muzyk.dll",
+            "program": "${workspaceFolder}/Muzyk-API/bin/Debug/netcoreapp2.1/Muzyk.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/DotNetPractice",
+            "cwd": "${workspaceFolder}/Muzyk-API",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
