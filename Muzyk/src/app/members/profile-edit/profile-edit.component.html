@@ -1,7 +1,8 @@
-<div class="container mt-4">
+<br><br>
+<div class="container-fluid">
   <div class="row">
     <div class="col-sm-4">
-        <h1>Your Profile</h1>
+      <h1>Your Profile</h1>
     </div>
     <div class="col sm-8">
       <div *ngIf="editForm.dirty" class="alert alert-info">
@@ -12,7 +13,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.username}}">
+        <img class="card-img-top img-thumbnail" src="{{photoUrl || '../../assets/user.png'}}" alt="{{user.username}}">
 
         <div class="card-body">
           <div>
@@ -25,12 +26,16 @@
           </div>
           <div>
             <strong>Member Since :</strong>
-            <p>{{user.created}}</p>
+            <p>{{user.created | date}}</p>
+          </div>
+          <div>
+            <strong>Last Active :</strong>
+            <p>{{user.lastActive | timeAgo}}</p>
           </div>
         </div>
 
         <div class="class-footer">
-            <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block w-100">Save Changes</button>
+          <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block w-100">Save Changes</button>
         </div>
       </div>
     </div>
@@ -51,11 +56,14 @@
                 <input type="text" name="city" class="form-control" [(ngModel)]="user.city">
                 <label for="country">Country</label>
                 <input type="text" name="country" class="form-control" [(ngModel)]="user.country">
+                <label for="genre">Genre</label>
+                <input type="text" name="genre" class="form-control" [(ngModel)]="user.genre">
               </div>
             </form>
           </tab>
+
           <tab heading="Edit Photos">
-            <p>Photo edit will be here</p>
+            <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateProfilePhoto($event)"></app-photo-editor>
           </tab>
         </tabset>
       </div>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
     <div class="container">
         <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['/newsfeed']">Muzyk</a>
@@ -16,7 +16,15 @@
         </li>
       </ul>
 
+      <form class="form-inline mr-3" *ngIf="loggedIn()">
+        <input class="form-control w-300" type="search" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchUsers()"><i class="fa fa-search"></i></button>
+      </form>
+
       <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <span class="mr-1">
+          <img src="{{photoUrl || '../../assets/user.png'}}">
+        </span>
         <a class="dropdown-toggle text-light" dropdownToggle>
           Welcome {{authService.decodedToken?.unique_name | titlecase}}
         </a>
@@ -39,5 +47,4 @@
     </div>
   </nav>
 </div>
-
-<br><br>
+<br>
