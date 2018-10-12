@@ -39,6 +39,7 @@ namespace DotNetPractice
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opt => {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+            services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
             services.AddCors(options => {
                 options.AddPolicy("AllowSpecificOrigin", builder =>
                 builder.WithOrigins("http://evil.com/").AllowAnyHeader().AllowAnyMethod());
