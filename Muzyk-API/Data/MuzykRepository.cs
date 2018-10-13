@@ -42,6 +42,10 @@ namespace DotNetPractice.Data
             return photo;
         }
 
+        public async Task<Photo> GetCoverPhotoForUser(int userId) {
+            return await _context.Photos.Where(u => u.UserId == userId).FirstOrDefaultAsync(p => p.isCoverPhoto);
+        }
+        
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);

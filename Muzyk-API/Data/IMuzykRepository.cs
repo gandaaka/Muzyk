@@ -14,6 +14,7 @@ namespace DotNetPractice.Data
         Task<User> GetUser(int id);
         Task<Photo> GetPhoto(int id);
         Task<Photo> GetMainPhotoForUser(int userId);
+        Task<Photo> GetCoverPhotoForUser(int userId);
         Task<Follow> GetFollow(int userId, int recepientId);
         Task<Message> GetMessage(int id);
         Task<PagedList<Message>> GetMessageForUser(MessageParams messageParams);

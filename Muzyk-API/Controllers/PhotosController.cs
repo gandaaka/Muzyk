@@ -69,7 +69,7 @@ namespace DotNetPractice.Controllers
                     var uploadParams = new ImageUploadParams()
                     {
                         File = new FileDescription(file.Name, stream),
-                        Transformation = new Transformation().Width(700).Height(500).Crop("fill").Gravity("face")
+                        Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
                     };
 
                     uploadResults = _cloudinary.Upload(uploadParams);
@@ -121,6 +121,31 @@ namespace DotNetPractice.Controllers
                 return NoContent();
 
             return BadRequest("Could not set photo as profile photo");
+        }
+
+        [HttpPost("{id}/setCover")]
+        public async Task<IActionResult> setCoverPhoto(int userId, int Id) {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var user = await _repo.GetUser(userId);
+
+            if (!user.Photos.Any(p => p.Id == Id))
+                return Unauthorized();
+
+            var photoFromRepo = await _repo.GetPhoto(Id);
+
+            if (photoFromRepo.isCoverPhoto) 
+                return BadRequest("Photo already set as Cover Photo");
+
+            var currentCoverPhoto = await _repo.GetCoverPhotoForUser(userId);
+            currentCoverPhoto.isCoverPhoto = false;
+            photoFromRepo.isCoverPhoto = true;
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            return BadRequest("Could not set Photo as Cover Photo");
         }
 
         [HttpDelete("{id}")]

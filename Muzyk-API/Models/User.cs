@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Muzyk_API.Models;
 
 namespace DotNetPractice.Models
 {
@@ -24,6 +25,7 @@ namespace DotNetPractice.Models
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<Video> Videos { get; set; }
         public ICollection<Follow> Follower { get; set; }
         public ICollection<Follow> Followee { get; set; }
         public ICollection<Message> MessageSent { get; set; }
