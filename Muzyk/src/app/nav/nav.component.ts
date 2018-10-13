@@ -12,6 +12,7 @@ export class NavComponent implements OnInit {
 
   model: any = {};
   photoUrl: string;
+  searchQuery: string;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 

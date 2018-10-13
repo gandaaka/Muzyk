@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Muzyk.Migrations
 {
-    public partial class mysqlInitial : Migration
+    public partial class azureInitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Pagination, PaginatedResult } from '../_models/pagination';
 import { User } from '../_models/user';
-import { AuthService } from '../_services/auth.service';
 import { UserService } from '../_services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
@@ -17,10 +16,9 @@ export class FollowerListComponent implements OnInit {
   followsParam: string;
 
   constructor(
-    private authService: AuthService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
   ) {}
 
   ngOnInit() {

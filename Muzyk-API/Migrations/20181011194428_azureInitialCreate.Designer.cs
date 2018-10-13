@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Muzyk.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181010231252_mysqlInitial")]
-    partial class mysqlInitial
+    [Migration("20181011194428_azureInitialCreate")]
+    partial class azureInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
