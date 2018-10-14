@@ -1,7 +1,4 @@
 using System.Threading.Tasks;
-using DotNetPractice.Data;
-using DotNetPractice.DTOS;
-using DotNetPractice.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
@@ -12,8 +9,11 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using AutoMapper;
+using Muzyk_API.Data;
+using Muzyk_API.DTOS;
+using Muzyk_API.Models;
 
-namespace DotNetPractice.Controllers
+namespace Muzyk_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

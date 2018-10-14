@@ -39,7 +39,7 @@ export class ProfilePageComponent implements OnInit {
       {
         width: '700px',
         height: '500px',
-        imagePercent: 100,
+        imagePercent: 85,
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Fade,
         preview: true

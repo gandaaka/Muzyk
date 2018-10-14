@@ -1,9 +1,10 @@
-using DotNetPractice.Models;
+
 using Microsoft.EntityFrameworkCore;
+using Muzyk_API.Models;
 using System;
 using System.Threading.Tasks;
 
-namespace DotNetPractice.Data
+namespace Muzyk_API.Data
 {
     public class AuthRepository : IAuthRepository
     {

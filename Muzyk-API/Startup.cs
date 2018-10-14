@@ -5,8 +5,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DotNetPractice.Data;
-using DotNetPractice.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -20,8 +18,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Muzyk_API.Data;
+using Muzyk_API.Helpers;
 
-namespace DotNetPractice
+namespace Muzyk_API
 {
     public class Startup
     {
@@ -68,7 +68,7 @@ namespace DotNetPractice
 
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opt =>
             {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -126,15 +126,16 @@ namespace DotNetPractice
             //seeder.seedUsers();
             app.UseCors("AllowSpecificOrigin");
             app.UseAuthentication();
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-            app.UseMvc(routes =>
+            //app.UseDefaultFiles();
+            //app.UseStaticFiles();
+            app.UseMvc();
+/*             app.UseMvc(routes =>
             {
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Fallback", action = "Index" }
                 );
-            });
+            }); */
         }
     }
 }

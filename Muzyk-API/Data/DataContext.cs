@@ -1,10 +1,10 @@
-﻿using DotNetPractice.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Muzyk_API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-namespace DotNetPractice.Data
+namespace Muzyk_API.Data
 {
     public class DataContext : DbContext
     {
@@ -15,6 +15,7 @@ namespace DotNetPractice.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Video> Videos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             builder.Entity<Follow>()

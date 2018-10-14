@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using DotNetPractice.Models;
 
-namespace DotNetPractice.DTOS
+namespace Muzyk_API.DTOS
 {
     public class UserForDetailDto
     {
@@ -21,6 +20,8 @@ namespace DotNetPractice.DTOS
         public string City { get; set; }
         public string Country { get; set; }
         public string PhotoUrl { get; set; }
+        public string VideoUrl { get; set; }
         public ICollection<PhotoForDetailDto> Photos { get; set; }
+        public ICollection<VideoForDetailDto> Videos { get; set; }
     }
 }

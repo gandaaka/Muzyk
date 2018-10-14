@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNetPractice.Controllers
+namespace Muzyk_API.Controllers
 {
     public class Fallback : Controller
     {

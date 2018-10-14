@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Muzyk_API.Models;
 
-namespace DotNetPractice.Models
+namespace Muzyk_API.Models
 {
     public class User
     {

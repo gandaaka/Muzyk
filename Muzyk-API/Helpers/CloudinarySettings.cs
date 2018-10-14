@@ -1,4 +1,4 @@
-namespace DotNetPractice.Helpers
+namespace Muzyk_API.Helpers
 {
     public class CloudinarySettings
     {

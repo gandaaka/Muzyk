@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DotNetPractice.Helpers;
-using DotNetPractice.Models;
+using Muzyk_API.Helpers;
+using Muzyk_API.Models;
 
-namespace DotNetPractice.Data
+namespace Muzyk_API.Data
 {
     public interface IMuzykRepository
     {
@@ -13,6 +13,7 @@ namespace DotNetPractice.Data
         Task<PagedList<User>> GetUsers(UserParams userParams);
         Task<User> GetUser(int id);
         Task<Photo> GetPhoto(int id);
+        Task<Video> GetVideo(int id);
         Task<Photo> GetMainPhotoForUser(int userId);
         Task<Photo> GetCoverPhotoForUser(int userId);
         Task<Follow> GetFollow(int userId, int recepientId);

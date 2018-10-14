@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DotNetPractice.DTOS
+namespace Muzyk_API.DTOS
 {
     public class UserToRegisterDto
     {

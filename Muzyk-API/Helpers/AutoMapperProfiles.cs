@@ -1,9 +1,9 @@
 using System.Linq;
 using AutoMapper;
-using DotNetPractice.DTOS;
-using DotNetPractice.Models;
+using Muzyk_API.DTOS;
+using Muzyk_API.Models;
 
-namespace DotNetPractice.Helpers
+namespace Muzyk_API.Helpers
 {
     public class AutoMapperProfiles : Profile
     {
@@ -23,13 +23,18 @@ namespace DotNetPractice.Helpers
                 .ForMember(dest => dest.Age, opt =>{
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
-            CreateMap<Photo, PhotoForDetailDto>();
-
             CreateMap<UserForUpdateDto, User>();
             CreateMap<UserForDetailDto, User>();
+            CreateMap<UserToRegisterDto, User>();
+            //photo DTo
+            CreateMap<Photo, PhotoForDetailDto>();
             CreateMap<Photo, PhotoFromReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
-            CreateMap<UserToRegisterDto, User>();
+            //video DTo
+            CreateMap<VideoForCreationDto, Video>();
+            CreateMap<Video, VideoForReturnDto>();
+            CreateMap<Video, VideoForDetailDto>();
+            //messageDto
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>()
                 .ForMember(m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.isProfilePhoto).PhotoUrl))

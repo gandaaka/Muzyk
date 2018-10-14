@@ -1,4 +1,4 @@
-namespace DotNetPractice.DTOS
+namespace Muzyk_API.DTOS
 {
     public class UserForUpdateDto
     {

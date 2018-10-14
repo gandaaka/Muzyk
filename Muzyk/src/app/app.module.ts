@@ -31,7 +31,7 @@ import { AlertifyService } from './_services/alertify.service';
 import { ListsComponent } from './members/lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
-import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import { NewsfeedComponent } from './newsFeed-components/newsfeed/newsfeed.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { MemberCardComponent } from './members/member-card/member-card.component';
@@ -48,6 +48,7 @@ import { FollowerResolver } from './_resolvers/followers.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { MemberMapComponent } from './members/member-map/member-map.component';
+import { NewsfeedCardComponent } from './newsFeed-components/newsfeed-card/newsfeed-card.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -63,6 +64,7 @@ export function tokenGetter() {
       MessagesComponent,
       AnalyticsComponent,
       NewsfeedComponent,
+      NewsfeedCardComponent,
       MemberCardComponent,
       ProfilePageComponent,
       ProfileEditComponent,

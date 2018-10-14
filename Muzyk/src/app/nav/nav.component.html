@@ -18,7 +18,7 @@
 
       <form #searchForm="ngForm" class="form-inline mr-3" *ngIf="loggedIn()" (ngSubmit)="searchUsers()">
         <div class="input-group-prepend">
-          <input class="form-control w-300" type="search" required placeholder="Search" [(ngModel)]="searchQuery">
+          <input class="form-control w-300" type="search" name="searchBox" required placeholder="Search" [(ngModel)]="searchQuery">
           <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
         </div>
       </form>

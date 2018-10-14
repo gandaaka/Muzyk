@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DotNetPractice.Helpers;
-using DotNetPractice.Models;
 using Microsoft.EntityFrameworkCore;
+using Muzyk_API.Helpers;
+using Muzyk_API.Models;
 
-namespace DotNetPractice.Data
+namespace Muzyk_API.Data
 {
     public class MuzykRepository : IMuzykRepository
     {
@@ -40,6 +40,11 @@ namespace DotNetPractice.Data
         {
             var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
             return photo;
+        }
+
+        public async Task<Video> GetVideo(int id) {
+            var video = await _context.Videos.FirstOrDefaultAsync(v => v.Id == id);
+            return video;
         }
 
         public async Task<Photo> GetCoverPhotoForUser(int userId) {

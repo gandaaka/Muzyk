@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using DotNetPractice.Models;
+using Muzyk_API.Data;
+using Muzyk_API.Models;
 using Newtonsoft.Json;
 
-namespace DotNetPractice.Data
+namespace Muzyk_API.Data
 {
     public class Seed
     {

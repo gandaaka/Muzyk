@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../_models/user';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../_services/user.service';
-import { Pagination, PaginatedResult } from '../_models/pagination';
-import { AlertifyService } from '../_services/alertify.service';
+import { UserService } from '../../_services/user.service';
+import { Pagination, PaginatedResult } from '../../_models/pagination';
+import { AlertifyService } from '../../_services/alertify.service';
+import { User } from '../../_models/user';
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-newsfeed',

@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Http;
 
-namespace DotNetPractice.DTOS
+namespace Muzyk_API.DTOS
 {
     public class PhotoForCreationDto
     {

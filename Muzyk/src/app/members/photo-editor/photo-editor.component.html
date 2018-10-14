@@ -4,7 +4,7 @@
     <!-- <img src="{{photo.photoUrl}}" class="img-fluid img-thumbnail p-1" alt=""> -->
     <carousel [(activeSlide)]="activeSlide">
       <slide *ngFor="let photo of photos; let index=index">
-        <img [src]="photo.photoUrl" alt="{{photo.description}}" class="w-100">
+        <img [src]="photo.photoUrl" class="justify-content-center img-fluid" alt="{{photo.description}}" class="w-65">
         <div class="carousel-caption">
           <p>{{photo.description}}</p>
           <div class="text-center">

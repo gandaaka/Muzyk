@@ -5,21 +5,21 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using DotNetPractice.Data;
-using DotNetPractice.DTOS;
-using DotNetPractice.Helpers;
-using DotNetPractice.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Muzyk_API.Data;
+using Muzyk_API.DTOS;
+using Muzyk_API.Helpers;
+using Muzyk_API.Models;
 
-namespace DotNetPractice.Controllers
+namespace Muzyk_API.Controllers
 {
     [Authorize]
     [Route("api/users/{userId}/photos")]
     [ApiController]
-    //[EnableCors("AllowSpecificOrigin")]
+    [EnableCors("AllowSpecificOrigin")]
     public class PhotosController : ControllerBase
     {
         private readonly IMuzykRepository _repo;
@@ -49,7 +49,6 @@ namespace DotNetPractice.Controllers
             var photo = _mapper.Map<PhotoFromReturnDto>(photoFromRepo);
             return Ok(photo);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm]PhotoForCreationDto photoForCreationDto)
@@ -139,7 +138,7 @@ namespace DotNetPractice.Controllers
                 return BadRequest("Photo already set as Cover Photo");
 
             var currentCoverPhoto = await _repo.GetCoverPhotoForUser(userId);
-            currentCoverPhoto.isCoverPhoto = false;
+            //currentCoverPhoto.isCoverPhoto = false;
             photoFromRepo.isCoverPhoto = true;
 
             if (await _repo.SaveAll())
