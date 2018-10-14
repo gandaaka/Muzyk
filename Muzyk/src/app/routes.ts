@@ -22,7 +22,7 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'newsfeed', component: NewsfeedComponent},
+            { path: 'newsfeed', component: NewsfeedComponent, resolve: {user: FollowerResolver}},
             { path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver}},
             { path: 'analytics', component: AnalyticsComponent},
             { path: 'lists', component: ListsComponent, resolve: {users: MemberListResolver}},

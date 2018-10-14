@@ -1,3 +1,18 @@
-<p>
-  newsfeed-card works!
-</p>
+<!-- <div *ngFor="let photo of photos"> -->
+<div class="card justify-content-center w-65">
+  <div class="card-title">
+    <img src="{{user.photoUrl}}" class="img-thumbnail" alt="">
+    {{user.firstName}}
+  </div>
+  <div class="img-card-top ">
+    <img src="{{user.photoUrl}}" class="w-80 pl-4" alt="">
+  </div>
+  <div class="card-body">
+    <div class="btn-group">
+      <button class="btn btn-primary"><i class="fab fa-gratipay"></i></button>
+      <button class="btn btn-primary"><i class="fas fa-comments"></i></button>
+    </div>
+  </div>
+</div>
+<!-- </div> -->
+<br>
