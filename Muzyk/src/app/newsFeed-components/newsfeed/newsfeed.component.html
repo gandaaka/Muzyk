@@ -1,0 +1,36 @@
+<div class="container-fluid pt-5 justify-content-center">
+  <div class="container col-7">
+
+    <!--Share your mood card start-->
+    <div class="card mb-3 mt-2">
+      <div class="card-title"></div>
+      <div class="card-body p-1">
+        <div class="form-group">
+          <textarea class="w-100" type="text" rows="3" placeholder="Share your mood"></textarea>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="dropdown" dropdown>
+          <a class="dropdown-toggle btn btn-outline-primary" color="white" dropdownToggle><i class="fas fa-upload"></i>
+            Upload</a>
+          <div class="dropdown-menu mt-3" *dropdownMenu>
+            <a class="dropdown-item" [routerLink]="['/profile/edit']"><i class="fas fa-camera"></i> Upload Photo</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item"><i class="fas fa-file-video"></i> Upload Video from Computer</a>
+          </div>
+        </div>
+      </div>
+      <!--Share your mood card end-->
+      <br>
+      <div class="container" *ngFor="let user of users">
+        <app-newsfeed-card [user]="user"></app-newsfeed-card>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+          [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+          firstText="&laquo;" lastText="&raquo;">
+        </pagination>
+      </div>
+    </div>
+  </div>

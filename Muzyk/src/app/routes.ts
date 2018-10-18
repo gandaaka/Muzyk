@@ -3,7 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './members/lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
-import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import { NewsfeedComponent } from './newsFeed-components/newsfeed/newsfeed.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ProfilePageComponent } from './members/profile-page/profile-page.component';
 import { ProfilePageResolver } from './_resolvers/profile-page.resolver';
@@ -22,7 +22,7 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'newsfeed', component: NewsfeedComponent},
+            { path: 'newsfeed', component: NewsfeedComponent, resolve: {user: FollowerResolver}},
             { path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver}},
             { path: 'analytics', component: AnalyticsComponent},
             { path: 'lists', component: ListsComponent, resolve: {users: MemberListResolver}},

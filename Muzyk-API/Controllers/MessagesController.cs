@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
-using DotNetPractice.Data;
-using DotNetPractice.DTOS;
-using DotNetPractice.Helpers;
-using DotNetPractice.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Muzyk_API.Data;
+using Muzyk_API.DTOS;
+using Muzyk_API.Helpers;
+using Muzyk_API.Models;
 
-namespace DotNetPractice.Controllers
+namespace Muzyk_API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]

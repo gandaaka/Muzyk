@@ -1,4 +1,4 @@
-namespace DotNetPractice.Models
+namespace Muzyk_API.Models
 {
     public class Follow
     {

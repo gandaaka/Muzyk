@@ -5,8 +5,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DotNetPractice.Data;
-using DotNetPractice.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -20,8 +18,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Muzyk_API.Data;
+using Muzyk_API.Helpers;
 
-namespace DotNetPractice
+namespace Muzyk_API
 {
     public class Startup
     {
@@ -36,13 +36,15 @@ namespace DotNetPractice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opt => {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opt =>
+            {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-            services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
-            services.AddCors(options => {
+            //services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
+            services.AddCors(options =>
+            {
                 options.AddPolicy("AllowSpecificOrigin", builder =>
-                builder.WithOrigins("http://evil.com/").AllowAnyHeader().AllowAnyMethod());
+                builder.WithOrigins("http://localhost:5000/").AllowAnyHeader().AllowAnyMethod());
             });
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
@@ -50,8 +52,10 @@ namespace DotNetPractice
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IMuzykRepository, MuzykRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>{
-                    options.TokenValidationParameters = new TokenValidationParameters{
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
                           .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
@@ -64,13 +68,15 @@ namespace DotNetPractice
 
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opt => {
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opt =>
+            {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
                 options.AddPolicy("AllowSpecificOrigin", builder =>
-                builder.WithOrigins("http://evil.com/").AllowAnyHeader().AllowAnyMethod());
+                builder.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowAnyMethod());
             });
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
@@ -78,8 +84,10 @@ namespace DotNetPractice
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IMuzykRepository, MuzykRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>{
-                    options.TokenValidationParameters = new TokenValidationParameters{
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
                           .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
@@ -98,12 +106,15 @@ namespace DotNetPractice
             }
             else
             {
-                app.UseExceptionHandler(builder => {
-                    builder.Run(async context =>{
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
                         var error = context.Features.Get<IExceptionHandlerFeature>();
-                        if(error != null){
+                        if (error != null)
+                        {
                             context.Response.AddApplicationError(error.Error.Message);
                             await context.Response.WriteAsync(error.Error.Message);
                         }
@@ -117,12 +128,14 @@ namespace DotNetPractice
             app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseMvc(routes => {
+            app.UseMvc();
+            app.UseMvc(routes =>
+            {
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
-                    defaults: new { controller = "Fallback", action = "Index"}
+                    defaults: new { controller = "Fallback", action = "Index" }
                 );
             });
         }
     }
-} 
+}

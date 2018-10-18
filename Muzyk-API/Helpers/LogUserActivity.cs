@@ -1,11 +1,11 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using DotNetPractice.Data;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
+using Muzyk_API.Data;
 
-namespace DotNetPractice.Helpers
+namespace Muzyk_API.Helpers
 {
     public class LogUserActivity : IAsyncActionFilter
     {

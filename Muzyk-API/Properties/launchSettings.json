@@ -20,7 +20,7 @@
     "Muzyk-API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "",
       "AllowHeaders":"*",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {

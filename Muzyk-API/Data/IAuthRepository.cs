@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using DotNetPractice.Models;
+using Muzyk_API.Models;
 
-namespace DotNetPractice.Data
+namespace Muzyk_API.Data
 {
     public interface IAuthRepository
     {

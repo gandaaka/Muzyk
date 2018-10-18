@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace DotNetPractice.Helpers
+namespace Muzyk_API.Helpers
 {
     public static class Extensions
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace DotNetPractice.DTOS
+namespace Muzyk_API.DTOS
 {
     public class UserForListDto
     {

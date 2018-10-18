@@ -54,9 +54,9 @@
               <div class="form-inline">
                 <label for="city">City</label>
                 <input type="text" name="city" class="form-control" [(ngModel)]="user.city">
-                <label for="country">Country</label>
+                <label class="ml-3" for="country">Country</label>
                 <input type="text" name="country" class="form-control" [(ngModel)]="user.country">
-                <label for="genre">Genre</label>
+                <label class="ml-3" for="genre">Genre</label>
                 <input type="text" name="genre" class="form-control" [(ngModel)]="user.genre">
               </div>
             </form>
@@ -64,6 +64,10 @@
 
           <tab heading="Edit Photos">
             <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateProfilePhoto($event)"></app-photo-editor>
+          </tab>
+
+          <tab heading="Edit Videos">
+            <app-video-editor></app-video-editor>
           </tab>
         </tabset>
       </div>
