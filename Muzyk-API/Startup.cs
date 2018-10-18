@@ -126,16 +126,16 @@ namespace Muzyk_API
             //seeder.seedUsers();
             app.UseCors("AllowSpecificOrigin");
             app.UseAuthentication();
-            //app.UseDefaultFiles();
-            //app.UseStaticFiles();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseMvc();
-/*             app.UseMvc(routes =>
+            app.UseMvc(routes =>
             {
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Fallback", action = "Index" }
                 );
-            }); */
+            });
         }
     }
 }

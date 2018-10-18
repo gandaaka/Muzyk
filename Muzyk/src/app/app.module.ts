@@ -49,6 +49,7 @@ import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { MemberMapComponent } from './members/member-map/member-map.component';
 import { NewsfeedCardComponent } from './newsFeed-components/newsfeed-card/newsfeed-card.component';
+import { VideoEditorComponent } from './members/video-editor/video-editor.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -73,7 +74,8 @@ export function tokenGetter() {
       MemberMessagesComponent,
       TimeAgoPipe,
       FollowerListComponent,
-      MemberMapComponent
+      MemberMapComponent,
+      VideoEditorComponent
    ],
    imports: [
       BrowserModule,

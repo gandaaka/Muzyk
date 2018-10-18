@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Muzyk_API.Data;
 
-namespace Muzyk_API.Migrations
+namespace Muzyk.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace Muzyk_API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DotNetPractice.Models.Follow", b =>
+            modelBuilder.Entity("Muzyk_API.Models.Follow", b =>
                 {
                     b.Property<int>("FollowerId");
 
@@ -32,7 +32,7 @@ namespace Muzyk_API.Migrations
                     b.ToTable("Follows");
                 });
 
-            modelBuilder.Entity("DotNetPractice.Models.Message", b =>
+            modelBuilder.Entity("Muzyk_API.Models.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace Muzyk_API.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("DotNetPractice.Models.Photo", b =>
+            modelBuilder.Entity("Muzyk_API.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,7 +90,7 @@ namespace Muzyk_API.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("DotNetPractice.Models.User", b =>
+            modelBuilder.Entity("Muzyk_API.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,7 +135,7 @@ namespace Muzyk_API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DotNetPractice.Models.Value", b =>
+            modelBuilder.Entity("Muzyk_API.Models.Value", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -168,38 +168,38 @@ namespace Muzyk_API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Video");
+                    b.ToTable("Videos");
                 });
 
-            modelBuilder.Entity("DotNetPractice.Models.Follow", b =>
+            modelBuilder.Entity("Muzyk_API.Models.Follow", b =>
                 {
-                    b.HasOne("DotNetPractice.Models.User", "Followee")
+                    b.HasOne("Muzyk_API.Models.User", "Followee")
                         .WithMany("Follower")
                         .HasForeignKey("FolloweeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("DotNetPractice.Models.User", "Follower")
+                    b.HasOne("Muzyk_API.Models.User", "Follower")
                         .WithMany("Followee")
                         .HasForeignKey("FollowerId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("DotNetPractice.Models.Message", b =>
+            modelBuilder.Entity("Muzyk_API.Models.Message", b =>
                 {
-                    b.HasOne("DotNetPractice.Models.User", "Recepient")
+                    b.HasOne("Muzyk_API.Models.User", "Recepient")
                         .WithMany("MessageRecieved")
                         .HasForeignKey("RecepientId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("DotNetPractice.Models.User", "Sender")
+                    b.HasOne("Muzyk_API.Models.User", "Sender")
                         .WithMany("MessageSent")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("DotNetPractice.Models.Photo", b =>
+            modelBuilder.Entity("Muzyk_API.Models.Photo", b =>
                 {
-                    b.HasOne("DotNetPractice.Models.User", "user")
+                    b.HasOne("Muzyk_API.Models.User", "user")
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -207,7 +207,7 @@ namespace Muzyk_API.Migrations
 
             modelBuilder.Entity("Muzyk_API.Models.Video", b =>
                 {
-                    b.HasOne("DotNetPractice.Models.User", "user")
+                    b.HasOne("Muzyk_API.Models.User", "user")
                         .WithMany("Videos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

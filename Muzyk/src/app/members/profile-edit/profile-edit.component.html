@@ -65,6 +65,10 @@
           <tab heading="Edit Photos">
             <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateProfilePhoto($event)"></app-photo-editor>
           </tab>
+
+          <tab heading="Edit Videos">
+            <app-video-editor></app-video-editor>
+          </tab>
         </tabset>
       </div>
     </div>

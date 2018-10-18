@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Muzyk_API.Migrations
+namespace Muzyk.Migrations
 {
-    public partial class AddedVideo : Migration
+    public partial class azureUpdateInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -132,7 +132,7 @@ namespace Muzyk_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Video",
+                name: "Videos",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -145,9 +145,9 @@ namespace Muzyk_API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Video", x => x.Id);
+                    table.PrimaryKey("PK_Videos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Video_Users_UserId",
+                        name: "FK_Videos_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -175,8 +175,8 @@ namespace Muzyk_API.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Video_UserId",
-                table: "Video",
+                name: "IX_Videos_UserId",
+                table: "Videos",
                 column: "UserId");
         }
 
@@ -195,7 +195,7 @@ namespace Muzyk_API.Migrations
                 name: "Values");
 
             migrationBuilder.DropTable(
-                name: "Video");
+                name: "Videos");
 
             migrationBuilder.DropTable(
                 name: "Users");
