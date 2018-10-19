@@ -6,12 +6,11 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using AutoMapper;
 using Muzyk_API.Data;
-using Muzyk_API.DTOS;
 using Muzyk_API.Models;
+using Muzyk_DTOS;
 
 namespace Muzyk_API.Controllers
 {

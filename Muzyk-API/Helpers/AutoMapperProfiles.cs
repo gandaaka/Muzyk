@@ -1,6 +1,6 @@
 using System.Linq;
 using AutoMapper;
-using Muzyk_API.DTOS;
+using Muzyk_DTOS;
 using Muzyk_API.Models;
 
 namespace Muzyk_API.Helpers

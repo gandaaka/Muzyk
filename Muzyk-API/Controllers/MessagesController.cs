@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Muzyk_API.Data;
-using Muzyk_API.DTOS;
+using Muzyk_DTOS;
 using Muzyk_API.Helpers;
 using Muzyk_API.Models;
 

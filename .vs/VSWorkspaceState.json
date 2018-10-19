@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Muzyk-API",
+    "\\Muzyk-DTOS"
   ],
-  "SelectedNode": "\\DotNetPractice",
+  "SelectedNode": "\\Muzyk-API\\Muzyk.csproj",
   "PreviewInSolutionExplorer": false
 }
