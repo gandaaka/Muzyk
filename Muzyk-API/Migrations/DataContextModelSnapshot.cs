@@ -90,6 +90,30 @@ namespace Muzyk.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("Muzyk_API.Models.Rating", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("Genre");
+
+                    b.Property<bool>("UserRating");
+
+                    b.HasKey("UserId", "Genre");
+
+                    b.ToTable("Ratings");
+                });
+
+            modelBuilder.Entity("Muzyk_API.Models.Recommendation", b =>
+                {
+                    b.Property<int>("RId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("RId", "UserId");
+
+                    b.ToTable("Recommendations");
+                });
+
             modelBuilder.Entity("Muzyk_API.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -122,6 +146,12 @@ namespace Muzyk.Migrations
 
                     b.Property<byte[]>("PasswordSalt");
 
+                    b.Property<int>("RId");
+
+                    b.Property<int?>("RecommendationRId");
+
+                    b.Property<int?>("RecommendationUserId");
+
                     b.Property<string>("UserType");
 
                     b.Property<string>("Username");
@@ -131,6 +161,8 @@ namespace Muzyk.Migrations
                     b.Property<string>("knownAs");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RecommendationRId", "RecommendationUserId");
 
                     b.ToTable("Users");
                 });
@@ -203,6 +235,13 @@ namespace Muzyk.Migrations
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Muzyk_API.Models.User", b =>
+                {
+                    b.HasOne("Muzyk_API.Models.Recommendation")
+                        .WithMany("RecommendedUsers")
+                        .HasForeignKey("RecommendationRId", "RecommendationUserId");
                 });
 
             modelBuilder.Entity("Muzyk_API.Models.Video", b =>

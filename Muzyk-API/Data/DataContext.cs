@@ -16,6 +16,8 @@ namespace Muzyk_API.Data
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Video> Videos { get; set; }
+        public DbSet<Recommendation> Recommendations { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             builder.Entity<Follow>()
@@ -42,6 +44,12 @@ namespace Muzyk_API.Data
                 .HasOne(u => u.Recepient)
                 .WithMany(m => m.MessageRecieved)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Rating>()
+                .HasKey(k => new {k.UserId, k.Genre});
+
+            builder.Entity<Recommendation>()
+                .HasKey(k => new {k.RId, k.UserId});
         }
     }
 }
