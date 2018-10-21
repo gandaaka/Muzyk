@@ -3,9 +3,9 @@ import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation, NgxGalleryAction } from 'ngx-gallery';
 import { AuthService } from '../../_services/auth.service';
-import { TabsetComponent } from 'ngx-bootstrap';
+import { TabsetComponent, TabDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-profile-page',
@@ -17,12 +17,14 @@ export class ProfilePageComponent implements OnInit {
   user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  galleryActions: NgxGalleryAction[];
+  myTabs: any[];
 
   constructor(
     private userService: UserService,
     private alertify: AlertifyService,
     private route: ActivatedRoute,
-    private authService: AuthService
+    public authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -45,6 +47,8 @@ export class ProfilePageComponent implements OnInit {
         preview: true
       }
     ];
+
+    this.galleryActions = [];
     this.galleryImages = this.getImages();
   }
 

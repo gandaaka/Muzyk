@@ -12,7 +12,7 @@ namespace Muzyk_DTOS
         public string PublicId { get; set; }
         public PhotoForCreationDto()
         {
-            DateAdded = DateTime.Now;
+            DateAdded = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
         }
     }
 }

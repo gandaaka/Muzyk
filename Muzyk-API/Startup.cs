@@ -20,6 +20,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Muzyk_API.Data;
 using Muzyk_API.Helpers;
+using Muzyk_API.Hubs;
 
 namespace Muzyk_API
 {
@@ -44,7 +45,7 @@ namespace Muzyk_API
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin", builder =>
-                builder.WithOrigins("http://localhost:5000/").AllowAnyHeader().AllowAnyMethod());
+                builder.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowAnyMethod());
             });
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
@@ -63,6 +64,7 @@ namespace Muzyk_API
                         ValidateAudience = false
                     };
                 });
+            services.AddSignalR();
             services.AddScoped<LogUserActivity>();
         }
 
@@ -95,6 +97,7 @@ namespace Muzyk_API
                         ValidateAudience = false
                     };
                 });
+            services.AddSignalR();
             services.AddScoped<LogUserActivity>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -135,6 +138,10 @@ namespace Muzyk_API
                     name: "spa-fallback",
                     defaults: new { controller = "Fallback", action = "Index" }
                 );
+            });
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<MessageHub>("/mHub");
             });
         }
     }

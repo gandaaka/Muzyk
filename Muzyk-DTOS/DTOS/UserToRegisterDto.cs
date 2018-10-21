@@ -39,8 +39,8 @@ namespace Muzyk_DTOS
 
         public UserToRegisterDto()
         {
-            Created = DateTime.Now;
-            LastActive = DateTime.Now;
+            Created = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
+            LastActive = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
         }
     }
 }

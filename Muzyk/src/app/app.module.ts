@@ -12,8 +12,7 @@ import {
   ProgressbarModule,
   BsDatepickerModule,
   PaginationModule,
-  ButtonsModule,
-  CarouselModule
+  ButtonsModule
 } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -84,7 +83,6 @@ export function tokenGetter() {
       ReactiveFormsModule,
       TabsModule.forRoot(),
       BsDropdownModule.forRoot(),
-      CarouselModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       AgmCoreModule.forRoot({
         apiKey: ''

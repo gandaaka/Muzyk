@@ -10,7 +10,8 @@ namespace Muzyk_API.Helpers
         public static void AddApplicationError(this HttpResponse response, string message){
             response.Headers.Add("Application-Error", message);
             response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
-            response.Headers.Add("Access-Control-Allow-Origin","*");
+            response.Headers.Add("Access-Control-Allow-Origin","http://localhost:4200");
+            response.Headers.Add("Access-Control-Allow-Credentials", "true");
         }
         public static void AddPagination(this HttpResponse response, int currentPage, int itemsPerPage, int totalItems, int totalPages){
             var paginationHeader = new PaginationHeader(currentPage, itemsPerPage, totalItems, totalPages);

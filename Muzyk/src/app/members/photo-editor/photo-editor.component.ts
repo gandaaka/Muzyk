@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
+import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
 
 @Component({
   selector: 'app-photo-editor',
@@ -14,6 +15,9 @@ import { AlertifyService } from '../../_services/alertify.service';
 export class PhotoEditorComponent implements OnInit {
   @Input() photos: Photo[];
   @Output() getMemberPhotoChange = new EventEmitter<string>();
+
+  galleryImages: NgxGalleryImage[];
+  galleryOptions: NgxGalleryOptions[];
 
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
@@ -29,6 +33,31 @@ export class PhotoEditorComponent implements OnInit {
 
   ngOnInit() {
     this.initializeUploader();
+    this.galleryOptions = [
+      {
+        width: '700px',
+        height: '500px',
+        imagePercent: 55,
+        thumbnails: false,
+        imageAnimation: NgxGalleryAnimation.Fade,
+        preview: true,
+        previewZoom: true,
+      }
+    ];
+    this.galleryImages = this.getImages();
+  }
+
+  getImages() {
+    const imageUrls = [];
+    for (let i = 0; i < this.photos.length; i++) {
+      imageUrls.push({
+        small: this.photos[i].photoUrl,
+        medium: this.photos[i].photoUrl,
+        big: this.photos[i].photoUrl,
+        description: this.photos[i].description
+      });
+    }
+    return imageUrls;
   }
 
   fileOverBase(e: any): void {
