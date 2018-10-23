@@ -85,7 +85,7 @@ export function tokenGetter() {
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       AgmCoreModule.forRoot({
-        apiKey: ''
+        apiKey: 'AIzaSyD-REm0oq9XBJ5ndh4yQNFI-1681tLaEq4'
       }),
       ProgressbarModule.forRoot(),
       BsDatepickerModule.forRoot(),

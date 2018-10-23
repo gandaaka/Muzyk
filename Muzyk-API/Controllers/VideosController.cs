@@ -41,41 +41,34 @@ namespace Muzyk_API.Controllers
             _cloudinary = new Cloudinary(account);
         }
 
-        [HttpGet("{id}", Name="GetVideo")]
-        public async Task<IActionResult> GetVideo(int id){
+        [HttpGet("{id}", Name = "GetVideo")]
+        public async Task<IActionResult> GetVideo(int id)
+        {
             var videoFromRepo = await _repo.GetVideo(id);
             var video = _mapper.Map<VideoForReturnDto>(videoFromRepo);
             return Ok(video);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddVideoForUser(int userId, [FromForm]VideoForCreationDto videoForCreationDto){
+        [RequestFormLimits(ValueCountLimit = 2000)]
+        [RequestSizeLimit(100000000)]
+        public async Task<IActionResult> AddVideoForUser(int userId, [FromForm]VideoForCreationDto videoForCreationDto)
+        {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var userFromRepo = await _repo.GetUser(userId);
 
-            var file = videoForCreationDto.File;
-            var uploadResults = new  VideoUploadResult();
-
-            if (file.Length > 0) {
-                using (var stream = file.OpenReadStream()){
-                    var uploadParams = new VideoUploadParams(){
-                        File = new FileDescription(file.Name, stream),
-                        Transformation = new Transformation().Width(500).Height(500).Crop("fill")
-                    };
-                    uploadResults = _cloudinary.Upload(uploadParams);
-                }
-            }
-            videoForCreationDto.VideoUrl = uploadResults.Uri.ToString();
-            videoForCreationDto.PublicId = uploadResults.PublicId;
-
+            videoForCreationDto.PublicId = "";
+            videoForCreationDto.Description = "";
+            videoForCreationDto.MediaType = "Video";
             var video = _mapper.Map<Models.Video>(videoForCreationDto);
             userFromRepo.Videos.Add(video);
 
-            if (await _repo.SaveAll()){
+            if (await _repo.SaveAll())
+            {
                 var videoToReturn = _mapper.Map<VideoForReturnDto>(video);
-                return CreatedAtRoute("GetVideo", new VideoForReturnDto{Id = video.Id}, videoToReturn);
+                return CreatedAtRoute("GetVideo", new VideoForReturnDto { Id = video.Id }, videoToReturn);
             }
 
             return BadRequest("Could not add the video!");

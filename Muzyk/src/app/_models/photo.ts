@@ -1,6 +1,6 @@
 export interface Photo {
     id: number;
-    photoUrl: string;
+    mediaUrl: string;
     description: string;
     dateAdded: Date;
     isProfilePhoto: boolean;

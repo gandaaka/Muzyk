@@ -56,9 +56,9 @@ export class ProfilePageComponent implements OnInit {
     const imageUrls = [];
     for (let i = 0; i < this.user.photos.length; i++) {
       imageUrls.push({
-        small: this.user.photos[i].photoUrl,
-        medium: this.user.photos[i].photoUrl,
-        big: this.user.photos[i].photoUrl,
+        small: this.user.photos[i].mediaUrl,
+        medium: this.user.photos[i].mediaUrl,
+        big: this.user.photos[i].mediaUrl,
         description: this.user.photos[i].description
       });
     }

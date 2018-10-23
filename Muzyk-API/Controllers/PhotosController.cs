@@ -74,9 +74,9 @@ namespace Muzyk_API.Controllers
                     uploadResults = _cloudinary.Upload(uploadParams);
                 }
             }
-            photoForCreationDto.PhotoUrl = uploadResults.Uri.ToString();
+            photoForCreationDto.MediaUrl = uploadResults.Uri.ToString();
             photoForCreationDto.PublicId = uploadResults.PublicId;
-
+            photoForCreationDto.MediaType = "Photo";
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
 

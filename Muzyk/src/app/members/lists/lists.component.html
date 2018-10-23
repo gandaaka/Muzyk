@@ -1,4 +1,4 @@
-<div class="container pt-3">
+<div class="container">
   <div class="text-center mt-3">
     <h2>Search Response - {{pagination.totalItems}} users found</h2>
   </div>
@@ -6,13 +6,13 @@
   <div class="container mt-3">
     <form class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
       <div class="form-group">
-        <label for="minExp">Experience From</label>
+        <label for="minExp">Years of Experience From:</label>
         <input type="number" class="form-control ml-1" style="width: 70px" id="minExp" [(ngModel)]="userParams.minExp"
           name="minExp">
       </div>
 
       <div class="form-group px-2">
-        <label for="maxExp">Experience To</label>
+        <label for="maxExp">To :</label>
         <input type="number" class="form-control ml-1" style="width: 70px" id="maxExp" [(ngModel)]="userParams.maxExp"
           name="maxExp">
       </div>

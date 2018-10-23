@@ -11,14 +11,14 @@ namespace Muzyk_API.Helpers
         {
             CreateMap<User, UserForListDto>().ForMember(dest => dest.PhotoUrl, opt =>
                 {
-                    opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.isProfilePhoto).PhotoUrl);
+                    opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.isProfilePhoto).MediaUrl);
                 })
                 .ForMember(dest => dest.Age, opt =>{
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
             CreateMap<User, UserForDetailDto>().ForMember(dest => dest.PhotoUrl, opt =>
                 {
-                    opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.isProfilePhoto).PhotoUrl);
+                    opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.isProfilePhoto).MediaUrl);
                 })
                 .ForMember(dest => dest.Age, opt =>{
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
@@ -37,8 +37,8 @@ namespace Muzyk_API.Helpers
             //messageDto
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>()
-                .ForMember(m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.isProfilePhoto).PhotoUrl))
-                .ForMember(m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.isProfilePhoto).PhotoUrl));
+                .ForMember(m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.isProfilePhoto).MediaUrl))
+                .ForMember(m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.isProfilePhoto).MediaUrl));
         }
     }
 }

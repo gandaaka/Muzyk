@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,11 @@ namespace Muzyk_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 200 * 1024 * 1024;
+                options.ValueCountLimit = 200 * 1024 * 1024;
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opt =>
             {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -51,7 +57,7 @@ namespace Muzyk_API
             services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IMuzykRepository, MuzykRepository>();
+            services.AddScoped<IMuzykRepository, MuzykRepository>();   
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -71,6 +77,11 @@ namespace Muzyk_API
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 200 * 1024 * 1024;
+                options.ValueCountLimit = 200 * 1024 * 1024;
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opt =>
             {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;

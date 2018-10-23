@@ -1,14 +1,12 @@
-<div class="container-fluid pt-3">
+<div class="container-fluid">
   <app-member-map></app-member-map>
   <div class="text-center mt-3">
     <div class="container-fluid mt-3">
       <br>
       <div class="row">
         <div class="btn-group">
-          <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followers" (click)="loadUsers()">Followers
-            {{pagination.totalItems}}</button>
-          <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followees" (click)="loadUsers()">Following
-            {{pagination.totalItems}}</button>
+          <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followers" (click)="loadUsers()">Followers {{tFollowees}}</button>
+          <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followees" (click)="loadUsers()">Following {{tFollowers}}</button>
         </div>
       </div>
       <br>

@@ -1,6 +1,6 @@
 export interface Video {
     id: number;
-    videoUrl: string;
+    mediaUrl: string;
     description: string;
     dateAdded: Date;
 }

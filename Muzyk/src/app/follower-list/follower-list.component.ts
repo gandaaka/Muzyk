@@ -14,6 +14,8 @@ export class FollowerListComponent implements OnInit {
   users: User[];
   pagination: Pagination;
   followsParam: string;
+  tFollowers: number;
+  tFollowees: number;
 
   constructor(
     private userService: UserService,
@@ -27,6 +29,7 @@ export class FollowerListComponent implements OnInit {
       this.pagination = data['user'].pagination;
     });
     this.followsParam = 'Followers';
+    this.loadUsers();
   }
 
   loadUsers() {
@@ -46,6 +49,11 @@ export class FollowerListComponent implements OnInit {
           this.alertify.error(error);
         }
       );
+      if (this.followsParam === 'Followers') {
+        this.tFollowers = this.pagination.totalItems;
+      } else {
+        this.tFollowees = this.pagination.totalItems;
+      }
   }
 
   pageChanged(event: any): void {

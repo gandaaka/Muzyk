@@ -1,9 +1,9 @@
 img.img-thumbnail {
-    height: 200px;
-    min-width: 250px !important;
-    margin-bottom: 2px;
+  height: 200px;
+  min-width: 200px !important;
+  margin-bottom: 2px;
 }
 
 .nv-file-over {
-    border: dotted 3px #158CBA;
+  border: dotted 3px #158cba;
 }

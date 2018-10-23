@@ -12,12 +12,17 @@ export class NavComponent implements OnInit {
   model: any = {};
   photoUrl: string;
   searchQuery: string;
+  collapsed = true;
 
   constructor(
     public authService: AuthService,
     private alertify: AlertifyService,
     private router: Router
   ) {}
+
+  toggleCollapsed(): void {
+    this.collapsed = !this.collapsed;
+  }
 
   ngOnInit() {
     this.authService.currentPhotoUrl.subscribe(

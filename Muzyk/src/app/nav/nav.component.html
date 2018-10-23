@@ -1,27 +1,34 @@
 <div class="container-fluid">
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-    <div class="container">
-      <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['/newsfeed']"><i class="fas fa-home"></i> Muzyk</a>
-      <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']"><i class="fas fa-home"></i> Muzyk</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapsed()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['/newsfeed']"><i class="fas fa-home"></i> Muzyk</a>
+        <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']"><i class="fas fa-home"></i> Muzyk</a>
+      </div>
 
-      <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/messages']"><i class="fas fa-comment-alt"></i> Messages </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/analytics']"><i class="fas fa-chart-line"></i> Analytics</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/followers']"><i class="fas fa-users"></i> Followers</a>
-        </li>
-      </ul>
-
-      <form #searchForm="ngForm" class="form-inline mr-3" *ngIf="loggedIn()" (ngSubmit)="searchUsers()">
-        <div class="input-group-prepend">
-          <input class="form-control w-300" type="search" name="searchBox" required placeholder="Search" [(ngModel)]="searchQuery">
-          <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
-        </div>
-      </form>
+      <div class="collapse navbar-collapse" id="mainMenu" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+        <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/messages']"><i class="fas fa-comment-alt"></i> Messages </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/analytics']"><i class="fas fa-chart-line"></i> Analytics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/followers']"><i class="fas fa-users"></i> Followers</a>
+          </li>
+        </ul>
+        <form #searchForm="ngForm" class="form-inline mr-3" *ngIf="loggedIn()" (ngSubmit)="searchUsers()">
+          <div class="input-group-prepend">
+            <input class="form-control w-300" type="search" name="searchBox" required placeholder="Search" [(ngModel)]="searchQuery">
+            <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+          </div>
+        </form>
+      </div>
 
       <div *ngIf="loggedIn()" class="dropdown" dropdown>
         <span class="mr-1">
@@ -50,4 +57,3 @@
     </div>
   </nav>
 </div>
-<br>

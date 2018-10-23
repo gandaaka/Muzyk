@@ -51,9 +51,9 @@ export class PhotoEditorComponent implements OnInit {
     const imageUrls = [];
     for (let i = 0; i < this.photos.length; i++) {
       imageUrls.push({
-        small: this.photos[i].photoUrl,
-        medium: this.photos[i].photoUrl,
-        big: this.photos[i].photoUrl,
+        small: this.photos[i].mediaUrl,
+        medium: this.photos[i].mediaUrl,
+        big: this.photos[i].mediaUrl,
         description: this.photos[i].description
       });
     }
@@ -88,7 +88,7 @@ export class PhotoEditorComponent implements OnInit {
         const res: Photo = JSON.parse(response);
         const photo = {
           id: res.id,
-          photoUrl: res.photoUrl,
+          mediaUrl: res.mediaUrl,
           dateAdded: res.dateAdded,
           description: res.description,
           isProfilePhoto: res.isProfilePhoto,
@@ -96,8 +96,8 @@ export class PhotoEditorComponent implements OnInit {
         };
         this.photos.push(photo);
         if (photo.isProfilePhoto) {
-          this.authService.changeMemberPhoto(photo.photoUrl);
-          this.authService.currentUser.photoUrl = photo.photoUrl;
+          this.authService.changeMemberPhoto(photo.mediaUrl);
+          this.authService.currentUser.photoUrl = photo.mediaUrl;
           localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
         }
       }
@@ -114,8 +114,8 @@ export class PhotoEditorComponent implements OnInit {
           )[0];
           this.currentProfilePhoto.isProfilePhoto = false;
           photo.isProfilePhoto = true;
-          this.authService.changeMemberPhoto(photo.photoUrl);
-          this.authService.currentUser.photoUrl = photo.photoUrl;
+          this.authService.changeMemberPhoto(photo.mediaUrl);
+          this.authService.currentUser.photoUrl = photo.mediaUrl;
           localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
         },
         error => {
