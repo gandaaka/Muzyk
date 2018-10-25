@@ -6,7 +6,7 @@ import { User } from '../_models/user';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
 import { Message } from '../_models/message';
-import { observe } from 'tns-core-modules/ui/gestures/gestures';
+import { Video } from '../_models/video';
 
 @Injectable({
   providedIn: 'root'
@@ -118,5 +118,9 @@ export class UserService {
 
   markAsRead(userId: number, messageId: number) {
     return this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + messageId + '/read', {}).subscribe();
+  }
+
+  uploadVideo(userId: number, video: Video) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/videos/', video);
   }
 }

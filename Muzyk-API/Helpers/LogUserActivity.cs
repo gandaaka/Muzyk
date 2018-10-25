@@ -16,7 +16,7 @@ namespace Muzyk_API.Helpers
             var userId = int.Parse(resultContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var repo = resultContext.HttpContext.RequestServices.GetService<IMuzykRepository>();
             var user = await repo.GetUser(userId);
-            user.LastActive = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
+            user.LastActive = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Local);
             await repo.SaveAll();
         }
     }

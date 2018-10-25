@@ -11,6 +11,7 @@ using AutoMapper;
 using Muzyk_API.Data;
 using Muzyk_API.Models;
 using Muzyk_DTOS;
+using Muzyk_API.Helpers;
 
 namespace Muzyk_API.Controllers
 {

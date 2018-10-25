@@ -32,14 +32,14 @@ export class MemberMessagesComponent implements OnInit {
       .withUrl(this.signalUrl + '/mHub')
       .build();
 
-/*     this.connection
+    this.connection
       .start()
       .then(() => {
         this.alertify.success('Connection Started');
       })
       .catch(error => {
         this.alertify.warning(error);
-      }); */
+      });
 
     this.loadMessages();
   }

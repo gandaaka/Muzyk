@@ -23,7 +23,12 @@
       <!--Share your mood card end-->
       <br>
       <div class="container" *ngFor="let user of users">
-        <app-newsfeed-card [user]="user"></app-newsfeed-card>
+        <div *ngIf="user.photos != null">
+          <app-newsfeed-card [user]="user"></app-newsfeed-card>
+        </div>
+        <div *ngIf="user.photos == null">
+          No information to show here
+        </div>
       </div>
 
       <div class="d-flex justify-content-center">

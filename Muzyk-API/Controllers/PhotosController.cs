@@ -16,6 +16,7 @@ using Muzyk_API.Models;
 
 namespace Muzyk_API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/users/{userId}/photos")]
     [ApiController]

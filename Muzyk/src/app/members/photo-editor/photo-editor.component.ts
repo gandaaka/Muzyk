@@ -24,6 +24,7 @@ export class PhotoEditorComponent implements OnInit {
   baseUrl = environment.apiUrl;
   currentProfilePhoto: Photo;
   activeSlide = 0;
+  pDescription: string;
 
   constructor(
     private authService: AuthService,
@@ -86,14 +87,16 @@ export class PhotoEditorComponent implements OnInit {
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
         const res: Photo = JSON.parse(response);
+        console.log(this.pDescription);
         const photo = {
           id: res.id,
           mediaUrl: res.mediaUrl,
           dateAdded: res.dateAdded,
-          description: res.description,
+          description: this.pDescription,
           isProfilePhoto: res.isProfilePhoto,
           isCoverPhoto: res.isCoverPhoto
         };
+        console.log(photo);
         this.photos.push(photo);
         if (photo.isProfilePhoto) {
           this.authService.changeMemberPhoto(photo.mediaUrl);

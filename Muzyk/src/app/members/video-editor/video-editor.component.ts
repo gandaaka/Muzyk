@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment.prod';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Video } from 'src/app/_models/video';
+
+import { NgForm } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-video-editor',
@@ -11,27 +14,36 @@ import { Video } from 'src/app/_models/video';
   styleUrls: ['./video-editor.component.css']
 })
 export class VideoEditorComponent implements OnInit {
-  videos: Video[];
+  @ViewChild('videoForm')
+  @Input() videos: Video[];
+
+  videoForm: NgForm;
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
 
   constructor(
     private authService: AuthService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private santizer: DomSanitizer
   ) { }
 
   ngOnInit() {
     this.initializeUploader();
   }
 
+  uploadVideo() {
+    this.videoForm.reset();
+  }
+
+  // video upload - cloudinary
   initializeUploader() {
     this.uploader = new FileUploader({
       url:
         this.baseUrl +
         'users/' +
         this.authService.decodedToken.nameid +
-        '/video',
+        '/videos',
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['video'],
@@ -46,6 +58,7 @@ export class VideoEditorComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
+        // const res: Video = JSON.parse(response);
         this.alertify.success('Video Uploaded Successfully');
       }
     };

@@ -10,7 +10,7 @@ namespace Muzyk_DTOS
         public string Content { get; set; }
         public MessageForCreationDto()
         {
-            MessageSent = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
+            MessageSent = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Local);
         }
     }
 }

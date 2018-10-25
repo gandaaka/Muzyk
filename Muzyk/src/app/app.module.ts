@@ -49,6 +49,7 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { MemberMapComponent } from './members/member-map/member-map.component';
 import { NewsfeedCardComponent } from './newsFeed-components/newsfeed-card/newsfeed-card.component';
 import { VideoEditorComponent } from './members/video-editor/video-editor.component';
+import { EmbedVideoPipe } from './_pipes/embedVideo/embedVideo.pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -74,7 +75,8 @@ export function tokenGetter() {
       TimeAgoPipe,
       FollowerListComponent,
       MemberMapComponent,
-      VideoEditorComponent
+      VideoEditorComponent,
+      EmbedVideoPipe
    ],
    imports: [
       BrowserModule,
@@ -84,9 +86,7 @@ export function tokenGetter() {
       TabsModule.forRoot(),
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
-      AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyD-REm0oq9XBJ5ndh4yQNFI-1681tLaEq4'
-      }),
+      AgmCoreModule.forRoot(),
       ProgressbarModule.forRoot(),
       BsDatepickerModule.forRoot(),
       PaginationModule.forRoot(),

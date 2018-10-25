@@ -13,7 +13,7 @@ namespace Muzyk_DTOS
         public string MediaType { get; set; }
         public PhotoForCreationDto()
         {
-            DateAdded = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
+            DateAdded = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Local);
         }
     }
 }

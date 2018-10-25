@@ -47,8 +47,6 @@ export class ProfilePageComponent implements OnInit {
         preview: true
       }
     ];
-
-    this.galleryActions = [];
     this.galleryImages = this.getImages();
   }
 

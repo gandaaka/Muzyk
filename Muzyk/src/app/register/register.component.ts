@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.minLength(6),
+            Validators.minLength(8),
             Validators.maxLength(24)
           ]
         ],
@@ -71,15 +71,19 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.registerForm.valid) {
       this.user = Object.assign({}, this.registerForm.value);
-      this.authService.register(this.user).subscribe(() => {
-        this.alertify.success('registration successful');
-      }, error => {
-        this.alertify.error('Something went wrong in registration');
-      }, () => {
-        this.authService.login(this.user).subscribe(() => {
-          this.router.navigate(['newsfeed']);
-        });
-      });
+      this.authService.register(this.user).subscribe(
+        () => {
+          this.alertify.success('registration successful');
+        },
+        error => {
+          this.alertify.error(error);
+        },
+        () => {
+          this.authService.login(this.user).subscribe(() => {
+            this.router.navigate(['newsfeed']);
+          });
+        }
+      );
     }
   }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Muzyk_DTOS.DTOS;
 
 namespace Muzyk_DTOS
 {
@@ -23,5 +24,6 @@ namespace Muzyk_DTOS
         public string VideoUrl { get; set; }
         public ICollection<PhotoForDetailDto> Photos { get; set; }
         public ICollection<VideoForDetailDto> Videos { get; set; }
+        public ICollection<MediaForDetailDto> Media { get; set; }
     }
 }

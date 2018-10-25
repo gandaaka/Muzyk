@@ -2,6 +2,7 @@ using System.Linq;
 using AutoMapper;
 using Muzyk_DTOS;
 using Muzyk_API.Models;
+using Muzyk_DTOS.DTOS;
 
 namespace Muzyk_API.Helpers
 {
@@ -34,6 +35,8 @@ namespace Muzyk_API.Helpers
             CreateMap<VideoForCreationDto, Video>();
             CreateMap<Video, VideoForReturnDto>();
             CreateMap<Video, VideoForDetailDto>();
+            //MediaDto Map
+            CreateMap<Media, MediaForDetailDto>();
             //messageDto
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>()

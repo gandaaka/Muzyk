@@ -59,9 +59,28 @@ namespace Muzyk_API.Controllers
 
             var userFromRepo = await _repo.GetUser(userId);
 
-            videoForCreationDto.PublicId = "";
-            videoForCreationDto.Description = "";
+            var file = videoForCreationDto.File;
+            var uploadResults = new VideoUploadResult();
+
+            if (file.Length > 0)
+            {
+                using (var stream = file.OpenReadStream())
+                {
+                    var uploadParams = new VideoUploadParams()
+                    {
+                        File = new FileDescription(file.Name, stream),
+                        Transformation = new Transformation().Width(500).Height(500).Crop("fill")
+                    };
+
+                    uploadResults = _cloudinary.Upload(uploadParams);
+                }
+            }
+
+            videoForCreationDto.MediaUrl = uploadResults.Uri.ToString();
+            videoForCreationDto.PublicId = uploadResults.PublicId;
+            
             videoForCreationDto.MediaType = "Video";
+            
             var video = _mapper.Map<Models.Video>(videoForCreationDto);
             userFromRepo.Videos.Add(video);
 

@@ -5,8 +5,8 @@
       <br>
       <div class="row">
         <div class="btn-group">
-          <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followers" (click)="loadUsers()">Followers {{tFollowees}}</button>
-          <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followees" (click)="loadUsers()">Following {{tFollowers}}</button>
+          <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followers" (click)="loadUsers()">Followers<span class="badge badge-pill badge-light"> {{tFollowees}}</span></button>
+          <button class="btn btn-primary" [(ngModel)]="followsParam" btnRadio="Followees" (click)="loadUsers()">Following<span class="badge badge-pill badge-light"> {{tFollowers}}</span></button>
         </div>
       </div>
       <br>

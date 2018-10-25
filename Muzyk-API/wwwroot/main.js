@@ -750,6 +750,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.markAsRead = function (userId, messageId) {
         return this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + messageId + '/read', {}).subscribe();
     };
+    UserService.prototype.uploadVideo = function (userId, video) {
+        return this.http.post(this.baseUrl + 'users/' + userId + '/videos/', video);
+    };
     UserService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -1041,10 +1044,9 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["TabsModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["BsDropdownModule"].forRoot(),
-                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["CarouselModule"].forRoot(),
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot(_routes__WEBPACK_IMPORTED_MODULE_11__["appRoutes"]),
                 _agm_core__WEBPACK_IMPORTED_MODULE_6__["AgmCoreModule"].forRoot({
-                    apiKey: ''
+                    apiKey: 'AIzaSyD-REm0oq9XBJ5ndh4yQNFI-1681tLaEq4'
                 }),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["ProgressbarModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["BsDatepickerModule"].forRoot(),
@@ -1164,7 +1166,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid pt-3\">\n  <app-member-map></app-member-map>\n  <div class=\"text-center mt-3\">\n    <div class=\"container-fluid mt-3\">\n      <br>\n      <div class=\"row\">\n        <div class=\"btn-group\">\n          <button class=\"btn btn-primary\" [(ngModel)]=\"followsParam\" btnRadio=\"Followers\" (click)=\"loadUsers()\">Followers\n            {{pagination.totalItems}}</button>\n          <button class=\"btn btn-primary\" [(ngModel)]=\"followsParam\" btnRadio=\"Followees\" (click)=\"loadUsers()\">Following\n            {{pagination.totalItems}}</button>\n        </div>\n      </div>\n      <br>\n\n      <div class=\"row\">\n        <div *ngFor=\"let user of users\" class=\"col-lg-3 col-md-4 col-sm-4 mt-4\">\n          <app-member-card [user]=\"user\"></app-member-card>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <pagination [boundaryLinks]=\"true\" [totalItems]=\"pagination.totalItems\" [itemsPerPage]=\"pagination.itemsPerPage\"\n        [(ngModel)]=\"pagination.currentPage\" (pageChanged)=\"pageChanged($event)\" previousText=\"&lsaquo;\" nextText=\"&rsaquo;\"\n        firstText=\"&laquo;\" lastText=\"&raquo;\">\n      </pagination>\n    </div>\n  </div>"
+module.exports = "<div class=\"container-fluid\">\n  <app-member-map></app-member-map>\n  <div class=\"text-center mt-3\">\n    <div class=\"container-fluid mt-3\">\n      <br>\n      <div class=\"row\">\n        <div class=\"btn-group\">\n          <button class=\"btn btn-primary\" [(ngModel)]=\"followsParam\" btnRadio=\"Followers\" (click)=\"loadUsers()\">Followers<span class=\"badge badge-pill badge-light\"> {{tFollowees}}</span></button>\n          <button class=\"btn btn-primary\" [(ngModel)]=\"followsParam\" btnRadio=\"Followees\" (click)=\"loadUsers()\">Following<span class=\"badge badge-pill badge-light\"> {{tFollowers}}</span></button>\n        </div>\n      </div>\n      <br>\n\n      <div class=\"row\">\n        <div *ngFor=\"let user of users\" class=\"col-lg-3 col-md-4 col-sm-4 mt-4\">\n          <app-member-card [user]=\"user\"></app-member-card>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <pagination [boundaryLinks]=\"true\" [totalItems]=\"pagination.totalItems\" [itemsPerPage]=\"pagination.itemsPerPage\"\n        [(ngModel)]=\"pagination.currentPage\" (pageChanged)=\"pageChanged($event)\" previousText=\"&lsaquo;\" nextText=\"&rsaquo;\"\n        firstText=\"&laquo;\" lastText=\"&raquo;\">\n      </pagination>\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -1208,6 +1210,7 @@ var FollowerListComponent = /** @class */ (function () {
             _this.pagination = data['user'].pagination;
         });
         this.followsParam = 'Followers';
+        this.loadUsers();
     };
     FollowerListComponent.prototype.loadUsers = function () {
         var _this = this;
@@ -1219,6 +1222,12 @@ var FollowerListComponent = /** @class */ (function () {
         }, function (error) {
             _this.alertify.error(error);
         });
+        if (this.followsParam === 'Followers') {
+            this.tFollowers = this.pagination.totalItems;
+        }
+        else {
+            this.tFollowees = this.pagination.totalItems;
+        }
     };
     FollowerListComponent.prototype.pageChanged = function (event) {
         this.pagination.currentPage = event.page;
@@ -1259,7 +1268,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mt-5\">\r\n  <form class=\"form-signin\">\r\n    <div *ngIf=\"!registerMode\" class=\"text-center mb-4\">\r\n      <h1 class=\"h3 mb-3 font-weight-bold\">Welcome to Muzyk</h1>\r\n      <p class=\"h5 mb-4 font-weight-bold\">A Place where artists meets the world</p>\r\n  \r\n      <button type=\"button\" class=\"btn btn-primary btn-lg mr-2\" (click)=\"registerToggle()\">Register</button>\r\n      <button type=\"button\" class=\"btn btn-secondary btn-lg\">Learn more</button>\r\n\r\n    </div>\r\n  </form>\r\n  <div *ngIf=\"registerMode\" class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n      <div class=\"col4\">\r\n        <app-register (cancelRegister)=\"cancelRegisterMode($event)\"></app-register>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<br>\r\n\r\n\r\n"
+module.exports = "<div class=\"container\">\r\n  <form class=\"form-signin\">\r\n    <div *ngIf=\"!registerMode\" class=\"text-center mb-4\">\r\n      <h1 class=\"h3 mb-3 font-weight-bold\">Welcome to Muzyk</h1>\r\n      <p class=\"h5 mb-4 font-weight-bold\">A Place where artists meets the world</p>\r\n  \r\n      <button type=\"button\" class=\"btn btn-primary btn-lg mr-2\" (click)=\"registerToggle()\">Register</button>\r\n      <button type=\"button\" class=\"btn btn-secondary btn-lg\">Learn more</button>\r\n\r\n    </div>\r\n  </form>\r\n  <div *ngIf=\"registerMode\" class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n      <div class=\"col4\">\r\n        <app-register (cancelRegister)=\"cancelRegisterMode($event)\"></app-register>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1332,7 +1341,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container pt-3\">\n  <div class=\"text-center mt-3\">\n    <h2>Search Response - {{pagination.totalItems}} users found</h2>\n  </div>\n\n  <div class=\"container mt-3\">\n    <form class=\"form-inline\" #form=\"ngForm\" (ngSubmit)=\"loadUsers()\" novalidate>\n      <div class=\"form-group\">\n        <label for=\"minExp\">Experience From</label>\n        <input type=\"number\" class=\"form-control ml-1\" style=\"width: 70px\" id=\"minExp\" [(ngModel)]=\"userParams.minExp\"\n          name=\"minExp\">\n      </div>\n\n      <div class=\"form-group px-2\">\n        <label for=\"maxExp\">Experience To</label>\n        <input type=\"number\" class=\"form-control ml-1\" style=\"width: 70px\" id=\"maxExp\" [(ngModel)]=\"userParams.maxExp\"\n          name=\"maxExp\">\n      </div>\n\n      <div class=\"form-group px-2\">\n        <label for=\"genre\">Genre: </label>\n        <select class=\"form-control ml-1\" style=\"width: 130px\" id=\"genre\" [(ngModel)]=\"defaultGenre\" name=\"selGenre\">\n          <option>None</option>\n          <option *ngFor=\"let genre of genreList\" [value]=\"genre.value\">\n            {{genre.display}}\n          </option>\n        </select>\n      </div>\n      <button type=\"submit\" class=\"btn btn-primary\" style=\"margin-left:10px\" (click)=\"selectGenre(defaultGenre)\">Apply\n        Filters</button>\n      <button type=\"button\" class=\"btn btn-danger\" style=\"margin-left:10px\" (click)=\"resetFilters()\">Reset Filter</button>\n\n      <div class=\"col\">\n        <div class=\"btn-group float-right\">\n          <button type=\"button\" name=\"orderBy\" class=\"btn btn-primary\" [(ngModel)]=\"userParams.orderBy\" (click)=\"loadUsers()\"\n            btnRadio=\"lastActive\">Last Active</button>\n          <button type=\"button\" name=\"orderBy\" class=\"btn btn-primary\" [(ngModel)]=\"userParams.orderBy\" (click)=\"loadUsers()\"\n            btnRadio=\"created\">Newest Members</button>\n        </div>\n      </div>\n    </form>\n\n    <div class=\"row\">\n      <div *ngFor=\"let user of users\" class=\"col-lg2 col-md-3 col-sm-6 mt-4\">\n        <app-member-card [user]=\"user\"></app-member-card>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <pagination [boundaryLinks]=\"true\" [(ngModel)]=\"pagination.currentPage\" [totalItems]=\"pagination.totalItems\"\n      [itemsPerPage]=\"pagination.itemsPerPage\" (pageChanged)=\"pageChanged($event)\" previousText=\"&lsaquo;\" nextText=\"&rsaquo;\"\n      firstText=\"&laquo;\" lastText=\"&raquo;\">\n    </pagination>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"text-center mt-3\">\n    <h2>Search Response - {{pagination.totalItems}} users found</h2>\n  </div>\n\n  <div class=\"container mt-3\">\n    <form class=\"form-inline\" #form=\"ngForm\" (ngSubmit)=\"loadUsers()\" novalidate>\n      <div class=\"form-group\">\n        <label for=\"minExp\">Years of Experience From:</label>\n        <input type=\"number\" class=\"form-control ml-1\" style=\"width: 70px\" id=\"minExp\" [(ngModel)]=\"userParams.minExp\"\n          name=\"minExp\">\n      </div>\n\n      <div class=\"form-group px-2\">\n        <label for=\"maxExp\">To :</label>\n        <input type=\"number\" class=\"form-control ml-1\" style=\"width: 70px\" id=\"maxExp\" [(ngModel)]=\"userParams.maxExp\"\n          name=\"maxExp\">\n      </div>\n\n      <div class=\"form-group px-2\">\n        <label for=\"genre\">Genre: </label>\n        <select class=\"form-control ml-1\" style=\"width: 130px\" id=\"genre\" [(ngModel)]=\"defaultGenre\" name=\"selGenre\">\n          <option>None</option>\n          <option *ngFor=\"let genre of genreList\" [value]=\"genre.value\">\n            {{genre.display}}\n          </option>\n        </select>\n      </div>\n      <button type=\"submit\" class=\"btn btn-primary\" style=\"margin-left:10px\" (click)=\"selectGenre(defaultGenre)\">Apply\n        Filters</button>\n      <button type=\"button\" class=\"btn btn-danger\" style=\"margin-left:10px\" (click)=\"resetFilters()\">Reset Filter</button>\n\n      <div class=\"col\">\n        <div class=\"btn-group float-right\">\n          <button type=\"button\" name=\"orderBy\" class=\"btn btn-primary\" [(ngModel)]=\"userParams.orderBy\" (click)=\"loadUsers()\"\n            btnRadio=\"lastActive\">Last Active</button>\n          <button type=\"button\" name=\"orderBy\" class=\"btn btn-primary\" [(ngModel)]=\"userParams.orderBy\" (click)=\"loadUsers()\"\n            btnRadio=\"created\">Newest Members</button>\n        </div>\n      </div>\n    </form>\n\n    <div class=\"row\">\n      <div *ngFor=\"let user of users\" class=\"col-lg2 col-md-3 col-sm-6 mt-4\">\n        <app-member-card [user]=\"user\"></app-member-card>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <pagination [boundaryLinks]=\"true\" [(ngModel)]=\"pagination.currentPage\" [totalItems]=\"pagination.totalItems\"\n      [itemsPerPage]=\"pagination.itemsPerPage\" (pageChanged)=\"pageChanged($event)\" previousText=\"&lsaquo;\" nextText=\"&rsaquo;\"\n      firstText=\"&laquo;\" lastText=\"&raquo;\">\n    </pagination>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1561,7 +1570,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <agm-map [latitude]=\"lat\" [longitude]=\"lng\" style=\"height: 300px;\" [zoom]=\"13\">\n    <agm-marker [latitude]=\"lat\" [longitude]=\"lng\"></agm-marker>\n  </agm-map>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <agm-map [latitude]=\"lat\" [longitude]=\"lng\" style=\"height: 300px;\" [zoom]=\"13\">\n    <agm-marker [latitude]=\"lat\" [longitude]=\"lng\"></agm-marker>\n  </agm-map>\n</div>\n "
 
 /***/ }),
 
@@ -1672,18 +1681,17 @@ var MemberMessagesComponent = /** @class */ (function () {
         this.signalUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].signalRUrl;
     }
     MemberMessagesComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.connection = new _aspnet_signalr__WEBPACK_IMPORTED_MODULE_5__["HubConnectionBuilder"]()
             .withUrl(this.signalUrl + '/mHub')
             .build();
-        this.connection
-            .start()
-            .then(function () {
-            _this.alertify.success('Connection Started');
-        })
-            .catch(function (error) {
-            _this.alertify.warning(error);
-        });
+        /*     this.connection
+              .start()
+              .then(() => {
+                this.alertify.success('Connection Started');
+              })
+              .catch(error => {
+                this.alertify.warning(error);
+              }); */
         this.loadMessages();
     };
     MemberMessagesComponent.prototype.loadMessages = function () {
@@ -1747,7 +1755,7 @@ var MemberMessagesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "img.img-thumbnail {\r\n    height: 200px;\r\n    min-width: 250px !important;\r\n    margin-bottom: 2px;\r\n}\r\n\r\n.nv-file-over {\r\n    border: dotted 3px #158CBA;\r\n}\r\n"
+module.exports = "img.img-thumbnail {\r\n  height: 200px;\r\n  min-width: 200px !important;\r\n  margin-bottom: 2px;\r\n}\r\n\r\n.nv-file-over {\r\n  border: dotted 3px #158cba;\r\n}\r\n"
 
 /***/ }),
 
@@ -1758,7 +1766,7 @@ module.exports = "img.img-thumbnail {\r\n    height: 200px;\r\n    min-width: 25
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-sm-12\">\n\n    <!-- <img src=\"{{photo.photoUrl}}\" class=\"img-fluid img-thumbnail p-1\" alt=\"\"> -->\n    <carousel [(activeSlide)]=\"activeSlide\">\n      <slide *ngFor=\"let photo of photos; let index=index\">\n        <img [src]=\"photo.photoUrl\" class=\"justify-content-center img-fluid\" alt=\"{{photo.description}}\" class=\"w-65\">\n        <div class=\"carousel-caption\">\n          <p>{{photo.description}}</p>\n          <div class=\"text-center\">\n            <ul class=\"list-inline member-icons animate text-center\">\n                <li class=\"list-inline-item\"><button type=\"button\" class=\"btn btn-sm mr-1\" (click)=\"setProfilePhoto(photo)\" [ngClass]=\"photo.isProfilePhoto ? 'btn-success active' : 'btn-secondary'\"\n                [disabled]=\"photo.isProfilePhoto\">set as Main</button></li>\n                <li class=\"list-inline-item\"><button type=\"button\" class=\"btn btn-sm btn-danger\" (click)=\"deletePhoto(photo.id)\" [disabled]=\"photo.isProfilePhoto\"><i\n                  class=\"fa fa-trash animate\"></i></button></li>\n            </ul>\n          </div>\n        </div>\n      </slide>\n    </carousel>\n  </div>\n</div>\n\n<div class=\"row mt-3\">\n  <div class=\"col-md-3\">\n    <h3>Add Photos</h3>\n    <div ng2FileDrop [ngClass]=\"{'nv-file-over': hasBaseDropZoneOver}\" (fileOver)=\"fileOverBase($event)\" [uploader]=\"uploader\"\n      class=\"card bg-faded p-3 text-center mb-3 my-drop-zone\">\n      <i class=\"fa fa-upload fa-3x\"></i>\n      Drop Photos Here\n    </div>\n    Multiple\n    <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" multiple /><br />\n    Single\n    <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\n  </div>\n\n  <div class=\"col-md-9\" style=\"margin-bottom: 40px\" *ngIf=\"uploader?.queue?.length\">\n    <h3>Upload queue</h3>\n    <p>Queue length: {{ uploader?.queue?.length }}</p>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th width=\"50%\">Name</th>\n          <th>Size</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of uploader.queue\">\n          <td><strong>{{ item?.file?.name }}</strong></td>\n          <td *ngIf=\"uploader.options.isHTML5\" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>\n\n        </tr>\n      </tbody>\n    </table>\n\n    <div>\n      <div>\n        Queue progress:\n        <div class=\"progress mb-4\">\n          <div class=\"progress-bar\" role=\"progressbar\" [ngStyle]=\"{ 'width': uploader.progress + '%' }\"></div>\n        </div>\n      </div>\n      <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\n        <span class=\"fa fa-upload\"></span> Upload\n      </button>\n      <button type=\"button\" class=\"btn btn-warning btn-s\" (click)=\"uploader.cancelAll()\" [disabled]=\"!uploader.isUploading\">\n        <span class=\"fa fa-ban\"></span> Cancel\n      </button>\n      <button type=\"button\" class=\"btn btn-danger btn-s\" (click)=\"uploader.clearQueue()\" [disabled]=\"!uploader.queue.length\">\n        <span class=\"fa fa-trash\"></span> Remove\n      </button>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\n  <div class=\"col-sm-12\">\n    <div *ngFor=\"let photo of photos\">\n      <img src=\"{{photo.mediaUrl}}\" alt=\"{{photo.description}}\" class=\"img-thumbnail rounded\">\n      <div class=\"btn-group\">\n          <button type=\"button\" class=\"btn btn-sm mr-1\" (click)=\"setProfilePhoto(photo)\" [ngClass]=\"photo.isProfilePhoto ? 'btn-success active' : 'btn-secondary'\"\n          [disabled]=\"photo.isProfilePhoto\">set\n          as Main</button>\n        <button type=\"button\" class=\"btn btn-sm btn-danger\" (click)=\"deletePhoto(photo.id)\" [disabled]=\"photo.isProfilePhoto\"><i\n            class=\"fa fa-trash animate\"></i></button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div class=\"row mt-3\">\n  <div class=\"col-md-3\">\n    <h3>Add Photos</h3>\n    <div ng2FileDrop [ngClass]=\"{'nv-file-over': hasBaseDropZoneOver}\" (fileOver)=\"fileOverBase($event)\" [uploader]=\"uploader\"\n      class=\"card bg-faded p-3 text-center mb-3 my-drop-zone\">\n      <i class=\"fa fa-upload fa-3x\"></i>\n      Drop Photos Here\n    </div>\n    <div class=\"input-group-inline justify-content-right\">\n      <div class=\"input-group-text\">\n        Multiple\n      </div>\n      <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" multiple /><br />\n    </div>\n    <br>\n    <div class=\"input-group-inline justify-content-right\">\n      <div class=\"input-group-text\">\n        Single\n      </div>\n      <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" /><br />\n    </div>\n  </div>\n\n  <div class=\"col-md-9\" style=\"margin-bottom: 40px\" *ngIf=\"uploader?.queue?.length\">\n    <h3>Upload queue</h3>\n    <p>Queue length: {{ uploader?.queue?.length }}</p>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th width=\"50%\">Name</th>\n          <th>Size</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of uploader.queue\">\n          <td><strong>{{ item?.file?.name }}</strong></td>\n          <td *ngIf=\"uploader.options.isHTML5\" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>\n\n        </tr>\n      </tbody>\n    </table>\n\n    <div>\n      <div>\n        Queue progress:\n        <div class=\"progress mb-4\">\n          <div class=\"progress-bar\" role=\"progressbar\" [ngStyle]=\"{ 'width': uploader.progress + '%' }\"></div>\n        </div>\n      </div>\n      <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\n        <span class=\"fa fa-upload\"></span> Upload\n      </button>\n      <button type=\"button\" class=\"btn btn-warning btn-s\" (click)=\"uploader.cancelAll()\" [disabled]=\"!uploader.isUploading\">\n        <span class=\"fa fa-ban\"></span> Cancel\n      </button>\n      <button type=\"button\" class=\"btn btn-danger btn-s\" (click)=\"uploader.clearQueue()\" [disabled]=\"!uploader.queue.length\">\n        <span class=\"fa fa-trash\"></span> Remove\n      </button>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1779,6 +1787,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../_services/auth.service */ "./src/app/_services/auth.service.ts");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../_services/user.service */ "./src/app/_services/user.service.ts");
 /* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../_services/alertify.service */ "./src/app/_services/alertify.service.ts");
+/* harmony import */ var ngx_gallery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-gallery */ "./node_modules/ngx-gallery/bundles/ngx-gallery.umd.js");
+/* harmony import */ var ngx_gallery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(ngx_gallery__WEBPACK_IMPORTED_MODULE_6__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1788,6 +1798,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1806,6 +1817,30 @@ var PhotoEditorComponent = /** @class */ (function () {
     }
     PhotoEditorComponent.prototype.ngOnInit = function () {
         this.initializeUploader();
+        this.galleryOptions = [
+            {
+                width: '700px',
+                height: '500px',
+                imagePercent: 55,
+                thumbnails: false,
+                imageAnimation: ngx_gallery__WEBPACK_IMPORTED_MODULE_6__["NgxGalleryAnimation"].Fade,
+                preview: true,
+                previewZoom: true,
+            }
+        ];
+        this.galleryImages = this.getImages();
+    };
+    PhotoEditorComponent.prototype.getImages = function () {
+        var imageUrls = [];
+        for (var i = 0; i < this.photos.length; i++) {
+            imageUrls.push({
+                small: this.photos[i].mediaUrl,
+                medium: this.photos[i].mediaUrl,
+                big: this.photos[i].mediaUrl,
+                description: this.photos[i].description
+            });
+        }
+        return imageUrls;
     };
     PhotoEditorComponent.prototype.fileOverBase = function (e) {
         this.hasBaseDropZoneOver = e;
@@ -1830,18 +1865,20 @@ var PhotoEditorComponent = /** @class */ (function () {
         this.uploader.onSuccessItem = function (item, response, status, headers) {
             if (response) {
                 var res = JSON.parse(response);
+                console.log(_this.pDescription);
                 var photo = {
                     id: res.id,
-                    photoUrl: res.photoUrl,
+                    mediaUrl: res.mediaUrl,
                     dateAdded: res.dateAdded,
-                    description: res.description,
+                    description: _this.pDescription,
                     isProfilePhoto: res.isProfilePhoto,
                     isCoverPhoto: res.isCoverPhoto
                 };
+                console.log(photo);
                 _this.photos.push(photo);
                 if (photo.isProfilePhoto) {
-                    _this.authService.changeMemberPhoto(photo.photoUrl);
-                    _this.authService.currentUser.photoUrl = photo.photoUrl;
+                    _this.authService.changeMemberPhoto(photo.mediaUrl);
+                    _this.authService.currentUser.photoUrl = photo.mediaUrl;
                     localStorage.setItem('user', JSON.stringify(_this.authService.currentUser));
                 }
             }
@@ -1855,8 +1892,8 @@ var PhotoEditorComponent = /** @class */ (function () {
             _this.currentProfilePhoto = _this.photos.filter(function (p) { return p.isProfilePhoto === true; })[0];
             _this.currentProfilePhoto.isProfilePhoto = false;
             photo.isProfilePhoto = true;
-            _this.authService.changeMemberPhoto(photo.photoUrl);
-            _this.authService.currentUser.photoUrl = photo.photoUrl;
+            _this.authService.changeMemberPhoto(photo.mediaUrl);
+            _this.authService.currentUser.photoUrl = photo.mediaUrl;
             localStorage.setItem('user', JSON.stringify(_this.authService.currentUser));
         }, function (error) {
             _this.alertify.error('Photo could not be set as Profile Photo');
@@ -1916,7 +1953,7 @@ module.exports = ".img-thumbnail {\r\n    margin: 25px;\r\n    width: 85%;\r\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br><br>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n      <h1>Your Profile</h1>\n    </div>\n    <div class=\"col sm-8\">\n      <div *ngIf=\"editForm.dirty\" class=\"alert alert-info\">\n        <strong>Information: </strong> Please save your changes ! Unsaved changes will be lost\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n      <div class=\"card\">\n        <img class=\"card-img-top img-thumbnail\" src=\"{{photoUrl || '../../assets/user.png'}}\" alt=\"{{user.username}}\">\n\n        <div class=\"card-body\">\n          <div>\n            <strong>Location :</strong>\n            <p>{{user.city}}, {{user.country}}</p>\n          </div>\n          <div>\n            <strong>Genre :</strong>\n            <p>{{user.genre}}</p>\n          </div>\n          <div>\n            <strong>Member Since :</strong>\n            <p>{{user.created | date}}</p>\n          </div>\n          <div>\n            <strong>Last Active :</strong>\n            <p>{{user.lastActive | timeAgo}}</p>\n          </div>\n        </div>\n\n        <div class=\"class-footer\">\n          <button [disabled]=\"!editForm.dirty\" form=\"editForm\" class=\"btn btn-success btn-block w-100\">Save Changes</button>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-sm-8\">\n      <div class=\"tab-panel\">\n        <tabset class=\"follower-tabset\">\n          <tab heading=\"Edit Profile\">\n            <br>\n            <form #editForm=\"ngForm\" id=\"editForm\" (ngSubmit)=\"updateUser()\">\n              <h4>Description</h4>\n              <textarea name=\"introduction\" rows=\"6\" class=\"form-control\" [(ngModel)]=\"user.introduction\"></textarea>\n              <br>\n              <h4>Interests</h4>\n              <textarea name=\"interests\" rows=\"6\" class=\"form-control\" [(ngModel)]=\"user.interests\"></textarea>\n              <h4>Location Details:</h4>\n              <div class=\"form-inline\">\n                <label for=\"city\">City</label>\n                <input type=\"text\" name=\"city\" class=\"form-control\" [(ngModel)]=\"user.city\">\n                <label class=\"ml-3\" for=\"country\">Country</label>\n                <input type=\"text\" name=\"country\" class=\"form-control\" [(ngModel)]=\"user.country\">\n                <label class=\"ml-3\" for=\"genre\">Genre</label>\n                <input type=\"text\" name=\"genre\" class=\"form-control\" [(ngModel)]=\"user.genre\">\n              </div>\n            </form>\n          </tab>\n\n          <tab heading=\"Edit Photos\">\n            <app-photo-editor [photos]=\"user.photos\" (getMemberPhotoChange)=\"updateProfilePhoto($event)\"></app-photo-editor>\n          </tab>\n\n          <tab heading=\"Edit Videos\">\n            <app-video-editor></app-video-editor>\n          </tab>\n        </tabset>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n      <h1>Your Profile</h1>\n    </div>\n    <div class=\"col sm-8\">\n      <div *ngIf=\"editForm.dirty\" class=\"alert alert-info\">\n        <strong>Information: </strong> Please save your changes ! Unsaved changes will be lost\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n      <div class=\"card\">\n        <img class=\"card-img-top img-thumbnail\" src=\"{{photoUrl || '../../assets/user.png'}}\" alt=\"{{user.username}}\">\n\n        <div class=\"card-body\">\n          <div>\n            <strong>Location :</strong>\n            <p>{{user.city}}, {{user.country}}</p>\n          </div>\n          <div>\n              <strong>Age :</strong>\n              <p>{{user.age}}</p>\n            </div>\n          <div>\n            <strong>Genre :</strong>\n            <p>{{user.genre}}</p>\n          </div>\n          <div>\n            <strong>Member Since :</strong>\n            <p>{{user.created | date}}</p>\n          </div>\n          <div>\n            <strong>Last Active :</strong>\n            <p>{{user.lastActive | timeAgo}}</p>\n          </div>\n        </div>\n\n        <div class=\"class-footer\">\n          <button [disabled]=\"!editForm.dirty\" form=\"editForm\" class=\"btn btn-success btn-block w-100\">Save Changes</button>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-sm-8\">\n      <div class=\"tab-panel\">\n        <tabset class=\"follower-tabset\">\n          <tab heading=\"Edit Profile\">\n            <br>\n            <form #editForm=\"ngForm\" id=\"editForm\" (ngSubmit)=\"updateUser()\">\n              <h4>Description</h4>\n              <textarea name=\"introduction\" rows=\"6\" class=\"form-control\" [(ngModel)]=\"user.introduction\"></textarea>\n              <br>\n              <h4>Interests</h4>\n              <textarea name=\"interests\" rows=\"6\" class=\"form-control\" [(ngModel)]=\"user.interests\"></textarea>\n              <h4>Location Details:</h4>\n              <div class=\"form-inline\">\n                <label for=\"city\">City </label>\n                <input type=\"text\" name=\"city\" class=\"form-control\" [(ngModel)]=\"user.city\">\n                <label class=\"ml-3\" for=\"country\">Country </label>\n                <input type=\"text\" name=\"country\" class=\"form-control\" [(ngModel)]=\"user.country\">\n                <label class=\"ml-3\" for=\"genre\">Genre </label>\n                <input type=\"text\" name=\"genre\" class=\"form-control\" [(ngModel)]=\"user.genre\">\n              </div>\n            </form>\n          </tab>\n\n          <tab heading=\"Edit Photos\">\n            <app-photo-editor [photos]=\"user.photos\" (getMemberPhotoChange)=\"updateProfilePhoto($event)\"></app-photo-editor>\n          </tab>\n\n          <tab heading=\"Edit Videos\">\n            <app-video-editor [videos]=\"user.videos\"></app-video-editor>\n          </tab>\n        </tabset>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1972,7 +2009,7 @@ var ProfileEditComponent = /** @class */ (function () {
     };
     ProfileEditComponent.prototype.updateUser = function () {
         var _this = this;
-        console.log(this.user);
+        // console.log(this.user);
         this.userService.updateUser(this.authService.decodedToken.nameid, this.user)
             .subscribe(function (next) {
             _this.alertify.success('Profile updated successfully');
@@ -2031,7 +2068,7 @@ module.exports = ".img-thumbnail {\r\n    margin: 25px;\r\n    width: 85%;\r\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br><br>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <br>\n    <h1>{{user.firstName | titlecase}}'s Profile</h1>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n      <div class=\"card\">\n        <img class=\"card-img-top img-thumbnail\" src=\"{{user.photoUrl || '../../assets/user.png'}}\" alt=\"{{user.username}}\">\n\n        <div class=\"card-body\">\n          <div>\n            <strong>Location :</strong>\n            <p>{{user.city}}, {{user.country}}</p>\n          </div>\n          <div>\n            <strong>Genre :</strong>\n            <p>{{user.genre}}</p>\n          </div>\n          <div>\n            <strong>Last Active :</strong>\n            <p>{{user.lastActive | timeAgo}}</p>\n          </div>\n          <div>\n            <strong>Member Since :</strong>\n            <p>{{user.created | date}}</p>\n          </div>\n          <div>\n            <strong>Years Of Experience :</strong>\n            <p>{{user.yearsOfExperience}}</p>\n          </div>\n        </div>\n\n        <div class=\"card-footer\">\n          <div class=\"btn-group d-flex\">\n            <button class=\"btn btn-primary w-100\">Follow</button>\n            <button class=\"btn btn-success w-100\" (click)=\"selectTab(3)\">Message</button>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-sm-8\">\n      <div class=\"tab-panel\">\n        <tabset class=\"follower-tabset\" #memberTabs>\n          <tab heading=\"About\">\n            <br>\n            <h4>Description</h4>\n            <p>{{user.introduction}}</p>\n          </tab>\n          <tab heading=\"Interests\">\n            <br>\n            <h4>Interests</h4>\n            <p>{{user.interests}}</p>\n          </tab>\n          <tab heading=\"Photos\">\n            <br>\n            <ngx-gallery [options]=\"galleryOptions\" [images]=\"galleryImages\"></ngx-gallery>\n          </tab>\n          <tab heading=\"Messages\">\n            <br>\n            <app-member-messages [recepientId]=\"user.id\"></app-member-messages>\n          </tab>\n        </tabset>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <br>\n    <h1>{{user.firstName | titlecase}}'s Profile</h1>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n      <div class=\"card\">\n        <img class=\"card-img-top img-thumbnail\" src=\"{{user.photoUrl || '../../assets/user.png'}}\" alt=\"{{user.username}}\">\n\n        <div class=\"card-body\">\n          <div>\n            <strong>Location :</strong>\n            <p>{{user.city}}, {{user.country}}</p>\n          </div>\n          <div>\n            <strong>Genre :</strong>\n            <p>{{user.genre}}</p>\n          </div>\n          <div>\n            <strong>Last Active :</strong>\n            <p>{{user.lastActive | timeAgo}}</p>\n          </div>\n          <div>\n            <strong>Member Since :</strong>\n            <p>{{user.created | date}}</p>\n          </div>\n          <div>\n            <strong>Years Of Experience :</strong>\n            <p>{{user.yearsOfExperience}}</p>\n          </div>\n        </div>\n\n        <div class=\"card-footer\">\n          <div class=\"btn-group d-flex\">\n            <button [hidden]=\"user.id == this.authService.decodedToken.nameid\" class=\"btn btn-primary w-100\">Follow</button>\n            <button [hidden]=\"user.id == this.authService.decodedToken.nameid\" class=\"btn btn-success w-100\" (click)=\"selectTab(3)\">Message</button>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-sm-8\">\n      <div class=\"tab-panel\">\n        <tabset class=\"follower-tabset\" *ngIf=\"user.id == this.authService.decodedToken.nameid\" #memberTabs>\n          <tab heading=\"About me\">\n            {{user.introduction}}\n          </tab>\n          <tab heading=\"My Interests\">\n            {{user.interests}}\n          </tab>\n          <tab heading=\"Gallery\">\n            <ngx-gallery [options]=\"galleryOptions\" [images]=\"galleryImages\"></ngx-gallery>\n          </tab>\n        </tabset>\n        <tabset class=\"follower-tabset\" *ngIf=\"user.id != this.authService.decodedToken.nameid\" #memberTabs>\n            <tab heading=\"About {{user.firstName}}\">\n              {{user.introduction}}\n            </tab>\n            <tab heading=\"{{user.firstName}}'s Interests\">\n              {{user.interests}}\n            </tab>\n            <tab heading=\"{{user.firstName}}'s Gallery\">\n              <ngx-gallery [options]=\"galleryOptions\" [images]=\"galleryImages\"></ngx-gallery>\n            </tab>\n            <tab heading=\"Chat\">\n              <app-member-messages [recepientId]=\"user.id\"></app-member-messages>\n            </tab>\n          </tabset>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -2102,9 +2139,9 @@ var ProfilePageComponent = /** @class */ (function () {
         var imageUrls = [];
         for (var i = 0; i < this.user.photos.length; i++) {
             imageUrls.push({
-                small: this.user.photos[i].photoUrl,
-                medium: this.user.photos[i].photoUrl,
-                big: this.user.photos[i].photoUrl,
+                small: this.user.photos[i].mediaUrl,
+                medium: this.user.photos[i].mediaUrl,
+                big: this.user.photos[i].mediaUrl,
                 description: this.user.photos[i].description
             });
         }
@@ -2153,7 +2190,7 @@ module.exports = ".nv-file-over {\r\n    border: dotted 3px #158CBA;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row mt-3\">\n  <div class=\"col-md-3\">\n    <h3>Add Videos</h3>\n    <div ng2FileDrop [ngClass]=\"{'nv-file-over': hasBaseDropZoneOver}\" (fileOver)=\"fileOverBase($event)\" [uploader]=\"uploader\"\n      class=\"card bg-faded p-3 text-center mb-3 my-drop-zone\">\n      <i class=\"fa fa-upload fa-3x\"></i>\n      Drop Videos Here\n    </div>\n    Multiple\n    <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" multiple /><br />\n    Single\n    <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\n  </div>\n</div>\n\n\n<!-- upload widget -->\n<div class=\"col-md-9\" style=\"margin-bottom: 40px\" *ngIf=\"uploader?.queue?.length\">\n  <h3>Upload queue</h3>\n  <p>Queue length: {{ uploader?.queue?.length }}</p>\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th width=\"50%\">Name</th>\n        <th>Size</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let item of uploader.queue\">\n        <td><strong>{{ item?.file?.name }}</strong></td>\n        <td *ngIf=\"uploader.options.isHTML5\" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>\n\n      </tr>\n    </tbody>\n  </table>\n\n  <div>\n    <div>\n      Queue progress:\n      <div class=\"progress mb-4\">\n        <div class=\"progress-bar\" role=\"progressbar\" [ngStyle]=\"{ 'width': uploader.progress + '%' }\"></div>\n      </div>\n    </div>\n    <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\n      <span class=\"fa fa-upload\"></span> Upload\n    </button>\n    <button type=\"button\" class=\"btn btn-warning btn-s\" (click)=\"uploader.cancelAll()\" [disabled]=\"!uploader.isUploading\">\n      <span class=\"fa fa-ban\"></span> Cancel\n    </button>\n    <button type=\"button\" class=\"btn btn-danger btn-s\" (click)=\"uploader.clearQueue()\" [disabled]=\"!uploader.queue.length\">\n      <span class=\"fa fa-trash\"></span> Remove\n    </button>\n  </div>"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col\" *ngFor=\"let video of videos\">\n        <iframe width=\"360\" height=\"115\" [src]=\"getVideoUrl(video)\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>\n    </div>\n  </div>\n  <div class=\"row mt-3\">\n    <form #videoForm=\"ngForm\">\n      <div class=\"input-group mb-3\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\" id=\"basic-addon1\">Video Url</span>\n        </div>\n        <input type=\"text\" class=\"form-control\" placeholder=\"Video Url\" aria-label=\"Username\">\n      </div>\n      <div class=\"input-group\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\">Description</span>\n        </div>\n        <textarea class=\"form-control\" aria-label=\"Description\"></textarea>\n      </div>\n      <br>\n      <button class=\"btn btn-primary\" type=\"submit\" (click)=\"uploadVideo()\">Add Video</button>\n      <button class=\"btn btn-danger ml-2\" type=\"reset\">Cancel</button><br>\n      <small>*Upload Video from Url</small><br><br>\n\n      <!-- <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" multiple />\n      <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" /><br>\n      <small>*Upload Video from Computer</small> -->\n      \n    </form>\n  </div>\n</div>\n\n<div class=\"col-md-9\" style=\"margin-bottom: 40px\" *ngIf=\"uploader?.queue?.length\">\n  <h3>Upload queue</h3>\n  <p>Queue length: {{ uploader?.queue?.length }}</p>\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th width=\"50%\">Name</th>\n        <th>Size</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let item of uploader.queue\">\n        <td><strong>{{ item?.file?.name }}</strong></td>\n        <td *ngIf=\"uploader.options.isHTML5\" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>\n\n      </tr>\n    </tbody>\n  </table>\n  <div>\n    <div>\n      Queue progress:\n      <div class=\"progress mb-4\">\n        <div class=\"progress-bar\" role=\"progressbar\" [ngStyle]=\"{ 'width': uploader.progress + '%' }\"></div>\n      </div>\n    </div>\n    <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\n      <span class=\"fa fa-upload\"></span> Upload\n    </button>\n    <button type=\"button\" class=\"btn btn-warning btn-s\" (click)=\"uploader.cancelAll()\" [disabled]=\"!uploader.isUploading\">\n      <span class=\"fa fa-ban\"></span> Cancel\n    </button>\n    <button type=\"button\" class=\"btn btn-danger btn-s\" (click)=\"uploader.clearQueue()\" [disabled]=\"!uploader.queue.length\">\n      <span class=\"fa fa-trash\"></span> Remove\n    </button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -2173,6 +2210,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/environments/environment.prod */ "./src/environments/environment.prod.ts");
 /* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/_services/auth.service */ "./src/app/_services/auth.service.ts");
 /* harmony import */ var src_app_services_alertify_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/_services/alertify.service */ "./src/app/_services/alertify.service.ts");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2187,23 +2225,29 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var VideoEditorComponent = /** @class */ (function () {
-    function VideoEditorComponent(authService, alertify) {
+    function VideoEditorComponent(authService, alertify, santizer) {
         this.authService = authService;
         this.alertify = alertify;
+        this.santizer = santizer;
         this.hasBaseDropZoneOver = false;
         this.baseUrl = src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_2__["environment"].apiUrl;
     }
     VideoEditorComponent.prototype.ngOnInit = function () {
         this.initializeUploader();
     };
+    VideoEditorComponent.prototype.uploadVideo = function () {
+        this.videoForm.reset();
+    };
+    // video upload - cloudinary
     VideoEditorComponent.prototype.initializeUploader = function () {
         var _this = this;
         this.uploader = new ng2_file_upload__WEBPACK_IMPORTED_MODULE_1__["FileUploader"]({
             url: this.baseUrl +
                 'users/' +
                 this.authService.decodedToken.nameid +
-                '/video',
+                '/videos',
             authToken: 'Bearer ' + localStorage.getItem('token'),
             isHTML5: true,
             allowedFileType: ['video'],
@@ -2216,6 +2260,7 @@ var VideoEditorComponent = /** @class */ (function () {
         };
         this.uploader.onSuccessItem = function (item, response, status, headers) {
             if (response) {
+                // const res: Video = JSON.parse(response);
                 _this.alertify.success('Video Uploaded Successfully');
             }
         };
@@ -2223,6 +2268,14 @@ var VideoEditorComponent = /** @class */ (function () {
     VideoEditorComponent.prototype.fileOverBase = function (e) {
         this.hasBaseDropZoneOver = e;
     };
+    VideoEditorComponent.prototype.getVideoUrl = function (video) {
+        return this.santizer.bypassSecurityTrustResourceUrl(video.mediaUrl);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('videoForm'),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Array)
+    ], VideoEditorComponent.prototype, "videos", void 0);
     VideoEditorComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-video-editor',
@@ -2230,7 +2283,8 @@ var VideoEditorComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./video-editor.component.css */ "./src/app/members/video-editor/video-editor.component.css")]
         }),
         __metadata("design:paramtypes", [src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
-            src_app_services_alertify_service__WEBPACK_IMPORTED_MODULE_4__["AlertifyService"]])
+            src_app_services_alertify_service__WEBPACK_IMPORTED_MODULE_4__["AlertifyService"],
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["DomSanitizer"]])
     ], VideoEditorComponent);
     return VideoEditorComponent;
 }());
@@ -2257,7 +2311,7 @@ module.exports = "table {\r\n    margin-top: 15px;\r\n}\r\n\r\n.img-circle{\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mt-5\">\n  <div class=\"row\">\n    <div class=\"btn-group\">\n      <button class=\"btn btn-primary\" [(ngModel)]=\"messageContainer\" btnRadio=\"Unread\" (click)=\"loadMessages()\">\n        <i class=\"fa fa-envelope\"></i> Unread\n      </button>\n      <button class=\"btn btn-primary\" [(ngModel)]=\"messageContainer\" btnRadio=\"Inbox\" (click)=\"loadMessages()\">\n        <i class=\"fa fa-envelope-open\"></i> Inbox\n      </button>\n      <button class=\"btn btn-primary\" [(ngModel)]=\"messageContainer\" btnRadio=\"Outbox\" (click)=\"loadMessages()\">\n        <i class=\"fa fa-paper-plane\"></i> Outbox\n      </button>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\" *ngIf=\"messages.length == 0\">\n    <h3>No messages</h3>\n  </div>\n  <br>\n\n  <div class=\"row\" *ngIf=\"messages.length > 0\">\n    <table class=\"table table-hover\" style=\"cursor: pointer\">\n      <tr>\n        <th style=\"width: 40%\">Message</th>\n        <th style=\"width: 20%\">From / To</th>\n        <th style=\"width: 20%\">Sent / Received</th>\n        <th style=\"width: 20%\"></th>\n      </tr>\n      <tr *ngFor=\"let message of messages\" [routerLink]=\"['/members', \n        messageContainer == 'Outbox' ? message.recepientId : message.senderId]\" [queryParams]=\"{tab: 3}\">\n        <td>{{message.content}}</td>\n        <td>\n          <div *ngIf=\"messageContainer != 'Outbox'\">\n            <img src={{message?.senderPhotoUrl}} class=\"img-circle rounded-circle mr-1\">\n            <strong>{{message.senderKnownAs}}</strong>\n          </div>\n          <div *ngIf=\"messageContainer == 'Outbox'\">\n            <img src={{message?.recepientPhotoUrl}} class=\"img-circle rounded-circle mr-1\">\n            <strong>{{message.recepientKnownAs}}</strong>\n          </div>\n        </td>\n        <td>{{message.messageSent | timeAgo}}</td>\n        <td>\n          <button class=\"btn btn-danger\" (click)=\"$event.stopPropagation()\" (click)=\"deleteMessage(message.id)\">Delete</button>\n        </td>\n      </tr>\n    </table>\n\n  </div>\n\n</div>\n\n<div class=\"d-flex justify-content-center\">\n  <pagination [boundaryLinks]=\"true\" [totalItems]=\"pagination.totalItems\" [itemsPerPage]=\"pagination.itemsPerPage\"\n    [(ngModel)]=\"pagination.currentPage\" (pageChanged)=\"pageChanged($event)\" previousText=\"&lsaquo;\" nextText=\"&rsaquo;\"\n    firstText=\"&laquo;\" lastText=\"&raquo;\">\n  </pagination>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"btn-group\">\n      <button class=\"btn btn-primary\" [(ngModel)]=\"messageContainer\" btnRadio=\"Unread\" (click)=\"loadMessages()\">\n        <i class=\"fa fa-envelope\"></i> Unread\n      </button>\n      <button class=\"btn btn-primary\" [(ngModel)]=\"messageContainer\" btnRadio=\"Inbox\" (click)=\"loadMessages()\">\n        <i class=\"fa fa-envelope-open\"></i> Inbox\n      </button>\n      <button class=\"btn btn-primary\" [(ngModel)]=\"messageContainer\" btnRadio=\"Outbox\" (click)=\"loadMessages()\">\n        <i class=\"fa fa-paper-plane\"></i> Outbox\n      </button>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\" *ngIf=\"messages.length == 0\">\n    <h3>No messages</h3>\n  </div>\n  <br>\n\n  <div class=\"row\" *ngIf=\"messages.length > 0\">\n    <table class=\"table table-hover\" style=\"cursor: pointer\">\n      <tr>\n        <th style=\"width: 40%\">Message</th>\n        <th style=\"width: 20%\">From / To</th>\n        <th style=\"width: 20%\">Sent / Received</th>\n        <th style=\"width: 20%\"></th>\n      </tr>\n      <tr *ngFor=\"let message of messages\" [routerLink]=\"['/members', \n        messageContainer == 'Outbox' ? message.recepientId : message.senderId]\" [queryParams]=\"{tab: 3}\">\n        <td>{{message.content}}</td>\n        <td>\n          <div *ngIf=\"messageContainer != 'Outbox'\">\n            <img src={{message?.senderPhotoUrl}} class=\"img-circle rounded-circle mr-1\">\n            <strong>{{message.senderKnownAs}}</strong>\n          </div>\n          <div *ngIf=\"messageContainer == 'Outbox'\">\n            <img src={{message?.recepientPhotoUrl}} class=\"img-circle rounded-circle mr-1\">\n            <strong>{{message.recepientKnownAs}}</strong>\n          </div>\n        </td>\n        <td>{{message.messageSent | timeAgo}}</td>\n        <td>\n          <button class=\"btn btn-danger\" (click)=\"$event.stopPropagation()\" (click)=\"deleteMessage(message.id)\">Delete</button>\n        </td>\n      </tr>\n    </table>\n\n  </div>\n\n</div>\n\n<div class=\"d-flex justify-content-center\">\n  <pagination [boundaryLinks]=\"true\" [totalItems]=\"pagination.totalItems\" [itemsPerPage]=\"pagination.itemsPerPage\"\n    [(ngModel)]=\"pagination.currentPage\" (pageChanged)=\"pageChanged($event)\" previousText=\"&lsaquo;\" nextText=\"&rsaquo;\"\n    firstText=\"&laquo;\" lastText=\"&raquo;\">\n  </pagination>\n</div>"
 
 /***/ }),
 
@@ -2366,7 +2420,7 @@ module.exports = ".dropdown-toggle, .dropdown-item{\r\n    cursor: pointer;\r\n}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <nav class=\"navbar navbar-expand-md navbar-dark fixed-top bg-primary\">\n    <div class=\"container\">\n      <a *ngIf=\"loggedIn()\" class=\"navbar-brand\" [routerLink]=\"['/newsfeed']\"><i class=\"fas fa-home\"></i> Muzyk</a>\n      <a *ngIf=\"!loggedIn()\" class=\"navbar-brand\" [routerLink]=\"['/home']\"><i class=\"fas fa-home\"></i> Muzyk</a>\n\n      <ul class=\"navbar-nav mr-auto\" *ngIf=\"loggedIn()\">\n        <li class=\"nav-item\" routerLinkActive=\"active\">\n          <a class=\"nav-link\" [routerLink]=\"['/messages']\"><i class=\"fas fa-comment-alt\"></i> Messages </a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" [routerLink]=\"['/analytics']\"><i class=\"fas fa-chart-line\"></i> Analytics</a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" [routerLink]=\"['/followers']\"><i class=\"fas fa-users\"></i> Followers</a>\n        </li>\n      </ul>\n\n      <form #searchForm=\"ngForm\" class=\"form-inline mr-3\" *ngIf=\"loggedIn()\" (ngSubmit)=\"searchUsers()\">\n        <div class=\"input-group-prepend\">\n          <input class=\"form-control w-300\" type=\"search\" name=\"searchBox\" required placeholder=\"Search\" [(ngModel)]=\"searchQuery\">\n          <button class=\"btn btn-success my-2 my-sm-0\" type=\"submit\"><i class=\"fa fa-search\"></i></button>\n        </div>\n      </form>\n\n      <div *ngIf=\"loggedIn()\" class=\"dropdown\" dropdown>\n        <span class=\"mr-1\">\n          <img src=\"{{photoUrl || '../../assets/user.png'}}\">\n        </span>\n        <a class=\"dropdown-toggle text-light\" dropdownToggle>\n          Welcome {{authService.decodedToken?.unique_name | titlecase}}\n        </a>\n        <div class=\"dropdown-menu mt-3\" *dropdownMenu>\n          <a class=\"dropdown-item\" [routerLink]=\"['/members/', this.authService.decodedToken?.nameid]\"><i class=\"fa fa-user\"></i>\n            My Profile</a>\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile/edit']\"><i class=\"fa fa-edit\"></i> Edit Profile</a>\n          <a class=\"dropdown-item\" href=\"#\"><i class=\"fa fa-calendar\"></i> My Bookings</a>\n          <a class=\"dropdown-item\" href=\"#\"><i class=\"fas fa-marker\"></i> Personalize</a>\n          <div class=\"dropdown-divider\"></div>\n          <a class=\"dropdown-item\" (click)=\"logout()\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>\n        </div>\n      </div>\n\n      <form *ngIf=\"!loggedIn()\" #loginForm=\"ngForm\" class=\"form-inline my-2 my-lg-0\" (ngSubmit)=\"login()\">\n        <input class=\"form-control mr-sm-2\" type=\"text\" name=\"username\" placeholder=\"Username\" required [(ngModel)]=\"model.Username\">\n\n        <input class=\"form-control mr-sm-2\" type=\"password\" name=\"password\" placeholder=\"Password\" required [(ngModel)]=\"model.Password\">\n        <button [disabled]=\"!loginForm.valid\" class=\"btn btn-success my-2 my-sm-0\" type=\"submit\">Login</button>\n      </form>\n    </div>\n  </nav>\n</div>\n<br>"
+module.exports = "<div class=\"container-fluid\">\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n    <div class=\"container-fluid\">\n      <div class=\"navbar-header\">\n        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#mainMenu\" aria-controls=\"navbarSupportedContent\"\n          aria-expanded=\"false\" aria-label=\"Toggle navigation\" (click)=\"toggleCollapsed()\">\n          <span class=\"navbar-toggler-icon\"></span>\n        </button>\n        <a *ngIf=\"loggedIn()\" class=\"navbar-brand\" [routerLink]=\"['/newsfeed']\"><i class=\"fas fa-home\"></i> Muzyk</a>\n        <a *ngIf=\"!loggedIn()\" class=\"navbar-brand\" [routerLink]=\"['/home']\"><i class=\"fas fa-home\"></i> Muzyk</a>\n      </div>\n\n      <div class=\"collapse navbar-collapse\" id=\"mainMenu\" [ngClass]=\"{'collapse': collapsed, 'navbar-collapse': true}\">\n        <ul class=\"navbar-nav mr-auto\" *ngIf=\"loggedIn()\">\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/messages']\"><i class=\"fas fa-comment-alt\"></i> Messages </a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/analytics']\"><i class=\"fas fa-chart-line\"></i> Analytics</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/followers']\"><i class=\"fas fa-users\"></i> Followers</a>\n          </li>\n        </ul>\n        <form #searchForm=\"ngForm\" class=\"form-inline mr-3\" *ngIf=\"loggedIn()\" (ngSubmit)=\"searchUsers()\">\n          <div class=\"input-group-prepend\">\n            <input class=\"form-control w-300\" type=\"search\" name=\"searchBox\" required placeholder=\"Search\" [(ngModel)]=\"searchQuery\">\n            <button class=\"btn btn-success my-2 my-sm-0\" type=\"submit\"><i class=\"fa fa-search\"></i></button>\n          </div>\n        </form>\n      </div>\n\n      <div *ngIf=\"loggedIn()\" class=\"dropdown\" dropdown>\n        <span class=\"mr-1\">\n          <img src=\"{{photoUrl || '../../assets/user.png'}}\">\n        </span>\n        <a class=\"dropdown-toggle text-light\" dropdownToggle>\n          Welcome {{authService.decodedToken?.unique_name | titlecase}}\n        </a>\n        <div class=\"dropdown-menu mt-3\" *dropdownMenu>\n          <a class=\"dropdown-item\" [routerLink]=\"['/members/', this.authService.decodedToken?.nameid]\"><i class=\"fa fa-user\"></i>\n            My Profile</a>\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile/edit']\"><i class=\"fa fa-edit\"></i> Edit Profile</a>\n          <a class=\"dropdown-item\" href=\"#\"><i class=\"fa fa-calendar\"></i> My Bookings</a>\n          <a class=\"dropdown-item\" href=\"#\"><i class=\"fas fa-marker\"></i> Personalize</a>\n          <div class=\"dropdown-divider\"></div>\n          <a class=\"dropdown-item\" (click)=\"logout()\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>\n        </div>\n      </div>\n\n      <form *ngIf=\"!loggedIn()\" #loginForm=\"ngForm\" class=\"form-inline my-2 my-lg-0\" (ngSubmit)=\"login()\">\n        <input class=\"form-control mr-sm-2\" type=\"text\" name=\"username\" placeholder=\"Username\" required [(ngModel)]=\"model.Username\">\n\n        <input class=\"form-control mr-sm-2\" type=\"password\" name=\"password\" placeholder=\"Password\" required [(ngModel)]=\"model.Password\">\n        <button [disabled]=\"!loginForm.valid\" class=\"btn btn-success my-2 my-sm-0\" type=\"submit\">Login</button>\n      </form>\n    </div>\n  </nav>\n</div>"
 
 /***/ }),
 
@@ -2403,10 +2457,14 @@ var NavComponent = /** @class */ (function () {
         this.alertify = alertify;
         this.router = router;
         this.model = {};
+        this.collapsed = true;
     }
+    NavComponent.prototype.toggleCollapsed = function () {
+        this.collapsed = !this.collapsed;
+    };
     NavComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.authService.currentPhotoUrl.subscribe(function (photoUrl) { return _this.photoUrl = photoUrl; });
+        this.authService.currentPhotoUrl.subscribe(function (photoUrl) { return (_this.photoUrl = photoUrl); });
     };
     NavComponent.prototype.login = function () {
         var _this = this;
@@ -2419,6 +2477,7 @@ var NavComponent = /** @class */ (function () {
         });
     };
     NavComponent.prototype.loggedIn = function () {
+        // this.router.navigate(['/newsfeed']);
         return this.authService.checkLoggedIn();
     };
     NavComponent.prototype.logout = function () {
@@ -2427,10 +2486,10 @@ var NavComponent = /** @class */ (function () {
         this.authService.decodedToken = null;
         this.authService.currentUser = null;
         this.alertify.message('logged out');
-        this.router.navigate(['\home']);
+        this.router.navigate(['home']);
     };
     NavComponent.prototype.searchUsers = function () {
-        this.router.navigate(['\lists']);
+        this.router.navigate(['lists']);
     };
     NavComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2438,7 +2497,9 @@ var NavComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./nav.component.html */ "./src/app/nav/nav.component.html"),
             styles: [__webpack_require__(/*! ./nav.component.css */ "./src/app/nav/nav.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"], _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__["AlertifyService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _services_alertify_service__WEBPACK_IMPORTED_MODULE_2__["AlertifyService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], NavComponent);
     return NavComponent;
 }());
@@ -2533,7 +2594,7 @@ module.exports = ".dropdown-toggle, .dropdown-item{\r\n    cursor: pointer;\r\n}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid pt-5 justify-content-center\">\n  <div class=\"container col-7\">\n\n    <!--Share your mood card start-->\n    <div class=\"card mb-3 mt-2\">\n      <div class=\"card-title\"></div>\n      <div class=\"card-body p-1\">\n        <div class=\"form-group\">\n          <textarea class=\"w-100\" type=\"text\" rows=\"3\" placeholder=\"Share your mood\"></textarea>\n        </div>\n      </div>\n      <div class=\"card-footer\">\n        <div class=\"dropdown\" dropdown>\n          <a class=\"dropdown-toggle btn btn-outline-primary\" color=\"white\" dropdownToggle><i class=\"fas fa-upload\"></i>\n            Upload</a>\n          <div class=\"dropdown-menu mt-3\" *dropdownMenu>\n            <a class=\"dropdown-item\" [routerLink]=\"['/profile/edit']\"><i class=\"fas fa-camera\"></i> Upload Photo</a>\n            <div class=\"dropdown-divider\"></div>\n            <a class=\"dropdown-item\"><i class=\"fas fa-file-video\"></i> Upload Video from Computer</a>\n          </div>\n        </div>\n      </div>\n      <!--Share your mood card end-->\n      <br>\n      <div class=\"container\" *ngFor=\"let user of users\">\n        <app-newsfeed-card [user]=\"user\"></app-newsfeed-card>\n      </div>\n\n      <div class=\"d-flex justify-content-center\">\n        <pagination [boundaryLinks]=\"true\" [totalItems]=\"pagination.totalItems\" [itemsPerPage]=\"pagination.itemsPerPage\"\n          [(ngModel)]=\"pagination.currentPage\" (pageChanged)=\"pageChanged($event)\" previousText=\"&lsaquo;\" nextText=\"&rsaquo;\"\n          firstText=\"&laquo;\" lastText=\"&raquo;\">\n        </pagination>\n      </div>\n    </div>\n  </div>"
+module.exports = "<div class=\"container-fluid justify-content-center\">\n  <div class=\"container col-7\">\n\n    <!--Share your mood card start-->\n    <div class=\"card mb-3 mt-2\">\n      <div class=\"card-title\"></div>\n      <div class=\"card-body p-1\">\n        <div class=\"form-group\">\n          <textarea class=\"w-100\" type=\"text\" rows=\"3\" placeholder=\"Share your mood\"></textarea>\n        </div>\n      </div>\n      <div class=\"card-footer\">\n        <div class=\"dropdown\" dropdown>\n          <a class=\"dropdown-toggle btn btn-outline-primary\" color=\"white\" dropdownToggle><i class=\"fas fa-upload\"></i>\n            Upload</a>\n          <div class=\"dropdown-menu mt-3\" *dropdownMenu>\n            <a class=\"dropdown-item\" [routerLink]=\"['/profile/edit']\"><i class=\"fas fa-camera\"></i> Upload Photo</a>\n            <div class=\"dropdown-divider\"></div>\n            <a class=\"dropdown-item\"><i class=\"fas fa-file-video\"></i> Upload Video from Computer</a>\n          </div>\n        </div>\n      </div>\n      <!--Share your mood card end-->\n      <br>\n      <div class=\"container\" *ngFor=\"let user of users\">\n        <div *ngIf=\"user.photos != null\">\n          <app-newsfeed-card [user]=\"user\"></app-newsfeed-card>\n        </div>\n        <div *ngIf=\"user.photos == null\">\n          No information to show here\n        </div>\n      </div>\n\n      <div class=\"d-flex justify-content-center\">\n        <pagination [boundaryLinks]=\"true\" [totalItems]=\"pagination.totalItems\" [itemsPerPage]=\"pagination.itemsPerPage\"\n          [(ngModel)]=\"pagination.currentPage\" (pageChanged)=\"pageChanged($event)\" previousText=\"&lsaquo;\" nextText=\"&rsaquo;\"\n          firstText=\"&laquo;\" lastText=\"&raquo;\">\n        </pagination>\n      </div>\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -2628,7 +2689,7 @@ module.exports = ".back-wallpaper {\r\n    background-image:'../../assets/reg-ba
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid back-wallpaper\">\r\n    <!-- register card start-->\r\n    <div class=\"card justify-content-center\">\r\n        <div class=\"card-title text-center text-primary\"><h3>Sign Up ! Its Completely Free</h3></div>\r\n        <div class=\"card-body\">\r\n            <form [formGroup]=\"registerForm\" (ngSubmit)=\"register()\">\r\n                <hr>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label mr-3\">I am a: </label>\r\n                    <label class=\"radio-inline\">\r\n                        <input type=\"radio\" class=\"mr-3\" value=\"artist\" formControlName=\"userType\"> Artist\r\n                    </label>\r\n                    <label class=\"radio-inline ml-3\">\r\n                        <input type=\"radio\" class=\"mr-3\" value=\"venue\" formControlName=\"userType\"> Venue\r\n                    </label>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}\"\r\n                        class=\"form-control\" placeholder=\"Username\" formControlName=\"username\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter a valid Username\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <div class=\"input-group\">\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('firstName').errors && registerForm.get('firstName').touched}\"\r\n                                class=\"form-control\" placeholder=\"First Name\" formControlName=\"firstName\">\r\n                            <div class=\"invalid-feedback\">\r\n                                please enter your First Name\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('lastName').errors && registerForm.get('lastName').touched}\"\r\n                                class=\"form-control\" placeholder=\"Last Name\" formControlName=\"lastName\">\r\n                            <div class=\"invalid-feedback\">\r\n                                please enter your Last Name\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}\"\r\n                        class=\"form-control\" placeholder=\"Nick Name\" formControlName=\"knownAs\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter a nickname\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"password\" [ngClass]=\"{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}\"\r\n                        class=\"form-control\" formControlName=\"password\" placeholder=\"Password\">\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('required') && registerForm.get('password').touched\">\r\n                        Password required\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('minlength') && registerForm.get('password').touched\">\r\n                        Please enter a password of atleast 8 characters\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched\">\r\n                        Password cannot exceed 20 characters\r\n                    </div>\r\n                    <small id=\"passwordHelpInline\" class=\"text-muted\">\r\n                        Must be 8-20 characters long.\r\n                    </small>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"password\" class=\"form-control\" [ngClass]=\"{'is-invalid': registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched || registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}\"\r\n                        formControlName=\"confirmPassword\" placeholder=\"Confirm Password\">\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched\">\r\n                        Please enter your password again\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched\">\r\n                        Password is not matching\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" bsDatepicker [bsConfig]=\"bsConfig\" [ngClass]=\"{'is-invalid': registerForm.get('dob').errors && registerForm.get('dob').touched}\"\r\n                        class=\"form-control\" placeholder=\"Date of Birth\" formControlName=\"dob\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter your Date of Birth\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <div class=\"input-group\">\r\n                        <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}\"\r\n                            class=\"form-control\" placeholder=\"City\" formControlName=\"city\">\r\n                        <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}\"\r\n                            class=\"form-control\" placeholder=\"Country\" formControlName=\"country\">\r\n                        <div class=\"invalid-feedback\">\r\n                            please enter your Address\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group text-centre inline-button\">\r\n                    <button class=\"btn btn-success mb-1 btn-block\" [disabled]=\"!registerForm.valid\" type=\"submit\">Sign\r\n                        Up</button>\r\n                    <button class=\"btn btn-default btn-block\" type=\"button\" (click)=\"cancel()\">Cancel</button>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n    <!-- register card div end-->\r\n</div>"
+module.exports = "<div class=\"container-fluid back-wallpaper\">\r\n    <!-- register card start-->\r\n    <div class=\"card justify-content-center\">\r\n        <div class=\"card-title text-center text-primary\">\r\n            <h3>Sign Up ! Its Completely Free</h3>\r\n        </div>\r\n        <div class=\"card-body\">\r\n            <form [formGroup]=\"registerForm\" (ngSubmit)=\"register()\">\r\n                <hr>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label mr-3\">I am a: </label>\r\n                    <label class=\"radio-inline\">\r\n                        <input type=\"radio\" class=\"mr-3\" value=\"artist\" formControlName=\"userType\"> Artist\r\n                    </label>\r\n                    <label class=\"radio-inline ml-3\">\r\n                        <input type=\"radio\" class=\"mr-3\" value=\"venue\" formControlName=\"userType\"> Venue\r\n                    </label>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}\"\r\n                        class=\"form-control\" placeholder=\"Username\" formControlName=\"username\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter a valid Username\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <div class=\"input-group\">\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('firstName').errors && registerForm.get('firstName').touched}\"\r\n                                class=\"form-control\" placeholder=\"First Name\" formControlName=\"firstName\">\r\n                            <div class=\"invalid-feedback\">\r\n                                please enter your First Name\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('lastName').errors && registerForm.get('lastName').touched}\"\r\n                                class=\"form-control\" placeholder=\"Last Name\" formControlName=\"lastName\">\r\n                            <div class=\"invalid-feedback\">\r\n                                please enter your Last Name\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}\"\r\n                        class=\"form-control\" placeholder=\"Nick Name\" formControlName=\"knownAs\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter a nickname\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"password\" [ngClass]=\"{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}\"\r\n                        class=\"form-control\" formControlName=\"password\" placeholder=\"Password\">\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('required') && registerForm.get('password').touched\">\r\n                        Password required\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('minlength') && registerForm.get('password').touched\">\r\n                        Please enter a password of atleast 8 characters\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched\">\r\n                        Password cannot exceed 20 characters\r\n                    </div>\r\n                    <small id=\"passwordHelpInline\" class=\"text-muted\">\r\n                        Must be 8-20 characters long.\r\n                    </small>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"password\" class=\"form-control\" [ngClass]=\"{'is-invalid': registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched || registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}\"\r\n                        formControlName=\"confirmPassword\" placeholder=\"Confirm Password\">\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched\">\r\n                        Please enter your password again\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched\">\r\n                        Password is not matching\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" bsDatepicker [bsConfig]=\"bsConfig\" [ngClass]=\"{'is-invalid': registerForm.get('dob').errors && registerForm.get('dob').touched}\"\r\n                        class=\"form-control\" placeholder=\"Date of Birth\" formControlName=\"dob\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter your Date of Birth\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <div class=\"input-group\">\r\n                        <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}\"\r\n                            class=\"form-control\" placeholder=\"City\" formControlName=\"city\">\r\n                        <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}\"\r\n                            class=\"form-control\" placeholder=\"Country\" formControlName=\"country\">\r\n                        <div class=\"invalid-feedback\">\r\n                            please enter your Address\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group text-centre inline-button\">\r\n                    <button class=\"btn btn-success mb-1 btn-block\" [disabled]=\"!registerForm.valid\" type=\"submit\">Sign\r\n                        Up</button>\r\n                    <button class=\"btn btn-default btn-block\" type=\"button\" (click)=\"cancel()\">Cancel</button>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n    <!-- register card div end-->\r\n</div>"
 
 /***/ }),
 
@@ -2708,7 +2769,7 @@ var RegisterComponent = /** @class */ (function () {
             this.authService.register(this.user).subscribe(function () {
                 _this.alertify.success('registration successful');
             }, function (error) {
-                _this.alertify.error('Something went wrong in registration');
+                _this.alertify.error(error);
             }, function () {
                 _this.authService.login(_this.user).subscribe(function () {
                     _this.router.navigate(['newsfeed']);
