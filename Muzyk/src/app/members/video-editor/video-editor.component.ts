@@ -48,6 +48,7 @@ export class VideoEditorComponent implements OnInit {
   uploadVideo() {
     if (this.videoForm.valid) {
       const video: Video = Object.assign({}, this.videoForm.value);
+      video.dateAdded = new Date();
       this.videos.push(video);
       this.userService
         .uploadVideo(this.authService.decodedToken.nameid, video)
@@ -61,6 +62,17 @@ export class VideoEditorComponent implements OnInit {
         );
       this.videoForm.reset();
     }
+  }
+
+  deleteVideo(videoId: number) {
+    this.alertify.confirm('Are you sure to delete this video ?', () => {
+      this.userService.deleteVideo(this.authService.decodedToken.nameid, videoId).subscribe(() => {
+        this.videos.splice(this.videos.findIndex(v => v.id === videoId), 1);
+        this.alertify.success('Video has been deleted successfully');
+      }, error => {
+        this.alertify.error('Failed to delete the video');
+      });
+    });
   }
 
   // video upload - cloudinary

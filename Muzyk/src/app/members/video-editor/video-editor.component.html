@@ -1,50 +1,54 @@
 <div class="container-fluid">
-  <div id="accordian">
-    <div class="card">
-      <div class="card-header">
-        <button class="card-link btn btn-secondary w-100" data-toggle="collapse" href="#addVideos">
-          Add New Videos
-        </button>
-      </div>
-      <div id="addVideos" class="collapse show" data-parent="#accordion">
-        <div class="card-body">
-          <div class="row-12 mt-3">
-            <form [formGroup]="videoForm" (ngSubmit)="uploadVideo()">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Video Url</span>
-                </div>
-                <input type="text" class="form-control" placeholder="Video Url" formControlName="mediaUrl">
+  <ngb-accordion activeIds="ngb-panel-0">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <i class="fas fa-video"></i> Add New Video
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div class="row-12 mt-3">
+          <form [formGroup]="videoForm" (ngSubmit)="uploadVideo()">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Video Url</span>
               </div>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Description</span>
-                </div>
-                <textarea class="form-control" formControlName="description"></textarea>
+              <input type="text" class="form-control" placeholder="Video Url" formControlName="mediaUrl">
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Description</span>
               </div>
-              <br>
-              <button class="btn btn-primary" type="submit" [disabled]="!videoForm.valid">Add Video</button>
-              <button class="btn btn-danger ml-2" type="reset">Cancel</button><br>
-              <small>*Upload Video from Url</small><br><br>
-            </form>
-          </div>
+              <textarea class="form-control" formControlName="description"></textarea>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit" [disabled]="!videoForm.valid">Add Video</button>
+            <button class="btn btn-danger ml-2" type="reset">Cancel</button><br>
+            <small>*Upload Video from Url</small><br><br>
+          </form>
         </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <button href="#allVideos" class="card-link btn btn-secondary w-100">All Videos</button>
-      </div>
-      <div id="allVideos" class="collapse show" data-parent="#accordian">
-        <div class="card-body">
-          <div class="row" id="collapseExample">
-            <div class="col" *ngFor="let video of videos">
-              <iframe width="300" height="250" [src]="video.mediaUrl | embedVideo" frameborder="0" allow="autoplay; encrypted-media"
-                allowfullscreen></iframe>
+      </ng-template>
+    </ngb-panel>
+
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <i class="fas fa-images"></i> All Videos
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div class="row" id="collapseExample">
+          <div class="col" *ngFor="let video of videos">
+            <div class="card text-center mt-2">
+              <div class="card-image-wrapper">
+                <iframe width="300" height="250" [src]="video.mediaUrl | embedVideo" frameborder="0" allow="autoplay; encrypted-media"
+                  allowfullscreen></iframe>
+              </div>
+              <div class="card-content">
+                <b>{{video.description}}</b><br>
+                {{video.dateAdded | timeAgo}}
+              </div>
+              <button type="button" class="btn btn-sm btn-danger w-100" (click)="deleteVideo(video.id)"><i class="fa fa-trash animate"></i></button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
 </div>
