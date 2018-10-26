@@ -31,5 +31,7 @@ namespace Muzyk_API.Models
         public ICollection<Follow> Followee { get; set; }
         public ICollection<Message> MessageSent { get; set; }
         public ICollection<Message> MessageRecieved { get; set; }
+        public ICollection<Booking> Bookers { get; set; }
+        public ICollection<Booking> Bookees { get; set; }
     }
 }

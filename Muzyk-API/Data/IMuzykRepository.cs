@@ -20,5 +20,8 @@ namespace Muzyk_API.Data
         Task<Message> GetMessage(int id);
         Task<PagedList<Message>> GetMessageForUser(MessageParams messageParams);
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId);
+        Task<Booking> GetBooking(int userId, int recepientId);
+        Task<IEnumerable<int>> GetUserBookings(int id,bool bookers);
+        IEnumerable<Booking> GetUserBooking(int userId);
     }
 }

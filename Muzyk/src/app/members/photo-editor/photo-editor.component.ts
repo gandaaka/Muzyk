@@ -96,7 +96,7 @@ export class PhotoEditorComponent implements OnInit {
           isProfilePhoto: res.isProfilePhoto,
           isCoverPhoto: res.isCoverPhoto
         };
-        console.log(photo);
+        // console.log(photo);
         this.photos.push(photo);
         if (photo.isProfilePhoto) {
           this.authService.changeMemberPhoto(photo.mediaUrl);

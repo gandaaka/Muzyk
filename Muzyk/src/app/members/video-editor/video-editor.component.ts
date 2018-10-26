@@ -5,8 +5,8 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Video } from 'src/app/_models/video';
 
-import { NgForm } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-video-editor',
@@ -15,29 +15,56 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class VideoEditorComponent implements OnInit {
   @ViewChild('videoForm')
-  @Input() videos: Video[];
+  @Input()
+  videos: Video[];
 
-  videoForm: NgForm;
+  videoForm: FormGroup;
+  mediaUrl: string;
+  desc: string;
+
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
 
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private alertify: AlertifyService,
-    private santizer: DomSanitizer
-  ) { }
+    private builder: FormBuilder
+  ) {}
 
   ngOnInit() {
-    this.initializeUploader();
+    // this.initializeUploader();
+    this.createVideoForm();
+  }
+
+  createVideoForm() {
+    this.videoForm = this.builder.group({
+      mediaUrl: ['', Validators.required],
+      description: ['']
+    });
   }
 
   uploadVideo() {
-    this.videoForm.reset();
+    if (this.videoForm.valid) {
+      const video: Video = Object.assign({}, this.videoForm.value);
+      this.videos.push(video);
+      this.userService
+        .uploadVideo(this.authService.decodedToken.nameid, video)
+        .subscribe(
+          next => {
+            this.alertify.success('Video uploaded successully');
+          },
+          error => {
+            this.alertify.error(error);
+          }
+        );
+      this.videoForm.reset();
+    }
   }
 
   // video upload - cloudinary
-  initializeUploader() {
+  /*   initializeUploader() {
     this.uploader = new FileUploader({
       url:
         this.baseUrl +
@@ -66,5 +93,5 @@ export class VideoEditorComponent implements OnInit {
 
   fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
-  }
+  } */
 }

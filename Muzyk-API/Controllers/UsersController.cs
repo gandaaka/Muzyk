@@ -10,6 +10,7 @@ using Muzyk_API.Data;
 using Muzyk_DTOS;
 using Muzyk_API.Helpers;
 using Muzyk_API.Models;
+using Muzyk_DTOS.DTOS;
 
 namespace Muzyk_API.Controllers
 {
@@ -83,11 +84,12 @@ namespace Muzyk_API.Controllers
 
             if (follow != null)
                 return BadRequest("you have already followed this user");
-            
+
             if (await _repo.GetUser(recepientId) == null)
                 return NotFound();
-            
-            follow = new Follow{
+
+            follow = new Follow
+            {
                 FollowerId = id,
                 FolloweeId = recepientId
             };
@@ -98,6 +100,60 @@ namespace Muzyk_API.Controllers
                 return Ok();
 
             throw new Exception("Failed to follow the user");
+        }
+
+        [HttpGet("{id}/Booking")]
+        public IActionResult UserBookings(int id)
+        {
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var booking = _repo.GetUserBooking(id);
+            return Ok(booking);
+        }
+
+        [HttpPost("{id}/Booking/{recipientId}")]
+        public async Task<IActionResult> BookMeetingWithUser(int id, [FromBody]BookingToCreateDto bookingToCreateDto)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            if (bookingToCreateDto.Date == null)
+                return BadRequest("Please specify booking date");
+
+            if (bookingToCreateDto.Date <= DateTime.Now)
+                return BadRequest("Date is required and you can book meeting on past date");
+
+            var booking = await _repo.GetBooking(id, bookingToCreateDto.RecipientId);
+
+            if (booking != null)
+            {
+                if (DateTime.Equals(booking.BookingDate, bookingToCreateDto.Date))
+                {
+                    return BadRequest("You have a booking with this user on same date");
+                }
+            }
+
+
+            if (await _repo.GetUser(bookingToCreateDto.RecipientId) == null)
+                return NotFound();
+
+            booking = new Booking
+            {
+                BookerId = id,
+                BookeeId = bookingToCreateDto.RecipientId,
+                Title = bookingToCreateDto.Title,
+                Desc = bookingToCreateDto.Desc,
+                BookingDate = bookingToCreateDto.Date
+            };
+
+            _repo.Add<Booking>(booking);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            throw new Exception("Failed to do booking the user");
         }
     }
 }

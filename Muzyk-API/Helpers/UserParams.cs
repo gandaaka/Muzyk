@@ -17,6 +17,8 @@ namespace Muzyk_API.Helpers
         public int MaxExp { get; set; } = 25;
         public string OrderBy { get; set; }
         public bool Followees { get; set; } = false;
-        public bool Followers { get; set; } = false;   
+        public bool Followers { get; set; } = false;
+        public bool Bookees { get; set; }
+        public bool Bookers { get; set; }
     }
 }

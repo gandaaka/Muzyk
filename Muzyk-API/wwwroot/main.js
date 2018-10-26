@@ -134,6 +134,52 @@ var PaginatedResult = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/_pipes/embedVideo/embedVideo.pipe.ts":
+/*!******************************************************!*\
+  !*** ./src/app/_pipes/embedVideo/embedVideo.pipe.ts ***!
+  \******************************************************/
+/*! exports provided: EmbedVideoPipe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmbedVideoPipe", function() { return EmbedVideoPipe; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var EmbedVideoPipe = /** @class */ (function () {
+    /**
+     *
+     */
+    function EmbedVideoPipe(dom) {
+        this.dom = dom;
+    }
+    EmbedVideoPipe.prototype.transform = function (value, args) {
+        return this.dom.bypassSecurityTrustResourceUrl(value);
+    };
+    EmbedVideoPipe = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"])({
+            name: 'embedVideo'
+        }),
+        __metadata("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])
+    ], EmbedVideoPipe);
+    return EmbedVideoPipe;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/_resolvers/followers.resolver.ts":
 /*!**************************************************!*\
   !*** ./src/app/_resolvers/followers.resolver.ts ***!
@@ -961,12 +1007,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _members_member_map_member_map_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./members/member-map/member-map.component */ "./src/app/members/member-map/member-map.component.ts");
 /* harmony import */ var _newsFeed_components_newsfeed_card_newsfeed_card_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./newsFeed-components/newsfeed-card/newsfeed-card.component */ "./src/app/newsFeed-components/newsfeed-card/newsfeed-card.component.ts");
 /* harmony import */ var _members_video_editor_video_editor_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./members/video-editor/video-editor.component */ "./src/app/members/video-editor/video-editor.component.ts");
+/* harmony import */ var _pipes_embedVideo_embedVideo_pipe__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./_pipes/embedVideo/embedVideo.pipe */ "./src/app/_pipes/embedVideo/embedVideo.pipe.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1035,7 +1083,8 @@ var AppModule = /** @class */ (function () {
                 time_ago_pipe__WEBPACK_IMPORTED_MODULE_10__["TimeAgoPipe"],
                 _follower_list_follower_list_component__WEBPACK_IMPORTED_MODULE_34__["FollowerListComponent"],
                 _members_member_map_member_map_component__WEBPACK_IMPORTED_MODULE_38__["MemberMapComponent"],
-                _members_video_editor_video_editor_component__WEBPACK_IMPORTED_MODULE_40__["VideoEditorComponent"]
+                _members_video_editor_video_editor_component__WEBPACK_IMPORTED_MODULE_40__["VideoEditorComponent"],
+                _pipes_embedVideo_embedVideo_pipe__WEBPACK_IMPORTED_MODULE_41__["EmbedVideoPipe"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -1045,9 +1094,7 @@ var AppModule = /** @class */ (function () {
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["TabsModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["BsDropdownModule"].forRoot(),
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot(_routes__WEBPACK_IMPORTED_MODULE_11__["appRoutes"]),
-                _agm_core__WEBPACK_IMPORTED_MODULE_6__["AgmCoreModule"].forRoot({
-                    apiKey: 'AIzaSyD-REm0oq9XBJ5ndh4yQNFI-1681tLaEq4'
-                }),
+                _agm_core__WEBPACK_IMPORTED_MODULE_6__["AgmCoreModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["ProgressbarModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["BsDatepickerModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["PaginationModule"].forRoot(),
@@ -1485,7 +1532,7 @@ module.exports = ".card:hover img{\r\n    -webkit-transform: scale(1.2, 1.2);\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card mb-3 mt-3\">\n\n  <div class=\"cards-image-wrapper\">\n    <img src=\"{{user.photoUrl || '../../../assets/user.png'}}\" alt=\"{{user.username}}\" class=\"card-img-top\">\n    <ul class=\"list-inline member-icons animate text-center\">\n      <li class=\"list-inline-item\"><button class=\"btn btn-primary\" [routerLink]=\"['/members/', user.id]\"><i class=\"fa fa-user animate\"></i></button></li>\n      <li class=\"list-inline-item\"><button class=\"btn btn-primary\" (click)=\"sendFollowRequest(user.id)\"><i class=\"fas fa-user-friends\"></i></button></li>\n      <li class=\"list-inline-item\"><button class=\"btn btn-primary\" [routerLink]=\"['/members/', user.id]\" [queryParams]=\"{tab: 3}\"><i class=\"fa fa-envelope animate\"></i></button></li>\n    </ul>\n  </div>\n\n  <div class=\"card-body p-1\">\n    <h5 class=\"card-title text-center mb-2\"><i class=\"fa fa-user\"></i>\n      {{user.firstName | titlecase}} , {{user.genre}}\n    </h5>\n    <p class=\"card-text text-muted text-center\">{{user.city}}</p>\n  </div>\n\n</div>"
+module.exports = "<div class=\"card mb-3 mt-3\">\n\n  <div class=\"cards-image-wrapper\">\n    <img src=\"{{user.photoUrl || '../../../assets/user.png'}}\" alt=\"{{user.username}}\" class=\"card-img-top\">\n    <ul class=\"list-inline member-icons animate text-center\">\n      <li class=\"list-inline-item\"><button class=\"btn btn-primary\" [routerLink]=\"['/members/', user.id]\"><i class=\"fa fa-user animate\"></i></button></li>\n      <li class=\"list-inline-item\"><button class=\"btn btn-primary\" (click)=\"sendFollowRequest(user.id)\"><i class=\"fas fa-user-friends\"></i></button></li>\n      <li class=\"list-inline-item\"><button class=\"btn btn-primary\" [routerLink]=\"['/members/', user.id]\" [queryParams]=\"{tab: 3}\"><i class=\"fa fa-envelope animate\"></i></button></li>\n    </ul>\n  </div>\n\n  <div class=\"card-body p-1\">\n    <h5 class=\"card-title text-center mb-2\"><i class=\"fa fa-user\"></i>\n      {{user.firstName | titlecase}} , {{user.genre}}\n    </h5>\n    <p class=\"card-text text-muted text-center\">{{user.city}}</p>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1681,17 +1728,18 @@ var MemberMessagesComponent = /** @class */ (function () {
         this.signalUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].signalRUrl;
     }
     MemberMessagesComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.connection = new _aspnet_signalr__WEBPACK_IMPORTED_MODULE_5__["HubConnectionBuilder"]()
             .withUrl(this.signalUrl + '/mHub')
             .build();
-        /*     this.connection
-              .start()
-              .then(() => {
-                this.alertify.success('Connection Started');
-              })
-              .catch(error => {
-                this.alertify.warning(error);
-              }); */
+        this.connection
+            .start()
+            .then(function () {
+            _this.alertify.success('Connection Started');
+        })
+            .catch(function (error) {
+            _this.alertify.warning(error);
+        });
         this.loadMessages();
     };
     MemberMessagesComponent.prototype.loadMessages = function () {
@@ -1874,7 +1922,7 @@ var PhotoEditorComponent = /** @class */ (function () {
                     isProfilePhoto: res.isProfilePhoto,
                     isCoverPhoto: res.isCoverPhoto
                 };
-                console.log(photo);
+                // console.log(photo);
                 _this.photos.push(photo);
                 if (photo.isProfilePhoto) {
                     _this.authService.changeMemberPhoto(photo.mediaUrl);
@@ -2190,7 +2238,7 @@ module.exports = ".nv-file-over {\r\n    border: dotted 3px #158CBA;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col\" *ngFor=\"let video of videos\">\n        <iframe width=\"360\" height=\"115\" [src]=\"getVideoUrl(video)\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>\n    </div>\n  </div>\n  <div class=\"row mt-3\">\n    <form #videoForm=\"ngForm\">\n      <div class=\"input-group mb-3\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\" id=\"basic-addon1\">Video Url</span>\n        </div>\n        <input type=\"text\" class=\"form-control\" placeholder=\"Video Url\" aria-label=\"Username\">\n      </div>\n      <div class=\"input-group\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\">Description</span>\n        </div>\n        <textarea class=\"form-control\" aria-label=\"Description\"></textarea>\n      </div>\n      <br>\n      <button class=\"btn btn-primary\" type=\"submit\" (click)=\"uploadVideo()\">Add Video</button>\n      <button class=\"btn btn-danger ml-2\" type=\"reset\">Cancel</button><br>\n      <small>*Upload Video from Url</small><br><br>\n\n      <!-- <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" multiple />\n      <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" /><br>\n      <small>*Upload Video from Computer</small> -->\n      \n    </form>\n  </div>\n</div>\n\n<div class=\"col-md-9\" style=\"margin-bottom: 40px\" *ngIf=\"uploader?.queue?.length\">\n  <h3>Upload queue</h3>\n  <p>Queue length: {{ uploader?.queue?.length }}</p>\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th width=\"50%\">Name</th>\n        <th>Size</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let item of uploader.queue\">\n        <td><strong>{{ item?.file?.name }}</strong></td>\n        <td *ngIf=\"uploader.options.isHTML5\" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>\n\n      </tr>\n    </tbody>\n  </table>\n  <div>\n    <div>\n      Queue progress:\n      <div class=\"progress mb-4\">\n        <div class=\"progress-bar\" role=\"progressbar\" [ngStyle]=\"{ 'width': uploader.progress + '%' }\"></div>\n      </div>\n    </div>\n    <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\n      <span class=\"fa fa-upload\"></span> Upload\n    </button>\n    <button type=\"button\" class=\"btn btn-warning btn-s\" (click)=\"uploader.cancelAll()\" [disabled]=\"!uploader.isUploading\">\n      <span class=\"fa fa-ban\"></span> Cancel\n    </button>\n    <button type=\"button\" class=\"btn btn-danger btn-s\" (click)=\"uploader.clearQueue()\" [disabled]=\"!uploader.queue.length\">\n      <span class=\"fa fa-trash\"></span> Remove\n    </button>\n  </div>\n</div>"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col\" *ngFor=\"let video of videos\">\n        <iframe width=\"315\" height=\"250\" [src]=\"video.mediaUrl | embedVideo\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>\n    </div>\n  </div>\n  <div class=\"row mt-3\">\n    <form [formGroup]=\"videoForm\" (ngSubmit)=\"uploadVideo()\">\n      <div class=\"input-group mb-3\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\" id=\"basic-addon1\">Video Url</span>\n        </div>\n        <input type=\"text\" class=\"form-control\" placeholder=\"Video Url\" formControlName=\"mediaUrl\">\n      </div>\n      <div class=\"input-group\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\">Description</span>\n        </div>\n        <textarea class=\"form-control\" formControlName=\"description\"></textarea>\n      </div>\n      <br>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!videoForm.valid\">Add Video</button>\n      <button class=\"btn btn-danger ml-2\" type=\"reset\">Cancel</button><br>\n      <small>*Upload Video from Url</small><br><br>\n\n      <!-- <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" multiple />\n      <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" /><br>\n      <small>*Upload Video from Computer</small> -->\n      \n    </form>\n  </div>\n</div>\n\n<div class=\"col-md-9\" style=\"margin-bottom: 40px\" *ngIf=\"uploader?.queue?.length\">\n  <h3>Upload queue</h3>\n  <p>Queue length: {{ uploader?.queue?.length }}</p>\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th width=\"50%\">Name</th>\n        <th>Size</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let item of uploader.queue\">\n        <td><strong>{{ item?.file?.name }}</strong></td>\n        <td *ngIf=\"uploader.options.isHTML5\" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>\n\n      </tr>\n    </tbody>\n  </table>\n  <div>\n    <div>\n      Queue progress:\n      <div class=\"progress mb-4\">\n        <div class=\"progress-bar\" role=\"progressbar\" [ngStyle]=\"{ 'width': uploader.progress + '%' }\"></div>\n      </div>\n    </div>\n    <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\n      <span class=\"fa fa-upload\"></span> Upload\n    </button>\n    <button type=\"button\" class=\"btn btn-warning btn-s\" (click)=\"uploader.cancelAll()\" [disabled]=\"!uploader.isUploading\">\n      <span class=\"fa fa-ban\"></span> Cancel\n    </button>\n    <button type=\"button\" class=\"btn btn-danger btn-s\" (click)=\"uploader.clearQueue()\" [disabled]=\"!uploader.queue.length\">\n      <span class=\"fa fa-trash\"></span> Remove\n    </button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -2205,12 +2253,11 @@ module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <d
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VideoEditorComponent", function() { return VideoEditorComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ng2-file-upload */ "./node_modules/ng2-file-upload/index.js");
-/* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(ng2_file_upload__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/environments/environment.prod */ "./src/environments/environment.prod.ts");
-/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/_services/auth.service */ "./src/app/_services/auth.service.ts");
-/* harmony import */ var src_app_services_alertify_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/_services/alertify.service */ "./src/app/_services/alertify.service.ts");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/environments/environment.prod */ "./src/environments/environment.prod.ts");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/_services/auth.service */ "./src/app/_services/auth.service.ts");
+/* harmony import */ var src_app_services_alertify_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/_services/alertify.service */ "./src/app/_services/alertify.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/_services/user.service */ "./src/app/_services/user.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2227,49 +2274,38 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var VideoEditorComponent = /** @class */ (function () {
-    function VideoEditorComponent(authService, alertify, santizer) {
+    function VideoEditorComponent(authService, userService, alertify, builder) {
         this.authService = authService;
+        this.userService = userService;
         this.alertify = alertify;
-        this.santizer = santizer;
+        this.builder = builder;
         this.hasBaseDropZoneOver = false;
-        this.baseUrl = src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_2__["environment"].apiUrl;
+        this.baseUrl = src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_1__["environment"].apiUrl;
     }
     VideoEditorComponent.prototype.ngOnInit = function () {
-        this.initializeUploader();
+        // this.initializeUploader();
+        this.createVideoForm();
+    };
+    VideoEditorComponent.prototype.createVideoForm = function () {
+        this.videoForm = this.builder.group({
+            mediaUrl: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            description: ['']
+        });
     };
     VideoEditorComponent.prototype.uploadVideo = function () {
-        this.videoForm.reset();
-    };
-    // video upload - cloudinary
-    VideoEditorComponent.prototype.initializeUploader = function () {
         var _this = this;
-        this.uploader = new ng2_file_upload__WEBPACK_IMPORTED_MODULE_1__["FileUploader"]({
-            url: this.baseUrl +
-                'users/' +
-                this.authService.decodedToken.nameid +
-                '/videos',
-            authToken: 'Bearer ' + localStorage.getItem('token'),
-            isHTML5: true,
-            allowedFileType: ['video'],
-            removeAfterUpload: true,
-            autoUpload: false,
-            maxFileSize: 200 * 1024 * 1024
-        });
-        this.uploader.onAfterAddingFile = function (file) {
-            file.withCredentials = false;
-        };
-        this.uploader.onSuccessItem = function (item, response, status, headers) {
-            if (response) {
-                // const res: Video = JSON.parse(response);
-                _this.alertify.success('Video Uploaded Successfully');
-            }
-        };
-    };
-    VideoEditorComponent.prototype.fileOverBase = function (e) {
-        this.hasBaseDropZoneOver = e;
-    };
-    VideoEditorComponent.prototype.getVideoUrl = function (video) {
-        return this.santizer.bypassSecurityTrustResourceUrl(video.mediaUrl);
+        if (this.videoForm.valid) {
+            var video = Object.assign({}, this.videoForm.value);
+            this.videos.push(video);
+            this.userService
+                .uploadVideo(this.authService.decodedToken.nameid, video)
+                .subscribe(function (next) {
+                _this.alertify.success('Video uploaded successully');
+            }, function (error) {
+                _this.alertify.error(error);
+            });
+            this.videoForm.reset();
+        }
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('videoForm'),
@@ -2282,9 +2318,10 @@ var VideoEditorComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./video-editor.component.html */ "./src/app/members/video-editor/video-editor.component.html"),
             styles: [__webpack_require__(/*! ./video-editor.component.css */ "./src/app/members/video-editor/video-editor.component.css")]
         }),
-        __metadata("design:paramtypes", [src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
-            src_app_services_alertify_service__WEBPACK_IMPORTED_MODULE_4__["AlertifyService"],
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["DomSanitizer"]])
+        __metadata("design:paramtypes", [src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"],
+            src_app_services_alertify_service__WEBPACK_IMPORTED_MODULE_3__["AlertifyService"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"]])
     ], VideoEditorComponent);
     return VideoEditorComponent;
 }());
@@ -2689,7 +2726,7 @@ module.exports = ".back-wallpaper {\r\n    background-image:'../../assets/reg-ba
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid back-wallpaper\">\r\n    <!-- register card start-->\r\n    <div class=\"card justify-content-center\">\r\n        <div class=\"card-title text-center text-primary\">\r\n            <h3>Sign Up ! Its Completely Free</h3>\r\n        </div>\r\n        <div class=\"card-body\">\r\n            <form [formGroup]=\"registerForm\" (ngSubmit)=\"register()\">\r\n                <hr>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label mr-3\">I am a: </label>\r\n                    <label class=\"radio-inline\">\r\n                        <input type=\"radio\" class=\"mr-3\" value=\"artist\" formControlName=\"userType\"> Artist\r\n                    </label>\r\n                    <label class=\"radio-inline ml-3\">\r\n                        <input type=\"radio\" class=\"mr-3\" value=\"venue\" formControlName=\"userType\"> Venue\r\n                    </label>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}\"\r\n                        class=\"form-control\" placeholder=\"Username\" formControlName=\"username\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter a valid Username\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <div class=\"input-group\">\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('firstName').errors && registerForm.get('firstName').touched}\"\r\n                                class=\"form-control\" placeholder=\"First Name\" formControlName=\"firstName\">\r\n                            <div class=\"invalid-feedback\">\r\n                                please enter your First Name\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('lastName').errors && registerForm.get('lastName').touched}\"\r\n                                class=\"form-control\" placeholder=\"Last Name\" formControlName=\"lastName\">\r\n                            <div class=\"invalid-feedback\">\r\n                                please enter your Last Name\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}\"\r\n                        class=\"form-control\" placeholder=\"Nick Name\" formControlName=\"knownAs\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter a nickname\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"password\" [ngClass]=\"{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}\"\r\n                        class=\"form-control\" formControlName=\"password\" placeholder=\"Password\">\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('required') && registerForm.get('password').touched\">\r\n                        Password required\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('minlength') && registerForm.get('password').touched\">\r\n                        Please enter a password of atleast 8 characters\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched\">\r\n                        Password cannot exceed 20 characters\r\n                    </div>\r\n                    <small id=\"passwordHelpInline\" class=\"text-muted\">\r\n                        Must be 8-20 characters long.\r\n                    </small>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"password\" class=\"form-control\" [ngClass]=\"{'is-invalid': registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched || registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}\"\r\n                        formControlName=\"confirmPassword\" placeholder=\"Confirm Password\">\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched\">\r\n                        Please enter your password again\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched\">\r\n                        Password is not matching\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" bsDatepicker [bsConfig]=\"bsConfig\" [ngClass]=\"{'is-invalid': registerForm.get('dob').errors && registerForm.get('dob').touched}\"\r\n                        class=\"form-control\" placeholder=\"Date of Birth\" formControlName=\"dob\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter your Date of Birth\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <div class=\"input-group\">\r\n                        <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}\"\r\n                            class=\"form-control\" placeholder=\"City\" formControlName=\"city\">\r\n                        <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}\"\r\n                            class=\"form-control\" placeholder=\"Country\" formControlName=\"country\">\r\n                        <div class=\"invalid-feedback\">\r\n                            please enter your Address\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group text-centre inline-button\">\r\n                    <button class=\"btn btn-success mb-1 btn-block\" [disabled]=\"!registerForm.valid\" type=\"submit\">Sign\r\n                        Up</button>\r\n                    <button class=\"btn btn-default btn-block\" type=\"button\" (click)=\"cancel()\">Cancel</button>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n    <!-- register card div end-->\r\n</div>"
+module.exports = "<div class=\"container-fluid back-wallpaper\">\r\n    <!-- register card start-->\r\n    <div class=\"card justify-content-center\">\r\n        <div class=\"card-title text-center text-primary\">\r\n            <h3>Sign Up ! Its Completely Free</h3>\r\n        </div>\r\n        <div class=\"card-body\">\r\n            <form [formGroup]=\"registerForm\" (ngSubmit)=\"register()\">\r\n                <hr>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label mr-3\">I am a: </label>\r\n                    <label class=\"radio-inline\">\r\n                        <input type=\"radio\" class=\"mr-3\" value=\"artist\" formControlName=\"userType\"> Artist\r\n                    </label>\r\n                    <label class=\"radio-inline ml-3\">\r\n                        <input type=\"radio\" class=\"mr-3\" value=\"venue\" formControlName=\"userType\"> Venue\r\n                    </label>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}\"\r\n                        class=\"form-control\" placeholder=\"Username\" formControlName=\"username\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter a valid Username\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <div class=\"input-group\">\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('firstName').errors && registerForm.get('firstName').touched}\"\r\n                                class=\"form-control\" placeholder=\"First Name\" formControlName=\"firstName\">\r\n                            <div class=\"invalid-feedback\">\r\n                                please enter your First Name\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('lastName').errors && registerForm.get('lastName').touched}\"\r\n                                class=\"form-control\" placeholder=\"Last Name\" formControlName=\"lastName\">\r\n                            <div class=\"invalid-feedback\">\r\n                                please enter your Last Name\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}\"\r\n                        class=\"form-control\" placeholder=\"Nick Name\" formControlName=\"knownAs\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter a nickname\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"password\" [ngClass]=\"{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}\"\r\n                        class=\"form-control\" formControlName=\"password\" placeholder=\"Password\">\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('required') && registerForm.get('password').touched\">\r\n                        Password required\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('minlength') && registerForm.get('password').touched\">\r\n                        Please enter a password of atleast 8 characters\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched\">\r\n                        Password cannot exceed 24 characters\r\n                    </div>\r\n                    <small id=\"passwordHelpInline\" class=\"text-muted\">\r\n                        Must be 8-24 characters long.\r\n                    </small>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"password\" class=\"form-control\" [ngClass]=\"{'is-invalid': registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched || registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}\"\r\n                        formControlName=\"confirmPassword\" placeholder=\"Confirm Password\">\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched\">\r\n                        Please enter your password again\r\n                    </div>\r\n                    <div class=\"invalid-feedback\" *ngIf=\"registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched\">\r\n                        Password is not matching\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <input type=\"text\" bsDatepicker [bsConfig]=\"bsConfig\" [ngClass]=\"{'is-invalid': registerForm.get('dob').errors && registerForm.get('dob').touched}\"\r\n                        class=\"form-control\" placeholder=\"Date of Birth\" formControlName=\"dob\">\r\n                    <div class=\"invalid-feedback\">\r\n                        please enter your Date of Birth\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group\">\r\n                    <div class=\"input-group\">\r\n                        <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}\"\r\n                            class=\"form-control\" placeholder=\"City\" formControlName=\"city\">\r\n                        <input type=\"text\" [ngClass]=\"{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}\"\r\n                            class=\"form-control\" placeholder=\"Country\" formControlName=\"country\">\r\n                        <div class=\"invalid-feedback\">\r\n                            please enter your Address\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group text-centre inline-button\">\r\n                    <button class=\"btn btn-success mb-1 btn-block\" [disabled]=\"!registerForm.valid\" type=\"submit\">Sign\r\n                        Up</button>\r\n                    <button class=\"btn btn-default btn-block\" type=\"button\" (click)=\"cancel()\">Cancel</button>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n    <!-- register card div end-->\r\n</div>"
 
 /***/ }),
 
@@ -2743,7 +2780,7 @@ var RegisterComponent = /** @class */ (function () {
                 '',
                 [
                     _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required,
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(6),
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(8),
                     _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(24)
                 ]
             ],

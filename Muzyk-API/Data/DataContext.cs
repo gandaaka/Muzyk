@@ -8,7 +8,7 @@ namespace Muzyk_API.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base (options){}
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Follow> Follows { get; set; }
@@ -16,10 +16,12 @@ namespace Muzyk_API.Data
         public DbSet<Video> Videos { get; set; }
         public DbSet<Recommendation> Recommendations { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder) {
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
             builder.Entity<Follow>()
-                .HasKey(k => new {k.FollowerId, k.FolloweeId});
+                .HasKey(k => new { k.FollowerId, k.FolloweeId });
 
             builder.Entity<Follow>()
                 .HasOne(u => u.Followee)
@@ -32,7 +34,7 @@ namespace Muzyk_API.Data
                 .WithMany(u => u.Followee)
                 .HasForeignKey(u => u.FollowerId)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
             builder.Entity<Message>()
                 .HasOne(u => u.Sender)
                 .WithMany(m => m.MessageSent)
@@ -44,10 +46,25 @@ namespace Muzyk_API.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Rating>()
-                .HasKey(k => new {k.UserId, k.Genre});
+                .HasKey(k => new { k.UserId, k.Genre });
 
             builder.Entity<Recommendation>()
-                .HasKey(k => new {k.RId, k.UserId});
+                .HasKey(k => new { k.RId, k.UserId });
+
+            builder.Entity<Booking>()
+                .HasKey(k => new { k.BookerId, k.BookeeId, k.BookingDate });
+
+            builder.Entity<Booking>()
+                .HasOne(u => u.Bookee)
+                .WithMany(u => u.Bookers)
+                .HasForeignKey(u => u.BookeeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Booking>()
+                .HasOne(u => u.Booker)
+                .WithMany(u => u.Bookees)
+                .HasForeignKey(u => u.BookerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -52,35 +52,15 @@ namespace Muzyk_API.Controllers
         [HttpPost]
         [RequestFormLimits(ValueCountLimit = 2000)]
         [RequestSizeLimit(100000000)]
-        public async Task<IActionResult> AddVideoForUser(int userId, [FromForm]VideoForCreationDto videoForCreationDto)
+        public async Task<IActionResult> AddVideoForUser(int userId, [FromBody]VideoForCreationDto videoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var userFromRepo = await _repo.GetUser(userId);
 
-            var file = videoForCreationDto.File;
-            var uploadResults = new VideoUploadResult();
-
-            if (file.Length > 0)
-            {
-                using (var stream = file.OpenReadStream())
-                {
-                    var uploadParams = new VideoUploadParams()
-                    {
-                        File = new FileDescription(file.Name, stream),
-                        Transformation = new Transformation().Width(500).Height(500).Crop("fill")
-                    };
-
-                    uploadResults = _cloudinary.Upload(uploadParams);
-                }
-            }
-
-            videoForCreationDto.MediaUrl = uploadResults.Uri.ToString();
-            videoForCreationDto.PublicId = uploadResults.PublicId;
-            
             videoForCreationDto.MediaType = "Video";
-            
+
             var video = _mapper.Map<Models.Video>(videoForCreationDto);
             userFromRepo.Videos.Add(video);
 
@@ -91,6 +71,24 @@ namespace Muzyk_API.Controllers
             }
 
             return BadRequest("Could not add the video!");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteVideoForUser(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var user = await _repo.GetUser(userId);
+
+            var videoFromRepo = await _repo.GetVideo(id);
+
+            _repo.Delete(videoFromRepo);
+
+            if (await _repo.SaveAll())
+                return Ok();
+            
+            return BadRequest("Unable to delete the video");
         }
     }
 }

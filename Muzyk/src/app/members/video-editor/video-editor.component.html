@@ -1,69 +1,50 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col" *ngFor="let video of videos">
-        <iframe width="360" height="115" [src]="video.mediaUrl | embedVideo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <form #videoForm="ngForm">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Video Url</span>
-        </div>
-        <input type="text" class="form-control" placeholder="Video Url" aria-label="Username">
+  <div id="accordian">
+    <div class="card">
+      <div class="card-header">
+        <button class="card-link btn btn-secondary w-100" data-toggle="collapse" href="#addVideos">
+          Add New Videos
+        </button>
       </div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Description</span>
+      <div id="addVideos" class="collapse show" data-parent="#accordion">
+        <div class="card-body">
+          <div class="row-12 mt-3">
+            <form [formGroup]="videoForm" (ngSubmit)="uploadVideo()">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Video Url</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Video Url" formControlName="mediaUrl">
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Description</span>
+                </div>
+                <textarea class="form-control" formControlName="description"></textarea>
+              </div>
+              <br>
+              <button class="btn btn-primary" type="submit" [disabled]="!videoForm.valid">Add Video</button>
+              <button class="btn btn-danger ml-2" type="reset">Cancel</button><br>
+              <small>*Upload Video from Url</small><br><br>
+            </form>
+          </div>
         </div>
-        <textarea class="form-control" aria-label="Description"></textarea>
-      </div>
-      <br>
-      <button class="btn btn-primary" type="submit" (click)="uploadVideo()">Add Video</button>
-      <button class="btn btn-danger ml-2" type="reset">Cancel</button><br>
-      <small>*Upload Video from Url</small><br><br>
-
-      <!-- <input type="file" ng2FileSelect [uploader]="uploader" multiple />
-      <input type="file" ng2FileSelect [uploader]="uploader" /><br>
-      <small>*Upload Video from Computer</small> -->
-      
-    </form>
-  </div>
-</div>
-
-<div class="col-md-9" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
-  <h3>Upload queue</h3>
-  <p>Queue length: {{ uploader?.queue?.length }}</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th width="50%">Name</th>
-        <th>Size</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of uploader.queue">
-        <td><strong>{{ item?.file?.name }}</strong></td>
-        <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>
-
-      </tr>
-    </tbody>
-  </table>
-  <div>
-    <div>
-      Queue progress:
-      <div class="progress mb-4">
-        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
       </div>
     </div>
-    <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-      <span class="fa fa-upload"></span> Upload
-    </button>
-    <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-      <span class="fa fa-ban"></span> Cancel
-    </button>
-    <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-      <span class="fa fa-trash"></span> Remove
-    </button>
+    <div class="card">
+      <div class="card-header">
+        <button href="#allVideos" class="card-link btn btn-secondary w-100">All Videos</button>
+      </div>
+      <div id="allVideos" class="collapse show" data-parent="#accordian">
+        <div class="card-body">
+          <div class="row" id="collapseExample">
+            <div class="col" *ngFor="let video of videos">
+              <iframe width="300" height="250" [src]="video.mediaUrl | embedVideo" frameborder="0" allow="autoplay; encrypted-media"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

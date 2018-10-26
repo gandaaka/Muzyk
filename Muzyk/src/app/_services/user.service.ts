@@ -123,4 +123,8 @@ export class UserService {
   uploadVideo(userId: number, video: Video) {
     return this.http.post(this.baseUrl + 'users/' + userId + '/videos/', video);
   }
+
+  deleteVideo(userId: number, id: number) {
+    return this.http.delete(this.baseUrl + 'users/' + userId + '/videos/' + id);
+  }
 }
