@@ -42,6 +42,9 @@ namespace Muzyk_API.Helpers
             CreateMap<Message, MessageToReturnDto>()
                 .ForMember(m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.isProfilePhoto).MediaUrl))
                 .ForMember(m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.isProfilePhoto).MediaUrl));
+
+            //bookingDto Map
+            CreateMap<Booking, BookingsToReturnDto>();
         }
     }
 }

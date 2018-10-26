@@ -110,7 +110,8 @@ namespace Muzyk_API.Controllers
                 return Unauthorized();
 
             var booking = _repo.GetUserBooking(id);
-            return Ok(booking);
+            var bookingForReturn = _mapper.Map<IEnumerable<BookingsToReturnDto>>(booking);
+            return Ok(bookingForReturn);
         }
 
         [HttpPost("{id}/Booking/{recipientId}")]

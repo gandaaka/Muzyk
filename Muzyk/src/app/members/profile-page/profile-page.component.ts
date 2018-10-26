@@ -18,7 +18,7 @@ export class ProfilePageComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   galleryActions: NgxGalleryAction[];
-  myTabs: any[];
+  tabs: any[];
 
   constructor(
     private userService: UserService,

@@ -52,6 +52,9 @@ import { MemberMapComponent } from './members/member-map/member-map.component';
 import { NewsfeedCardComponent } from './newsFeed-components/newsfeed-card/newsfeed-card.component';
 import { VideoEditorComponent } from './members/video-editor/video-editor.component';
 import { EmbedVideoPipe } from './_pipes/embedVideo/embedVideo.pipe';
+import { BookingService } from './_services/booking.service';
+import { BookingsComponent } from './bookings/bookings.component';
+import { MemberBookingComponent } from './members/member-booking/member-booking.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -78,7 +81,9 @@ export function tokenGetter() {
     FollowerListComponent,
     MemberMapComponent,
     VideoEditorComponent,
-    EmbedVideoPipe
+    EmbedVideoPipe,
+    BookingsComponent,
+    MemberBookingComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +120,8 @@ export function tokenGetter() {
     MemberListResolver,
     ProfileEditResolver,
     FollowerResolver,
-    MessagesResolver
+    MessagesResolver,
+    BookingService
   ],
   bootstrap: [AppComponent]
 })

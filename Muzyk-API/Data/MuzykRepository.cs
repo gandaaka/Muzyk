@@ -61,8 +61,7 @@ namespace Muzyk_API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
-
+            var users = _context.Users.Include(p => p.Photos).Include(v => v.Videos).OrderByDescending(u => u.LastActive).AsQueryable();
             users = users.Where(u => u.Id != userParams.UserId);
             if (userParams.Genre != null || userParams.Genre != "")
             {

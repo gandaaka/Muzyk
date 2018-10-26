@@ -50,8 +50,6 @@ namespace Muzyk_API.Controllers
         }
 
         [HttpPost]
-        [RequestFormLimits(ValueCountLimit = 2000)]
-        [RequestSizeLimit(100000000)]
         public async Task<IActionResult> AddVideoForUser(int userId, [FromBody]VideoForCreationDto videoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

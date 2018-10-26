@@ -1,4 +1,5 @@
 using System;
+using Muzyk_DTOS;
 
 namespace Muzyk_API.Models
 {

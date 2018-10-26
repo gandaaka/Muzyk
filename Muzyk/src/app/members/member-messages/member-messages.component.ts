@@ -28,7 +28,7 @@ export class MemberMessagesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.connection = new signalR.HubConnectionBuilder()
+/*     this.connection = new signalR.HubConnectionBuilder()
       .withUrl(this.signalUrl + '/mHub')
       .build();
 
@@ -39,7 +39,7 @@ export class MemberMessagesComponent implements OnInit {
       })
       .catch(error => {
         this.alertify.warning(error);
-      });
+      }); */
 
     this.loadMessages();
   }
