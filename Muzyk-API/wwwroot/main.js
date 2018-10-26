@@ -799,6 +799,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.uploadVideo = function (userId, video) {
         return this.http.post(this.baseUrl + 'users/' + userId + '/videos/', video);
     };
+    UserService.prototype.deleteVideo = function (userId, id) {
+        return this.http.delete(this.baseUrl + 'users/' + userId + '/videos/' + id);
+    };
     UserService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -977,43 +980,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ng2-file-upload */ "./node_modules/ng2-file-upload/index.js");
 /* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(ng2_file_upload__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var time_ago_pipe__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! time-ago-pipe */ "./node_modules/time-ago-pipe/esm5/time-ago-pipe.js");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./routes */ "./src/app/routes.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./_services/auth.service */ "./src/app/_services/auth.service.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
-/* harmony import */ var _services_error_interceptor__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./_services/error.interceptor */ "./src/app/_services/error.interceptor.ts");
-/* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./_services/alertify.service */ "./src/app/_services/alertify.service.ts");
-/* harmony import */ var _members_lists_lists_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./members/lists/lists.component */ "./src/app/members/lists/lists.component.ts");
-/* harmony import */ var _messages_messages_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./messages/messages.component */ "./src/app/messages/messages.component.ts");
-/* harmony import */ var _analytics_analytics_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./analytics/analytics.component */ "./src/app/analytics/analytics.component.ts");
-/* harmony import */ var _newsFeed_components_newsfeed_newsfeed_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./newsFeed-components/newsfeed/newsfeed.component */ "./src/app/newsFeed-components/newsfeed/newsfeed.component.ts");
-/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./_guards/auth.guard */ "./src/app/_guards/auth.guard.ts");
-/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./_services/user.service */ "./src/app/_services/user.service.ts");
-/* harmony import */ var _members_member_card_member_card_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./members/member-card/member-card.component */ "./src/app/members/member-card/member-card.component.ts");
-/* harmony import */ var _members_profile_page_profile_page_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./members/profile-page/profile-page.component */ "./src/app/members/profile-page/profile-page.component.ts");
-/* harmony import */ var _resolvers_profile_page_resolver__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./_resolvers/profile-page.resolver */ "./src/app/_resolvers/profile-page.resolver.ts");
-/* harmony import */ var _resolvers_member_list_resolver__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./_resolvers/member-list.resolver */ "./src/app/_resolvers/member-list.resolver.ts");
-/* harmony import */ var _members_profile_edit_profile_edit_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./members/profile-edit/profile-edit.component */ "./src/app/members/profile-edit/profile-edit.component.ts");
-/* harmony import */ var _resolvers_profile_edit_resolver__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./_resolvers/profile-edit.resolver */ "./src/app/_resolvers/profile-edit.resolver.ts");
-/* harmony import */ var _guards_prevent_unsaved_changes_guard__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./_guards/prevent-unsaved-changes.guard */ "./src/app/_guards/prevent-unsaved-changes.guard.ts");
-/* harmony import */ var _members_photo_editor_photo_editor_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./members/photo-editor/photo-editor.component */ "./src/app/members/photo-editor/photo-editor.component.ts");
-/* harmony import */ var _auto_generated_auto_generated_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./auto-generated/auto-generated.component */ "./src/app/auto-generated/auto-generated.component.ts");
-/* harmony import */ var _follower_list_follower_list_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./follower-list/follower-list.component */ "./src/app/follower-list/follower-list.component.ts");
-/* harmony import */ var _resolvers_followers_resolver__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./_resolvers/followers.resolver */ "./src/app/_resolvers/followers.resolver.ts");
-/* harmony import */ var _resolvers_messages_resolver__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./_resolvers/messages.resolver */ "./src/app/_resolvers/messages.resolver.ts");
-/* harmony import */ var _members_member_messages_member_messages_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./members/member-messages/member-messages.component */ "./src/app/members/member-messages/member-messages.component.ts");
-/* harmony import */ var _members_member_map_member_map_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./members/member-map/member-map.component */ "./src/app/members/member-map/member-map.component.ts");
-/* harmony import */ var _newsFeed_components_newsfeed_card_newsfeed_card_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./newsFeed-components/newsfeed-card/newsfeed-card.component */ "./src/app/newsFeed-components/newsfeed-card/newsfeed-card.component.ts");
-/* harmony import */ var _members_video_editor_video_editor_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./members/video-editor/video-editor.component */ "./src/app/members/video-editor/video-editor.component.ts");
-/* harmony import */ var _pipes_embedVideo_embedVideo_pipe__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./_pipes/embedVideo/embedVideo.pipe */ "./src/app/_pipes/embedVideo/embedVideo.pipe.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./routes */ "./src/app/routes.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./_services/auth.service */ "./src/app/_services/auth.service.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
+/* harmony import */ var _services_error_interceptor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./_services/error.interceptor */ "./src/app/_services/error.interceptor.ts");
+/* harmony import */ var _services_alertify_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./_services/alertify.service */ "./src/app/_services/alertify.service.ts");
+/* harmony import */ var _members_lists_lists_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./members/lists/lists.component */ "./src/app/members/lists/lists.component.ts");
+/* harmony import */ var _messages_messages_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./messages/messages.component */ "./src/app/messages/messages.component.ts");
+/* harmony import */ var _analytics_analytics_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./analytics/analytics.component */ "./src/app/analytics/analytics.component.ts");
+/* harmony import */ var _newsFeed_components_newsfeed_newsfeed_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./newsFeed-components/newsfeed/newsfeed.component */ "./src/app/newsFeed-components/newsfeed/newsfeed.component.ts");
+/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./_guards/auth.guard */ "./src/app/_guards/auth.guard.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./_services/user.service */ "./src/app/_services/user.service.ts");
+/* harmony import */ var _members_member_card_member_card_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./members/member-card/member-card.component */ "./src/app/members/member-card/member-card.component.ts");
+/* harmony import */ var _members_profile_page_profile_page_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./members/profile-page/profile-page.component */ "./src/app/members/profile-page/profile-page.component.ts");
+/* harmony import */ var _resolvers_profile_page_resolver__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./_resolvers/profile-page.resolver */ "./src/app/_resolvers/profile-page.resolver.ts");
+/* harmony import */ var _resolvers_member_list_resolver__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./_resolvers/member-list.resolver */ "./src/app/_resolvers/member-list.resolver.ts");
+/* harmony import */ var _members_profile_edit_profile_edit_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./members/profile-edit/profile-edit.component */ "./src/app/members/profile-edit/profile-edit.component.ts");
+/* harmony import */ var _resolvers_profile_edit_resolver__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./_resolvers/profile-edit.resolver */ "./src/app/_resolvers/profile-edit.resolver.ts");
+/* harmony import */ var _guards_prevent_unsaved_changes_guard__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./_guards/prevent-unsaved-changes.guard */ "./src/app/_guards/prevent-unsaved-changes.guard.ts");
+/* harmony import */ var _members_photo_editor_photo_editor_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./members/photo-editor/photo-editor.component */ "./src/app/members/photo-editor/photo-editor.component.ts");
+/* harmony import */ var _auto_generated_auto_generated_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./auto-generated/auto-generated.component */ "./src/app/auto-generated/auto-generated.component.ts");
+/* harmony import */ var _follower_list_follower_list_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./follower-list/follower-list.component */ "./src/app/follower-list/follower-list.component.ts");
+/* harmony import */ var _resolvers_followers_resolver__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./_resolvers/followers.resolver */ "./src/app/_resolvers/followers.resolver.ts");
+/* harmony import */ var _resolvers_messages_resolver__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./_resolvers/messages.resolver */ "./src/app/_resolvers/messages.resolver.ts");
+/* harmony import */ var _members_member_messages_member_messages_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./members/member-messages/member-messages.component */ "./src/app/members/member-messages/member-messages.component.ts");
+/* harmony import */ var _members_member_map_member_map_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./members/member-map/member-map.component */ "./src/app/members/member-map/member-map.component.ts");
+/* harmony import */ var _newsFeed_components_newsfeed_card_newsfeed_card_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./newsFeed-components/newsfeed-card/newsfeed-card.component */ "./src/app/newsFeed-components/newsfeed-card/newsfeed-card.component.ts");
+/* harmony import */ var _members_video_editor_video_editor_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./members/video-editor/video-editor.component */ "./src/app/members/video-editor/video-editor.component.ts");
+/* harmony import */ var _pipes_embedVideo_embedVideo_pipe__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./_pipes/embedVideo/embedVideo.pipe */ "./src/app/_pipes/embedVideo/embedVideo.pipe.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1065,26 +1070,26 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_12__["AppComponent"],
-                _nav_nav_component__WEBPACK_IMPORTED_MODULE_13__["NavComponent"],
-                _home_home_component__WEBPACK_IMPORTED_MODULE_15__["HomeComponent"],
-                _register_register_component__WEBPACK_IMPORTED_MODULE_16__["RegisterComponent"],
-                _members_lists_lists_component__WEBPACK_IMPORTED_MODULE_19__["ListsComponent"],
-                _messages_messages_component__WEBPACK_IMPORTED_MODULE_20__["MessagesComponent"],
-                _analytics_analytics_component__WEBPACK_IMPORTED_MODULE_21__["AnalyticsComponent"],
-                _newsFeed_components_newsfeed_newsfeed_component__WEBPACK_IMPORTED_MODULE_22__["NewsfeedComponent"],
-                _newsFeed_components_newsfeed_card_newsfeed_card_component__WEBPACK_IMPORTED_MODULE_39__["NewsfeedCardComponent"],
-                _members_member_card_member_card_component__WEBPACK_IMPORTED_MODULE_25__["MemberCardComponent"],
-                _members_profile_page_profile_page_component__WEBPACK_IMPORTED_MODULE_26__["ProfilePageComponent"],
-                _members_profile_edit_profile_edit_component__WEBPACK_IMPORTED_MODULE_29__["ProfileEditComponent"],
-                _members_photo_editor_photo_editor_component__WEBPACK_IMPORTED_MODULE_32__["PhotoEditorComponent"],
-                _auto_generated_auto_generated_component__WEBPACK_IMPORTED_MODULE_33__["AutoGeneratedComponent"],
-                _members_member_messages_member_messages_component__WEBPACK_IMPORTED_MODULE_37__["MemberMessagesComponent"],
+                _app_component__WEBPACK_IMPORTED_MODULE_13__["AppComponent"],
+                _nav_nav_component__WEBPACK_IMPORTED_MODULE_14__["NavComponent"],
+                _home_home_component__WEBPACK_IMPORTED_MODULE_16__["HomeComponent"],
+                _register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"],
+                _members_lists_lists_component__WEBPACK_IMPORTED_MODULE_20__["ListsComponent"],
+                _messages_messages_component__WEBPACK_IMPORTED_MODULE_21__["MessagesComponent"],
+                _analytics_analytics_component__WEBPACK_IMPORTED_MODULE_22__["AnalyticsComponent"],
+                _newsFeed_components_newsfeed_newsfeed_component__WEBPACK_IMPORTED_MODULE_23__["NewsfeedComponent"],
+                _newsFeed_components_newsfeed_card_newsfeed_card_component__WEBPACK_IMPORTED_MODULE_40__["NewsfeedCardComponent"],
+                _members_member_card_member_card_component__WEBPACK_IMPORTED_MODULE_26__["MemberCardComponent"],
+                _members_profile_page_profile_page_component__WEBPACK_IMPORTED_MODULE_27__["ProfilePageComponent"],
+                _members_profile_edit_profile_edit_component__WEBPACK_IMPORTED_MODULE_30__["ProfileEditComponent"],
+                _members_photo_editor_photo_editor_component__WEBPACK_IMPORTED_MODULE_33__["PhotoEditorComponent"],
+                _auto_generated_auto_generated_component__WEBPACK_IMPORTED_MODULE_34__["AutoGeneratedComponent"],
+                _members_member_messages_member_messages_component__WEBPACK_IMPORTED_MODULE_38__["MemberMessagesComponent"],
                 time_ago_pipe__WEBPACK_IMPORTED_MODULE_10__["TimeAgoPipe"],
-                _follower_list_follower_list_component__WEBPACK_IMPORTED_MODULE_34__["FollowerListComponent"],
-                _members_member_map_member_map_component__WEBPACK_IMPORTED_MODULE_38__["MemberMapComponent"],
-                _members_video_editor_video_editor_component__WEBPACK_IMPORTED_MODULE_40__["VideoEditorComponent"],
-                _pipes_embedVideo_embedVideo_pipe__WEBPACK_IMPORTED_MODULE_41__["EmbedVideoPipe"]
+                _follower_list_follower_list_component__WEBPACK_IMPORTED_MODULE_35__["FollowerListComponent"],
+                _members_member_map_member_map_component__WEBPACK_IMPORTED_MODULE_39__["MemberMapComponent"],
+                _members_video_editor_video_editor_component__WEBPACK_IMPORTED_MODULE_41__["VideoEditorComponent"],
+                _pipes_embedVideo_embedVideo_pipe__WEBPACK_IMPORTED_MODULE_42__["EmbedVideoPipe"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -1093,7 +1098,7 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["TabsModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["BsDropdownModule"].forRoot(),
-                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot(_routes__WEBPACK_IMPORTED_MODULE_11__["appRoutes"]),
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot(_routes__WEBPACK_IMPORTED_MODULE_12__["appRoutes"]),
                 _agm_core__WEBPACK_IMPORTED_MODULE_6__["AgmCoreModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["ProgressbarModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["BsDatepickerModule"].forRoot(),
@@ -1101,6 +1106,7 @@ var AppModule = /** @class */ (function () {
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["ButtonsModule"].forRoot(),
                 ngx_gallery__WEBPACK_IMPORTED_MODULE_8__["NgxGalleryModule"],
                 ng2_file_upload__WEBPACK_IMPORTED_MODULE_9__["FileUploadModule"],
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NgbModule"],
                 _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_5__["JwtModule"].forRoot({
                     config: {
                         tokenGetter: tokenGetter,
@@ -1110,19 +1116,19 @@ var AppModule = /** @class */ (function () {
                 })
             ],
             providers: [
-                _services_auth_service__WEBPACK_IMPORTED_MODULE_14__["AuthService"],
-                _services_error_interceptor__WEBPACK_IMPORTED_MODULE_17__["ErrorInterceptorProvider"],
-                _services_alertify_service__WEBPACK_IMPORTED_MODULE_18__["AlertifyService"],
-                _guards_auth_guard__WEBPACK_IMPORTED_MODULE_23__["AuthGuard"],
-                _guards_prevent_unsaved_changes_guard__WEBPACK_IMPORTED_MODULE_31__["PreventUnsavedChanges"],
-                _services_user_service__WEBPACK_IMPORTED_MODULE_24__["UserService"],
-                _resolvers_profile_page_resolver__WEBPACK_IMPORTED_MODULE_27__["ProfilePageResolver"],
-                _resolvers_member_list_resolver__WEBPACK_IMPORTED_MODULE_28__["MemberListResolver"],
-                _resolvers_profile_edit_resolver__WEBPACK_IMPORTED_MODULE_30__["ProfileEditResolver"],
-                _resolvers_followers_resolver__WEBPACK_IMPORTED_MODULE_35__["FollowerResolver"],
-                _resolvers_messages_resolver__WEBPACK_IMPORTED_MODULE_36__["MessagesResolver"]
+                _services_auth_service__WEBPACK_IMPORTED_MODULE_15__["AuthService"],
+                _services_error_interceptor__WEBPACK_IMPORTED_MODULE_18__["ErrorInterceptorProvider"],
+                _services_alertify_service__WEBPACK_IMPORTED_MODULE_19__["AlertifyService"],
+                _guards_auth_guard__WEBPACK_IMPORTED_MODULE_24__["AuthGuard"],
+                _guards_prevent_unsaved_changes_guard__WEBPACK_IMPORTED_MODULE_32__["PreventUnsavedChanges"],
+                _services_user_service__WEBPACK_IMPORTED_MODULE_25__["UserService"],
+                _resolvers_profile_page_resolver__WEBPACK_IMPORTED_MODULE_28__["ProfilePageResolver"],
+                _resolvers_member_list_resolver__WEBPACK_IMPORTED_MODULE_29__["MemberListResolver"],
+                _resolvers_profile_edit_resolver__WEBPACK_IMPORTED_MODULE_31__["ProfileEditResolver"],
+                _resolvers_followers_resolver__WEBPACK_IMPORTED_MODULE_36__["FollowerResolver"],
+                _resolvers_messages_resolver__WEBPACK_IMPORTED_MODULE_37__["MessagesResolver"]
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_12__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_13__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -1814,7 +1820,7 @@ module.exports = "img.img-thumbnail {\r\n  height: 200px;\r\n  min-width: 200px 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-sm-12\">\n    <div *ngFor=\"let photo of photos\">\n      <img src=\"{{photo.mediaUrl}}\" alt=\"{{photo.description}}\" class=\"img-thumbnail rounded\">\n      <div class=\"btn-group\">\n          <button type=\"button\" class=\"btn btn-sm mr-1\" (click)=\"setProfilePhoto(photo)\" [ngClass]=\"photo.isProfilePhoto ? 'btn-success active' : 'btn-secondary'\"\n          [disabled]=\"photo.isProfilePhoto\">set\n          as Main</button>\n        <button type=\"button\" class=\"btn btn-sm btn-danger\" (click)=\"deletePhoto(photo.id)\" [disabled]=\"photo.isProfilePhoto\"><i\n            class=\"fa fa-trash animate\"></i></button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div class=\"row mt-3\">\n  <div class=\"col-md-3\">\n    <h3>Add Photos</h3>\n    <div ng2FileDrop [ngClass]=\"{'nv-file-over': hasBaseDropZoneOver}\" (fileOver)=\"fileOverBase($event)\" [uploader]=\"uploader\"\n      class=\"card bg-faded p-3 text-center mb-3 my-drop-zone\">\n      <i class=\"fa fa-upload fa-3x\"></i>\n      Drop Photos Here\n    </div>\n    <div class=\"input-group-inline justify-content-right\">\n      <div class=\"input-group-text\">\n        Multiple\n      </div>\n      <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" multiple /><br />\n    </div>\n    <br>\n    <div class=\"input-group-inline justify-content-right\">\n      <div class=\"input-group-text\">\n        Single\n      </div>\n      <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" /><br />\n    </div>\n  </div>\n\n  <div class=\"col-md-9\" style=\"margin-bottom: 40px\" *ngIf=\"uploader?.queue?.length\">\n    <h3>Upload queue</h3>\n    <p>Queue length: {{ uploader?.queue?.length }}</p>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th width=\"50%\">Name</th>\n          <th>Size</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of uploader.queue\">\n          <td><strong>{{ item?.file?.name }}</strong></td>\n          <td *ngIf=\"uploader.options.isHTML5\" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>\n\n        </tr>\n      </tbody>\n    </table>\n\n    <div>\n      <div>\n        Queue progress:\n        <div class=\"progress mb-4\">\n          <div class=\"progress-bar\" role=\"progressbar\" [ngStyle]=\"{ 'width': uploader.progress + '%' }\"></div>\n        </div>\n      </div>\n      <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\n        <span class=\"fa fa-upload\"></span> Upload\n      </button>\n      <button type=\"button\" class=\"btn btn-warning btn-s\" (click)=\"uploader.cancelAll()\" [disabled]=\"!uploader.isUploading\">\n        <span class=\"fa fa-ban\"></span> Cancel\n      </button>\n      <button type=\"button\" class=\"btn btn-danger btn-s\" (click)=\"uploader.clearQueue()\" [disabled]=\"!uploader.queue.length\">\n        <span class=\"fa fa-trash\"></span> Remove\n      </button>\n    </div>\n  </div>\n</div>"
+module.exports = "<ngb-accordion activeIds=\"ngb-panel-1\">\n  <ngb-panel>\n    <ng-template ngbPanelTitle>\n      <i class=\"fas fa-camera\"></i> Add new Photos\n    </ng-template>\n    <ng-template ngbPanelContent>\n      <div class=\"row mt-3\">\n        <div class=\"col-md-3\">\n          <h3>Add Photos</h3>\n          <div ng2FileDrop [ngClass]=\"{'nv-file-over': hasBaseDropZoneOver}\" (fileOver)=\"fileOverBase($event)\"\n            [uploader]=\"uploader\" class=\"card bg-faded p-3 text-center mb-3 my-drop-zone\">\n            <i class=\"fa fa-upload fa-3x\"></i>\n            Drop Photos Here\n          </div>\n          <div class=\"input-group-inline justify-content-right\">\n            <div class=\"input-group-text\">\n              Multiple\n            </div>\n            <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" multiple /><br />\n          </div>\n          <br>\n          <div class=\"input-group-inline justify-content-right\">\n            <div class=\"input-group-text\">\n              Single\n            </div>\n            <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" /><br />\n          </div>\n        </div>\n\n        <div class=\"col-md-9\" style=\"margin-bottom: 40px\" *ngIf=\"uploader?.queue?.length\">\n          <h3>Upload queue</h3>\n          <p>Queue length: {{ uploader?.queue?.length }}</p>\n          <table class=\"table\">\n            <thead>\n              <tr>\n                <th width=\"50%\">Name</th>\n                <th>Size</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let item of uploader.queue\">\n                <td><strong>{{ item?.file?.name }}</strong></td>\n                <td *ngIf=\"uploader.options.isHTML5\" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>\n\n              </tr>\n            </tbody>\n          </table>\n\n          <div>\n            <div>\n              Queue progress:\n              <div class=\"progress mb-4\">\n                <div class=\"progress-bar\" role=\"progressbar\" [ngStyle]=\"{ 'width': uploader.progress + '%' }\"></div>\n              </div>\n            </div>\n            <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\n              <span class=\"fa fa-upload\"></span> Upload\n            </button>\n            <button type=\"button\" class=\"btn btn-warning btn-s\" (click)=\"uploader.cancelAll()\" [disabled]=\"!uploader.isUploading\">\n              <span class=\"fa fa-ban\"></span> Cancel\n            </button>\n            <button type=\"button\" class=\"btn btn-danger btn-s\" (click)=\"uploader.clearQueue()\" [disabled]=\"!uploader.queue.length\">\n              <span class=\"fa fa-trash\"></span> Remove\n            </button>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </ngb-panel>\n  <ngb-panel>\n    <ng-template ngbPanelTitle>\n      <i class=\"fas fa-images\"></i> All Photos\n    </ng-template>\n    <ng-template ngbPanelContent>\n      <div class=\"row\">\n        <div class=\"col-sm-4\" *ngFor=\"let photo of photos\">\n          <div class=\"card\">\n            <div class=\"card-image-wrapper\">\n              <img src=\"{{photo.mediaUrl}}\" alt=\"{{photo.description}}\" class=\"img-thumbnail w-100 rounded\">\n            </div>\n            <div class=\"btn-group\">\n              <button type=\"button\" class=\"btn btn-sm mr-1 w-50\" (click)=\"setProfilePhoto(photo)\" [ngClass]=\"photo.isProfilePhoto ? 'btn-success active' : 'btn-secondary'\"\n                [disabled]=\"photo.isProfilePhoto\">set\n                as Main</button>\n              <button type=\"button\" class=\"btn btn-sm btn-danger w-50\" (click)=\"deletePhoto(photo.id)\" [disabled]=\"photo.isProfilePhoto\"><i\n                  class=\"fa fa-trash animate\"></i></button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </ngb-panel>\n</ngb-accordion>"
 
 /***/ }),
 
@@ -2238,7 +2244,7 @@ module.exports = ".nv-file-over {\r\n    border: dotted 3px #158CBA;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col\" *ngFor=\"let video of videos\">\n        <iframe width=\"315\" height=\"250\" [src]=\"video.mediaUrl | embedVideo\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>\n    </div>\n  </div>\n  <div class=\"row mt-3\">\n    <form [formGroup]=\"videoForm\" (ngSubmit)=\"uploadVideo()\">\n      <div class=\"input-group mb-3\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\" id=\"basic-addon1\">Video Url</span>\n        </div>\n        <input type=\"text\" class=\"form-control\" placeholder=\"Video Url\" formControlName=\"mediaUrl\">\n      </div>\n      <div class=\"input-group\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\">Description</span>\n        </div>\n        <textarea class=\"form-control\" formControlName=\"description\"></textarea>\n      </div>\n      <br>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!videoForm.valid\">Add Video</button>\n      <button class=\"btn btn-danger ml-2\" type=\"reset\">Cancel</button><br>\n      <small>*Upload Video from Url</small><br><br>\n\n      <!-- <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" multiple />\n      <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" /><br>\n      <small>*Upload Video from Computer</small> -->\n      \n    </form>\n  </div>\n</div>\n\n<div class=\"col-md-9\" style=\"margin-bottom: 40px\" *ngIf=\"uploader?.queue?.length\">\n  <h3>Upload queue</h3>\n  <p>Queue length: {{ uploader?.queue?.length }}</p>\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th width=\"50%\">Name</th>\n        <th>Size</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let item of uploader.queue\">\n        <td><strong>{{ item?.file?.name }}</strong></td>\n        <td *ngIf=\"uploader.options.isHTML5\" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB </td>\n\n      </tr>\n    </tbody>\n  </table>\n  <div>\n    <div>\n      Queue progress:\n      <div class=\"progress mb-4\">\n        <div class=\"progress-bar\" role=\"progressbar\" [ngStyle]=\"{ 'width': uploader.progress + '%' }\"></div>\n      </div>\n    </div>\n    <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\n      <span class=\"fa fa-upload\"></span> Upload\n    </button>\n    <button type=\"button\" class=\"btn btn-warning btn-s\" (click)=\"uploader.cancelAll()\" [disabled]=\"!uploader.isUploading\">\n      <span class=\"fa fa-ban\"></span> Cancel\n    </button>\n    <button type=\"button\" class=\"btn btn-danger btn-s\" (click)=\"uploader.clearQueue()\" [disabled]=\"!uploader.queue.length\">\n      <span class=\"fa fa-trash\"></span> Remove\n    </button>\n  </div>\n</div>"
+module.exports = "<div class=\"container-fluid\">\n  <ngb-accordion activeIds=\"ngb-panel-0\">\n    <ngb-panel>\n      <ng-template ngbPanelTitle>\n        <i class=\"fas fa-video\"></i> Add New Video\n      </ng-template>\n      <ng-template ngbPanelContent>\n        <div class=\"row-12 mt-3\">\n          <form [formGroup]=\"videoForm\" (ngSubmit)=\"uploadVideo()\">\n            <div class=\"input-group mb-3\">\n              <div class=\"input-group-prepend\">\n                <span class=\"input-group-text\" id=\"basic-addon1\">Video Url</span>\n              </div>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Video Url\" formControlName=\"mediaUrl\">\n            </div>\n            <div class=\"input-group\">\n              <div class=\"input-group-prepend\">\n                <span class=\"input-group-text\">Description</span>\n              </div>\n              <textarea class=\"form-control\" formControlName=\"description\"></textarea>\n            </div>\n            <br>\n            <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!videoForm.valid\">Add Video</button>\n            <button class=\"btn btn-danger ml-2\" type=\"reset\">Cancel</button><br>\n            <small>*Upload Video from Url</small><br><br>\n          </form>\n        </div>\n      </ng-template>\n    </ngb-panel>\n\n    <ngb-panel>\n      <ng-template ngbPanelTitle>\n        <i class=\"fas fa-images\"></i> All Videos\n      </ng-template>\n      <ng-template ngbPanelContent>\n        <div class=\"row\" id=\"collapseExample\">\n          <div class=\"col\" *ngFor=\"let video of videos\">\n            <div class=\"card text-center mt-2\">\n              <div class=\"card-image-wrapper\">\n                <iframe width=\"300\" height=\"250\" [src]=\"video.mediaUrl | embedVideo\" frameborder=\"0\" allow=\"autoplay; encrypted-media\"\n                  allowfullscreen></iframe>\n              </div>\n              <div class=\"card-content\">\n                <b>{{video.description}}</b><br>\n                {{video.dateAdded | timeAgo}}\n              </div>\n              <button type=\"button\" class=\"btn btn-sm btn-danger w-100\" (click)=\"deleteVideo(video.id)\"><i class=\"fa fa-trash animate\"></i></button>\n            </div>\n          </div>\n        </div>\n      </ng-template>\n    </ngb-panel>\n  </ngb-accordion>\n</div>"
 
 /***/ }),
 
@@ -2296,6 +2302,7 @@ var VideoEditorComponent = /** @class */ (function () {
         var _this = this;
         if (this.videoForm.valid) {
             var video = Object.assign({}, this.videoForm.value);
+            video.dateAdded = new Date();
             this.videos.push(video);
             this.userService
                 .uploadVideo(this.authService.decodedToken.nameid, video)
@@ -2306,6 +2313,17 @@ var VideoEditorComponent = /** @class */ (function () {
             });
             this.videoForm.reset();
         }
+    };
+    VideoEditorComponent.prototype.deleteVideo = function (videoId) {
+        var _this = this;
+        this.alertify.confirm('Are you sure to delete this video ?', function () {
+            _this.userService.deleteVideo(_this.authService.decodedToken.nameid, videoId).subscribe(function () {
+                _this.videos.splice(_this.videos.findIndex(function (v) { return v.id === videoId; }), 1);
+                _this.alertify.success('Video has been deleted successfully');
+            }, function (error) {
+                _this.alertify.error('Failed to delete the video');
+            });
+        });
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('videoForm'),
