@@ -1,21 +1,36 @@
-<div class="container">
-  <form class="form-signin">
-    <div *ngIf="!registerMode" class="text-center mb-4">
-      <h1 class="h3 mb-3 font-weight-bold">Welcome to Muzyk</h1>
-      <p class="h5 mb-4 font-weight-bold">A Place where artists meets the world</p>
-  
-      <button type="button" class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
-      <button type="button" class="btn btn-secondary btn-lg">Learn more</button>
-
-    </div>
-  </form>
-  <div *ngIf="registerMode" class="container">
-    <div class="row justify-content-center">
-      <div class="col4">
-        <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+<div class="container w-50">
+  <div class="card text-center" *ngIf="!registerMode">
+    <div class="card-body">
+      <div class="card-title text-center text-primary">
+        <h1 class="h3 mb-3 font-weight-bold">Welcome to Muzyk</h1>
       </div>
+      <div class="card-subtitle text-muted">
+        <p class="h5 mb-4 font-weight-bold">A Place where artists meets the world</p>
+      </div>
+      <div class="card-text">
+        <form *ngIf="!loggedIn()" #loginForm="ngForm" class="m-2 my-2 my-lg-0" (ngSubmit)="login()">
+          <input class="form-control mr-sm-2" type="text" name="username" placeholder="Username" required [(ngModel)]="model.Username"><br>
+          <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" required
+            [(ngModel)]="model.Password">
+
+          <br>
+          <div class="btn-group w-100">
+            <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0 w-50" type="submit">Login</button>
+            <button type="button" class="btn btn-primary w-50" (click)="registerToggle()">New User ? Register here</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="">Forget password ?</a>
     </div>
   </div>
 </div>
 
-
+<div *ngIf="registerMode" class="container">
+  <div class="row justify-content-center">
+    <div class="col4">
+      <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+    </div>
+  </div>
+</div>

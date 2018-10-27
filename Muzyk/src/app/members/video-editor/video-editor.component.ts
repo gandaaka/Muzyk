@@ -48,7 +48,7 @@ export class VideoEditorComponent implements OnInit {
   uploadVideo() {
     if (this.videoForm.valid) {
       const video: Video = Object.assign({}, this.videoForm.value);
-      video.dateAdded = new Date();
+      // video.dateAdded = new Date();
       this.videos.push(video);
       this.userService
         .uploadVideo(this.authService.decodedToken.nameid, video)
