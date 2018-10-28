@@ -5,6 +5,7 @@
         <img src="{{photo.mediaUrl}}" class="w-50" alt="user.firstName">
       </div>
       <div class="card-footer">
+        <img src="{{user.photoUrl}}" alt="{{user.firstName}}" class="img-thumbnail">
         {{user.firstName | titlecase}} <span class="text-muted">- posted {{photo.dateAdded | timeAgo}}</span>
       </div>
     </div>

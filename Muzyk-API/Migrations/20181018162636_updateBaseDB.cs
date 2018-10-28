@@ -4,35 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Muzyk.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class updateBaseDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Ratings",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false),
-                    Genre = table.Column<string>(nullable: false),
-                    UserRating = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ratings", x => new { x.UserId, x.Genre });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Recommendations",
-                columns: table => new
-                {
-                    RId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Recommendations", x => new { x.RId, x.UserId });
-                });
-
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -55,47 +30,24 @@ namespace Muzyk.Migrations
                     Introduction = table.Column<string>(nullable: true),
                     Interests = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
-                    Country = table.Column<string>(nullable: true),
-                    RId = table.Column<int>(nullable: false),
-                    RecommendationRId = table.Column<int>(nullable: true),
-                    RecommendationUserId = table.Column<int>(nullable: true)
+                    Country = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Recommendations_RecommendationRId_RecommendationUserId",
-                        columns: x => new { x.RecommendationRId, x.RecommendationUserId },
-                        principalTable: "Recommendations",
-                        principalColumns: new[] { "RId", "UserId" },
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookings",
+                name: "Values",
                 columns: table => new
                 {
-                    BookerId = table.Column<int>(nullable: false),
-                    BookeeId = table.Column<int>(nullable: false),
-                    BookingDate = table.Column<DateTime>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Desc = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookings", x => new { x.BookerId, x.BookeeId, x.BookingDate });
-                    table.ForeignKey(
-                        name: "FK_Bookings_Users_BookeeId",
-                        column: x => x.BookeeId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Bookings_Users_BookerId",
-                        column: x => x.BookerId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Values", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,14 +112,13 @@ namespace Muzyk.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MediaUrl = table.Column<string>(nullable: true),
-                    MediaType = table.Column<string>(nullable: true),
+                    PhotoUrl = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     DateAdded = table.Column<DateTime>(nullable: false),
-                    PublicId = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
                     isProfilePhoto = table.Column<bool>(nullable: false),
-                    isCoverPhoto = table.Column<bool>(nullable: false)
+                    isCoverPhoto = table.Column<bool>(nullable: false),
+                    PublicId = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -186,8 +137,7 @@ namespace Muzyk.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MediaUrl = table.Column<string>(nullable: true),
-                    MediaType = table.Column<string>(nullable: true),
+                    VideoUrl = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     PublicId = table.Column<string>(nullable: true),
@@ -203,11 +153,6 @@ namespace Muzyk.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bookings_BookeeId",
-                table: "Bookings",
-                column: "BookeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Follows_FolloweeId",
@@ -230,11 +175,6 @@ namespace Muzyk.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_RecommendationRId_RecommendationUserId",
-                table: "Users",
-                columns: new[] { "RecommendationRId", "RecommendationUserId" });
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Videos_UserId",
                 table: "Videos",
                 column: "UserId");
@@ -242,9 +182,6 @@ namespace Muzyk.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Bookings");
-
             migrationBuilder.DropTable(
                 name: "Follows");
 
@@ -255,16 +192,13 @@ namespace Muzyk.Migrations
                 name: "Photos");
 
             migrationBuilder.DropTable(
-                name: "Ratings");
+                name: "Values");
 
             migrationBuilder.DropTable(
                 name: "Videos");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Recommendations");
         }
     }
 }

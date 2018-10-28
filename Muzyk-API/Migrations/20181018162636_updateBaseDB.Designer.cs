@@ -10,8 +10,8 @@ using Muzyk_API.Data;
 namespace Muzyk.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181028172810_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20181018162636_updateBaseDB")]
+    partial class updateBaseDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,25 +20,6 @@ namespace Muzyk.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Muzyk_API.Models.Booking", b =>
-                {
-                    b.Property<int>("BookerId");
-
-                    b.Property<int>("BookeeId");
-
-                    b.Property<DateTime>("BookingDate");
-
-                    b.Property<string>("Desc");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("BookerId", "BookeeId", "BookingDate");
-
-                    b.HasIndex("BookeeId");
-
-                    b.ToTable("Bookings");
-                });
 
             modelBuilder.Entity("Muzyk_API.Models.Follow", b =>
                 {
@@ -94,9 +75,7 @@ namespace Muzyk.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("MediaType");
-
-                    b.Property<string>("MediaUrl");
+                    b.Property<string>("PhotoUrl");
 
                     b.Property<string>("PublicId");
 
@@ -111,30 +90,6 @@ namespace Muzyk.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Photos");
-                });
-
-            modelBuilder.Entity("Muzyk_API.Models.Rating", b =>
-                {
-                    b.Property<int>("UserId");
-
-                    b.Property<string>("Genre");
-
-                    b.Property<bool>("UserRating");
-
-                    b.HasKey("UserId", "Genre");
-
-                    b.ToTable("Ratings");
-                });
-
-            modelBuilder.Entity("Muzyk_API.Models.Recommendation", b =>
-                {
-                    b.Property<int>("RId");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("RId", "UserId");
-
-                    b.ToTable("Recommendations");
                 });
 
             modelBuilder.Entity("Muzyk_API.Models.User", b =>
@@ -169,12 +124,6 @@ namespace Muzyk.Migrations
 
                     b.Property<byte[]>("PasswordSalt");
 
-                    b.Property<int>("RId");
-
-                    b.Property<int?>("RecommendationRId");
-
-                    b.Property<int?>("RecommendationUserId");
-
                     b.Property<string>("UserType");
 
                     b.Property<string>("Username");
@@ -185,9 +134,20 @@ namespace Muzyk.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecommendationRId", "RecommendationUserId");
-
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Muzyk_API.Models.Value", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Values");
                 });
 
             modelBuilder.Entity("Muzyk_API.Models.Video", b =>
@@ -200,32 +160,17 @@ namespace Muzyk.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("MediaType");
-
-                    b.Property<string>("MediaUrl");
-
                     b.Property<string>("PublicId");
 
                     b.Property<int>("UserId");
+
+                    b.Property<string>("VideoUrl");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Videos");
-                });
-
-            modelBuilder.Entity("Muzyk_API.Models.Booking", b =>
-                {
-                    b.HasOne("Muzyk_API.Models.User", "Bookee")
-                        .WithMany("Bookers")
-                        .HasForeignKey("BookeeId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Muzyk_API.Models.User", "Booker")
-                        .WithMany("Bookees")
-                        .HasForeignKey("BookerId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Muzyk_API.Models.Follow", b =>
@@ -260,13 +205,6 @@ namespace Muzyk.Migrations
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Muzyk_API.Models.User", b =>
-                {
-                    b.HasOne("Muzyk_API.Models.Recommendation")
-                        .WithMany("RecommendedUsers")
-                        .HasForeignKey("RecommendationRId", "RecommendationUserId");
                 });
 
             modelBuilder.Entity("Muzyk_API.Models.Video", b =>

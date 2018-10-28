@@ -5,7 +5,6 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { tap } from 'rxjs/operators';
 import * as signalR from '@aspnet/signalr';
-import { environment } from 'src/environments/environment';
 import { MessageService } from 'src/app/_services/message.service';
 
 @Component({

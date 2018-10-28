@@ -6,6 +6,7 @@
           allowfullscreen></iframe>
       </div>
       <div class="card-footer">
+        <img src="{{user.photoUrl}}" alt="{{user.firstName}}" class="img-thumbnail">
         {{user.firstName | titlecase}} <span class="text-muted">- posted {{video.dateAdded | timeAgo}}</span>
         <br>
         <span class="text-muted">{{video.description}}</span>
