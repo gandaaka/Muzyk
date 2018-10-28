@@ -1,0 +1,16 @@
+<div class="container">
+  <div *ngFor="let video of videos">
+    <div class="card">
+      <div class="card-img-top text-center">
+        <iframe width="100%" height="350" [src]="video.mediaUrl | embedVideo" frameborder="0" allow="autoplay; encrypted-media"
+          allowfullscreen></iframe>
+      </div>
+      <div class="card-footer">
+        {{user.firstName | titlecase}} <span class="text-muted">- posted {{video.dateAdded | timeAgo}}</span>
+        <br>
+        <span class="text-muted">{{video.description}}</span>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>

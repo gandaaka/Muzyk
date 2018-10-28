@@ -26,7 +26,9 @@ export class NewsfeedComponent implements OnInit {
       this.users = data['user'].result;
       this.pagination = data['user'].pagination;
     });
-    this.followsParam = 'Followees';
+    this.followsParam = 'Followers';
+    this.loadUsers();
+    console.log(this.users);
   }
 
   loadUsers() {

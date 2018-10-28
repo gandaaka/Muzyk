@@ -3,7 +3,6 @@
 
     <!--Share your mood card start-->
     <div class="card mb-3 mt-2">
-      <div class="card-title"></div>
       <div class="card-body p-1">
         <div class="form-group">
           <textarea class="w-100" type="text" rows="3" placeholder="Share your mood"></textarea>
@@ -25,13 +24,16 @@
       <div *ngIf="users == null">
         Please add some more Followers
       </div>
-      <div *ngIf="users != null">
-        <div class="container" *ngFor="let user of users">
-          <div *ngIf="user.photos != null">
-            <app-newsfeed-card [user]="user"></app-newsfeed-card>
-          </div>
+
+      <div *ngFor="let user of users">
+        <div *ngIf="user.photos != null">
+          <app-newsfeed-card [user]="user" [photos]="user.photos"></app-newsfeed-card>
+        </div>
+        <div *ngIf="user.videos != null">
+          <app-newsfeed-video-card [user]="user" [videos]="user.videos"></app-newsfeed-video-card>
         </div>
       </div>
+
       <div class="d-flex justify-content-center">
         <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
           [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"

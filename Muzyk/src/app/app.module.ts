@@ -60,6 +60,7 @@ import { MessageService } from './_services/message.service';
 import { MemberForgetPasswordComponent } from './members/member-forget-password/member-forget-password.component';
 import { MemberChangePasswordComponent } from './members/member-change-password/member-change-password.component';
 import { MemberSettingsComponent } from './members/member-settings/member-settings.component';
+import { NewsfeedVideoCardComponent } from './newsFeed-components/newsfeed-video-card/newsfeed-video-card.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -91,7 +92,8 @@ export function tokenGetter() {
     MemberBookingComponent,
     MemberForgetPasswordComponent,
     MemberChangePasswordComponent,
-    MemberSettingsComponent
+    MemberSettingsComponent,
+    NewsfeedVideoCardComponent
   ],
   imports: [
     BrowserModule,

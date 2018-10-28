@@ -1,8 +1,7 @@
 using System.Linq;
 using AutoMapper;
-using Muzyk_DTOS;
 using Muzyk_API.Models;
-using Muzyk_DTOS.DTOS;
+using Muzyk_API.DTOS;
 
 namespace Muzyk_API.Helpers
 {

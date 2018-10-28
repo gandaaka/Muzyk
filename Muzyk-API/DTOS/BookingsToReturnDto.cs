@@ -1,14 +1,13 @@
 using System;
-using Muzyk_API.DTOS;
 
-namespace Muzyk_API.Models
+namespace Muzyk_API.DTOS
 {
-    public class Booking
+    public class BookingsToReturnDto
     {
         public int BookerId { get; set; }
         public int BookeeId { get; set; }
-        public User Booker { get; set; }
-        public User Bookee { get; set; }
+        public UserForListDto Booker { get; set; }
+        public UserForListDto Bookee { get; set; } 
         public DateTime BookingDate { get; set; }
         public string Title { get; set; }
         public string Desc { get; set; }

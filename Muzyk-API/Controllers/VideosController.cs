@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Muzyk_API.Data;
-using Muzyk_DTOS;
+using Muzyk_API.DTOS;
 using Muzyk_API.Helpers;
 using Muzyk_API.Models;
 
