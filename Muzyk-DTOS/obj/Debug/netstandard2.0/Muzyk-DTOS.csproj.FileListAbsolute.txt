@@ -1,9 +1,0 @@
-C:\Users\Anku\Documents\Projects\Muzyk-DTOS\bin\Debug\netstandard2.0\Muzyk-DTOS.deps.json
-C:\Users\Anku\Documents\Projects\Muzyk-DTOS\bin\Debug\netstandard2.0\Muzyk-DTOS.dll
-C:\Users\Anku\Documents\Projects\Muzyk-DTOS\bin\Debug\netstandard2.0\Muzyk-DTOS.pdb
-C:\Users\Anku\Documents\Projects\Muzyk-DTOS\obj\Debug\netstandard2.0\Muzyk-DTOS.csprojAssemblyReference.cache
-C:\Users\Anku\Documents\Projects\Muzyk-DTOS\obj\Debug\netstandard2.0\Muzyk-DTOS.csproj.CoreCompileInputs.cache
-C:\Users\Anku\Documents\Projects\Muzyk-DTOS\obj\Debug\netstandard2.0\Muzyk-DTOS.AssemblyInfoInputs.cache
-C:\Users\Anku\Documents\Projects\Muzyk-DTOS\obj\Debug\netstandard2.0\Muzyk-DTOS.AssemblyInfo.cs
-C:\Users\Anku\Documents\Projects\Muzyk-DTOS\obj\Debug\netstandard2.0\Muzyk-DTOS.dll
-C:\Users\Anku\Documents\Projects\Muzyk-DTOS\obj\Debug\netstandard2.0\Muzyk-DTOS.pdb
