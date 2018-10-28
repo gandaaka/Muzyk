@@ -7,6 +7,7 @@ import { Video } from 'src/app/_models/video';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/_services/user.service';
+import { MediaService } from 'src/app/_services/media.service';
 
 @Component({
   selector: 'app-video-editor',
@@ -30,6 +31,7 @@ export class VideoEditorComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private alertify: AlertifyService,
+    private mediaService: MediaService,
     private builder: FormBuilder
   ) {}
 
@@ -50,7 +52,7 @@ export class VideoEditorComponent implements OnInit {
       const video: Video = Object.assign({}, this.videoForm.value);
       // video.dateAdded = new Date();
       this.videos.push(video);
-      this.userService
+      this.mediaService
         .uploadVideo(this.authService.decodedToken.nameid, video)
         .subscribe(
           next => {
@@ -66,7 +68,7 @@ export class VideoEditorComponent implements OnInit {
 
   deleteVideo(videoId: number) {
     this.alertify.confirm('Are you sure to delete this video ?', () => {
-      this.userService.deleteVideo(this.authService.decodedToken.nameid, videoId).subscribe(() => {
+      this.mediaService.deleteVideo(this.authService.decodedToken.nameid, videoId).subscribe(() => {
         this.videos.splice(this.videos.findIndex(v => v.id === videoId), 1);
         this.alertify.success('Video has been deleted successfully');
       }, error => {

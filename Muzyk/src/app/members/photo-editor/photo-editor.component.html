@@ -73,18 +73,20 @@
         <i class="fas fa-images"></i> All Photos
       </ng-template>
       <ng-template ngbPanelContent>
-        <div class="row">
-          <div class="col-sm-4" *ngFor="let photo of photos">
-            <div class="card">
-              <div class="card-image-wrapper">
-                <img src="{{photo.mediaUrl}}" alt="{{photo.description}}" class="img-thumbnail w-100 rounded">
-              </div>
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm mr-1 w-50" (click)="setProfilePhoto(photo)" [ngClass]="photo.isProfilePhoto ? 'btn-success active' : 'btn-secondary'"
-                  [disabled]="photo.isProfilePhoto">set
-                  as Main</button>
-                <button type="button" class="btn btn-sm btn-danger w-50" (click)="deletePhoto(photo.id)" [disabled]="photo.isProfilePhoto"><i
-                    class="fa fa-trash animate"></i></button>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let photo of photos">
+              <div class="card">
+                <div class="card-img-top">
+                  <img src="{{photo.mediaUrl}}" alt="{{photo.description}}" class="rounded w-100">
+                </div>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm w-50" (click)="setProfilePhoto(photo)" [ngClass]="photo.isProfilePhoto ? 'btn-success active' : 'btn-secondary'"
+                    [disabled]="photo.isProfilePhoto">set
+                    as Main</button>
+                  <button type="button" class="btn btn-sm btn-danger w-50" (click)="deletePhoto(photo.id)" [disabled]="photo.isProfilePhoto"><i
+                      class="fa fa-trash animate"></i></button>
+                </div>
               </div>
             </div>
           </div>

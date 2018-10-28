@@ -6,6 +6,7 @@ import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
+import { MediaService } from 'src/app/_services/media.service';
 
 @Component({
   selector: 'app-photo-editor',
@@ -29,6 +30,7 @@ export class PhotoEditorComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private mediaService: MediaService,
     private alertify: AlertifyService
   ) {}
 
@@ -108,7 +110,7 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   setProfilePhoto(photo: Photo) {
-    this.userService
+    this.mediaService
       .setProfilePhoto(this.authService.decodedToken.nameid, photo.id)
       .subscribe(
         () => {
@@ -129,7 +131,7 @@ export class PhotoEditorComponent implements OnInit {
 
   deletePhoto(photoId: number) {
     this.alertify.confirm('Are you sure to delete this photo ?', () => {
-      this.userService.deletePhoto(this.authService.decodedToken.nameid, photoId).subscribe(() => {
+      this.mediaService.deletePhoto(this.authService.decodedToken.nameid, photoId).subscribe(() => {
         this.photos.splice(this.photos.findIndex(p => p.id === photoId), 1);
         this.alertify.success('Photo has been deleted successfully');
       }, error => {

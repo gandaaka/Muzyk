@@ -15,6 +15,7 @@ import { FollowerListComponent } from './follower-list/follower-list.component';
 import { FollowerResolver } from './_resolvers/followers.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { BookingsComponent } from './bookings/bookings.component';
+import { MemberSettingsComponent } from './members/member-settings/member-settings.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -31,7 +32,8 @@ export const appRoutes: Routes = [
                 canDeactivate: [PreventUnsavedChanges]},
             { path: 'followers', component: FollowerListComponent, resolve: {user: FollowerResolver}},
             { path: 'members/:id', component: ProfilePageComponent, resolve: {user: ProfilePageResolver}},
-            { path: 'bookings', component: BookingsComponent}
+            { path: 'bookings', component: BookingsComponent},
+            { path: 'settings', component: MemberSettingsComponent}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

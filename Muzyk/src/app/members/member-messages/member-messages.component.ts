@@ -6,6 +6,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { tap } from 'rxjs/operators';
 import * as signalR from '@aspnet/signalr';
 import { environment } from 'src/environments/environment';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
   selector: 'app-member-messages',
@@ -24,6 +25,7 @@ export class MemberMessagesComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authService: AuthService,
+    private messageService: MessageService,
     private alertify: AlertifyService
   ) {}
 
@@ -46,7 +48,7 @@ export class MemberMessagesComponent implements OnInit {
 
   loadMessages() {
     const currentUserId = +this.authService.decodedToken.nameid;
-    this.userService
+    this.messageService
       .getMessageThread(this.authService.decodedToken.nameid, this.recepientId)
       .pipe(
         tap(messages => {
@@ -55,7 +57,7 @@ export class MemberMessagesComponent implements OnInit {
               messages[i].isRead === false &&
               messages[i].recepientId === currentUserId
             ) {
-              this.userService.markAsRead(currentUserId, messages[i].id);
+              this.messageService.markAsRead(currentUserId, messages[i].id);
             }
           }
         })
@@ -72,7 +74,7 @@ export class MemberMessagesComponent implements OnInit {
 
   sendMessage() {
     this.newMessage.recepientId = this.recepientId;
-    this.userService
+    this.messageService
       .sendMessage(this.authService.decodedToken.nameid, this.newMessage)
       .subscribe(
         (message: Message) => {

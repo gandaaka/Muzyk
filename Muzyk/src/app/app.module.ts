@@ -55,6 +55,11 @@ import { EmbedVideoPipe } from './_pipes/embedVideo/embedVideo.pipe';
 import { BookingService } from './_services/booking.service';
 import { BookingsComponent } from './bookings/bookings.component';
 import { MemberBookingComponent } from './members/member-booking/member-booking.component';
+import { MediaService } from './_services/media.service';
+import { MessageService } from './_services/message.service';
+import { MemberForgetPasswordComponent } from './members/member-forget-password/member-forget-password.component';
+import { MemberChangePasswordComponent } from './members/member-change-password/member-change-password.component';
+import { MemberSettingsComponent } from './members/member-settings/member-settings.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -83,7 +88,10 @@ export function tokenGetter() {
     VideoEditorComponent,
     EmbedVideoPipe,
     BookingsComponent,
-    MemberBookingComponent
+    MemberBookingComponent,
+    MemberForgetPasswordComponent,
+    MemberChangePasswordComponent,
+    MemberSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +129,9 @@ export function tokenGetter() {
     ProfileEditResolver,
     FollowerResolver,
     MessagesResolver,
-    BookingService
+    BookingService,
+    MediaService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
