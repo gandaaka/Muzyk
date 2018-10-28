@@ -20,7 +20,7 @@ export class MemberMessagesComponent implements OnInit {
   public newMessage: any = {};
   private connection: signalR.HubConnection;
 
-  signalUrl = environment.signalRUrl;
+  // signalUrl = environment.signalRUrl;
 
   constructor(
     private userService: UserService,
