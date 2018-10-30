@@ -6,10 +6,11 @@ namespace Muzyk_API.Models
     {
         public int RId { get; set; }
         public int UserId { get; set; }
-        public int RecommendedUser1 { get; set; }
-        public int RecommendedUser2 { get; set; }
-        public int RecommendedUser3 { get; set; }
-        public int RecommendedUser4 { get; set; }
-        public int RecommendedUser5 { get; set; }
+        public int RelatedUser1 { get; set; }
+        public int RelatedUser2 { get; set; }
+        public int RelatedUser3 { get; set; }
+        public int RelatedUser4 { get; set; }
+        public int RelatedUser5 { get; set; }
+        public ICollection<User> RecommendedUsers { get; set; }
     }
 }

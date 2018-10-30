@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Muzyk_API.Data;
 
 namespace Muzyk.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20181030172650_Updated_RecommendationsTable")]
+    partial class Updated_RecommendationsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,15 +132,15 @@ namespace Muzyk.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<int>("RelatedUser1");
+                    b.Property<int>("RecommendedUser1");
 
-                    b.Property<int>("RelatedUser2");
+                    b.Property<int>("RecommendedUser2");
 
-                    b.Property<int>("RelatedUser3");
+                    b.Property<int>("RecommendedUser3");
 
-                    b.Property<int>("RelatedUser4");
+                    b.Property<int>("RecommendedUser4");
 
-                    b.Property<int>("RelatedUser5");
+                    b.Property<int>("RecommendedUser5");
 
                     b.HasKey("RId", "UserId");
 

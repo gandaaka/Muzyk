@@ -16,6 +16,7 @@ import { FollowerResolver } from './_resolvers/followers.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { BookingsComponent } from './bookings/bookings.component';
 import { MemberSettingsComponent } from './members/member-settings/member-settings.component';
+import { MemberRecommendationComponent } from './dashboard/member-recommendation/member-recommendation.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -33,7 +34,8 @@ export const appRoutes: Routes = [
             { path: 'followers', component: FollowerListComponent, resolve: {user: FollowerResolver}},
             { path: 'members/:id', component: ProfilePageComponent, resolve: {user: ProfilePageResolver}},
             { path: 'bookings', component: BookingsComponent},
-            { path: 'settings', component: MemberSettingsComponent}
+            { path: 'settings', component: MemberSettingsComponent},
+            { path: 'dashboard', component: MemberRecommendationComponent}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

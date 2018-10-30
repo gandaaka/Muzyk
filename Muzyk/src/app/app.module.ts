@@ -61,6 +61,9 @@ import { MemberForgetPasswordComponent } from './members/member-forget-password/
 import { MemberChangePasswordComponent } from './members/member-change-password/member-change-password.component';
 import { MemberSettingsComponent } from './members/member-settings/member-settings.component';
 import { NewsfeedVideoCardComponent } from './newsFeed-components/newsfeed-video-card/newsfeed-video-card.component';
+import { MemberRecommendationComponent } from './dashboard/member-recommendation/member-recommendation.component';
+import { MemberRecommendationCardComponent } from './dashboard/member-recommendation-card/member-recommendation-card.component';
+import { RecommendationService } from './_services/recommendation.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -93,7 +96,9 @@ export function tokenGetter() {
     MemberForgetPasswordComponent,
     MemberChangePasswordComponent,
     MemberSettingsComponent,
-    NewsfeedVideoCardComponent
+    NewsfeedVideoCardComponent,
+    MemberRecommendationComponent,
+    MemberRecommendationCardComponent
   ],
   imports: [
     BrowserModule,
@@ -133,7 +138,8 @@ export function tokenGetter() {
     MessagesResolver,
     BookingService,
     MediaService,
-    MessageService
+    MessageService,
+    RecommendationService
   ],
   bootstrap: [AppComponent]
 })

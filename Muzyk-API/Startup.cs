@@ -57,7 +57,8 @@ namespace Muzyk_API
             services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IMuzykRepository, MuzykRepository>();   
+            services.AddScoped<IMuzykRepository, MuzykRepository>(); 
+            services.AddScoped<IRecommendationRepository, RecommendationRepository>();  
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -96,6 +97,7 @@ namespace Muzyk_API
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IMuzykRepository, MuzykRepository>();
+            services.AddScoped<IRecommendationRepository, RecommendationRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
