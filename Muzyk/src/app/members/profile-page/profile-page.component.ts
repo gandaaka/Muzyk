@@ -66,4 +66,12 @@ export class ProfilePageComponent implements OnInit {
   selectTab(tabId: number) {
     this.memberTabs.tabs[tabId].active = true;
   }
+
+  sendFollowRequest(id: number) {
+    this.userService.sendFollow(this.authService.decodedToken.nameid, id).subscribe(data => {
+      this.alertify.success('You are now following ' + this.user.firstName);
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 }

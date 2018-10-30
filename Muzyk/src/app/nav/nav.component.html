@@ -1,54 +1,52 @@
-<div class="container-fluid">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button *ngIf="loggedIn()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="navbarSupportedContent"
-          aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapsed()">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['/newsfeed']"><i class="fas fa-home"></i> Muzyk</a>
-        <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']"><i class="fas fa-home"></i> Muzyk</a>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button *ngIf="loggedIn()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapsed()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['/newsfeed']"><i class="fas fa-home"></i> Muzyk</a>
+      <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']"><i class="fas fa-home"></i> Muzyk</a>
+    </div>
 
-      <div [hidden]="loggedIn()" class="collapse navbar-collapse" id="mainMenu" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
-        <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/messages']"><i class="fas fa-comment-alt"></i> Messages </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/analytics']"><i class="fas fa-chart-line"></i> Analytics</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/followers']"><i class="fas fa-users"></i> Followers</a>
-          </li>
-          <li class="nav-item">
+    <div [hidden]="loggedIn()" class="collapse navbar-collapse" id="mainMenu" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+      <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/messages']"><i class="fas fa-comment-alt"></i> Messages </a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/analytics']"><i class="fas fa-chart-line"></i> Analytics</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/followers']"><i class="fas fa-users"></i> Followers</a>
+        </li>
+        <!-- <li class="nav-item">
             <a class="nav-link" [routerLink]="['/bookings']"><i class="fas fa-calendar"></i> Bookings</a>
-          </li>
-        </ul>
-        <form #searchForm="ngForm" class="form-inline mr-3" *ngIf="loggedIn()" (ngSubmit)="searchUsers()">
-          <div class="input-group-prepend">
-            <input class="form-control w-300" type="search" name="searchBox" required placeholder="Search" [(ngModel)]="searchQuery">
-            <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
-          </div>
-        </form>
-      </div>
-
-      <div *ngIf="loggedIn()" class="dropdown" dropdown>
-        <span class="mr-1">
-          <img src="{{photoUrl || '../../assets/user.png'}}">
-        </span>
-        <a class="dropdown-toggle text-light" dropdownToggle>
-          Welcome {{authService.decodedToken?.unique_name | titlecase}}
-        </a>
-        <div class="dropdown-menu mt-3" *dropdownMenu>
-          <a class="dropdown-item" [routerLink]="['/members/', this.authService.decodedToken?.nameid]"><i class="fa fa-user"></i>
-            My Profile</a>
-          <a class="dropdown-item" [routerLink]="['/profile/edit']"><i class="fa fa-edit"></i> Edit Profile</a>
-          <a class="dropdown-item" [routerLink]="['/settings']"><i class="fas fa-marker"></i> Personalize</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </li> -->
+      </ul>
+      <form #searchForm="ngForm" class="form-inline mr-3" *ngIf="loggedIn()" (ngSubmit)="searchUsers()">
+        <div class="input-group-prepend">
+          <input class="form-control w-300" type="search" name="searchBox" required placeholder="Search" [(ngModel)]="searchQuery">
+          <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
         </div>
+      </form>
+    </div>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <span class="mr-1">
+        <img src="{{photoUrl || '../../assets/user.png'}}">
+      </span>
+      <a class="dropdown-toggle text-light" dropdownToggle>
+        Welcome {{authService.decodedToken?.unique_name | titlecase}}
+      </a>
+      <div class="dropdown-menu mt-3" *dropdownMenu>
+        <a class="dropdown-item" [routerLink]="['/members/', this.authService.decodedToken?.nameid]"><i class="fa fa-user"></i>
+          My Profile</a>
+        <a class="dropdown-item" [routerLink]="['/profile/edit']"><i class="fa fa-edit"></i> Edit Profile</a>
+        <!-- <a class="dropdown-item" [routerLink]="['/settings']"><i class="fas fa-marker"></i> Personalize</a> -->
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
       </div>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>

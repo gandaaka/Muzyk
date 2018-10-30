@@ -135,7 +135,6 @@ namespace Muzyk_API.Controllers
                 }
             }
 
-
             if (await _repo.GetUser(bookingToCreateDto.RecipientId) == null)
                 return NotFound();
 
@@ -154,6 +153,16 @@ namespace Muzyk_API.Controllers
                 return Ok();
 
             throw new Exception("Failed to do booking the user");
+        }
+
+        //change password method
+        [HttpPut("changePassword")]
+        public async Task<IActionResult> ChangePassword(int userId, UserToPasswordChangeDto userToPasswordChangeDto) {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            
+            return NoContent();
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Muzyk_API.Helpers
             CreateMap<UserForUpdateDto, User>();
             CreateMap<UserForDetailDto, User>();
             CreateMap<UserToRegisterDto, User>();
+            CreateMap<UserToPasswordChangeDto, User>();
             //photo DTo
             CreateMap<Photo, PhotoForDetailDto>();
             CreateMap<Photo, PhotoFromReturnDto>();
