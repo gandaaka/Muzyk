@@ -24,7 +24,6 @@ namespace Muzyk_API.Models
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public int RId { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Video> Videos { get; set; }
         public ICollection<Follow> Follower { get; set; }

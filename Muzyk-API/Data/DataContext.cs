@@ -15,7 +15,7 @@ namespace Muzyk_API.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Video> Videos { get; set; }
         public DbSet<Recommendation> Recommendations { get; set; }
-        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Ratings> Ratings { get; set; }
         public DbSet<Booking> Bookings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -45,11 +45,11 @@ namespace Muzyk_API.Data
                 .WithMany(m => m.MessageRecieved)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Rating>()
+            builder.Entity<Ratings>()
                 .HasKey(k => new { k.UserId, k.Genre });
 
             builder.Entity<Recommendation>()
-                .HasKey(k => new { k.RId, k.UserId });
+                .HasKey(k => k.RId);
 
             builder.Entity<Booking>()
                 .HasKey(k => new { k.BookerId, k.BookeeId, k.BookingDate });

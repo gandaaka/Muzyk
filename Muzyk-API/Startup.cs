@@ -47,11 +47,11 @@ namespace Muzyk_API
             {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-            //services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
+            services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin", builder =>
-                builder.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowAnyMethod());
+                builder.WithOrigins("http://localhost:5000/").AllowAnyHeader().AllowAnyMethod());
             });
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
@@ -90,7 +90,7 @@ namespace Muzyk_API
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin", builder =>
-                builder.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowAnyMethod());
+                builder.WithOrigins("http://localhost:5000/").AllowAnyHeader().AllowAnyMethod());
             });
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();

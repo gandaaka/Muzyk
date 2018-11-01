@@ -6,6 +6,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { tap } from 'rxjs/operators';
 import * as signalR from '@aspnet/signalr';
 import { MessageService } from 'src/app/_services/message.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-member-messages',
@@ -19,7 +20,7 @@ export class MemberMessagesComponent implements OnInit {
   public newMessage: any = {};
   private connection: signalR.HubConnection;
 
-  // signalUrl = environment.signalRUrl;
+  signalUrl = environment.signalRUrl;
 
   constructor(
     private userService: UserService,
@@ -29,7 +30,7 @@ export class MemberMessagesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-/*     this.connection = new signalR.HubConnectionBuilder()
+    this.connection = new signalR.HubConnectionBuilder()
       .withUrl(this.signalUrl + '/mHub')
       .build();
 
@@ -40,7 +41,7 @@ export class MemberMessagesComponent implements OnInit {
       })
       .catch(error => {
         this.alertify.warning(error);
-      }); */
+      });
 
     this.loadMessages();
   }

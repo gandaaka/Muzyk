@@ -10,8 +10,8 @@ using Muzyk_API.Data;
 namespace Muzyk.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181025183549_Added_BookingEntity")]
-    partial class Added_BookingEntity
+    [Migration("20181030215903_Removed_RIDFromUsersTable")]
+    partial class Removed_RIDFromUsersTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,13 +113,13 @@ namespace Muzyk.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("Muzyk_API.Models.Rating", b =>
+            modelBuilder.Entity("Muzyk_API.Models.Ratings", b =>
                 {
                     b.Property<int>("UserId");
 
                     b.Property<string>("Genre");
 
-                    b.Property<bool>("UserRating");
+                    b.Property<int>("Rating");
 
                     b.HasKey("UserId", "Genre");
 
@@ -128,11 +128,23 @@ namespace Muzyk.Migrations
 
             modelBuilder.Entity("Muzyk_API.Models.Recommendation", b =>
                 {
-                    b.Property<int>("RId");
+                    b.Property<int>("RId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("RelatedUser1");
+
+                    b.Property<int>("RelatedUser2");
+
+                    b.Property<int>("RelatedUser3");
+
+                    b.Property<int>("RelatedUser4");
+
+                    b.Property<int>("RelatedUser5");
 
                     b.Property<int>("UserId");
 
-                    b.HasKey("RId", "UserId");
+                    b.HasKey("RId");
 
                     b.ToTable("Recommendations");
                 });
@@ -169,11 +181,7 @@ namespace Muzyk.Migrations
 
                     b.Property<byte[]>("PasswordSalt");
 
-                    b.Property<int>("RId");
-
                     b.Property<int?>("RecommendationRId");
-
-                    b.Property<int?>("RecommendationUserId");
 
                     b.Property<string>("UserType");
 
@@ -185,7 +193,7 @@ namespace Muzyk.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecommendationRId", "RecommendationUserId");
+                    b.HasIndex("RecommendationRId");
 
                     b.ToTable("Users");
                 });
@@ -266,7 +274,7 @@ namespace Muzyk.Migrations
                 {
                     b.HasOne("Muzyk_API.Models.Recommendation")
                         .WithMany("RecommendedUsers")
-                        .HasForeignKey("RecommendationRId", "RecommendationUserId");
+                        .HasForeignKey("RecommendationRId");
                 });
 
             modelBuilder.Entity("Muzyk_API.Models.Video", b =>
